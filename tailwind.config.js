@@ -4,13 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#f5f9ff',
-        ink: '#0f172a',
-        steel: '#d6e2ef',
-        mist: '#4f6177',
-        accent: '#0a66c2',
-        accentDark: '#004182',
-        mint: '#378fe9',
+        canvas: '#FAF9F6',
+        canvasSubtle: '#F3EFEA',
+        ink: '#1F2421',
+        inkMuted: '#5C6661',
+        steel: '#E5E1D8',
+        mist: '#7B847F',
+        accent: '#0E4A7D',
+        accentDark: '#082D4F',
+        accentLight: '#EBF3FA',
+        mint: '#2575B8',
       },
       fontFamily: {
         sans: ['Sora', 'sans-serif'],

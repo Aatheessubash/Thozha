@@ -1,146 +1,104 @@
 import { motion } from 'framer-motion'
-import { Clock3, Gem, ThumbsUp } from 'lucide-react'
-
-import { truncateWords } from '@/utils/helpers'
+import { CheckCircle2, Compass, ShieldCheck } from 'lucide-react'
 
 function AboutSection({ about }) {
-  const values = Array.isArray(about?.values) ? about.values.filter(Boolean) : []
-  const cityCoverageLabel = '10+ cities'
+  const brandMeaning =
+    about?.brand_meaning ||
+    '"Thozha" translates to "trusted companion" in Tamil — a commitment to stand with each client from the initial sketch to the handover of keys.'
 
-  const intro = truncateWords(
-    about?.story ||
-      'We combine planning discipline and field execution to deliver reliable construction outcomes.',
-    24,
-  )
-
-  const qualitySource = values.length
-    ? values.slice(0, 3).join(', ')
-    : about?.service_area
-
-  const highlights = [
-    {
-      title: 'Reliability',
-      icon: ThumbsUp,
-      detail: truncateWords(
-        about?.brand_meaning ||
-          'We choose smart, experienced, and accountable professionals for every project stage.',
-        18,
-      ),
-    },
-    {
-      title: 'Expertise',
-      icon: Clock3,
-      detail: truncateWords(
-        about?.mission ||
-          `Technical planning and project execution across ${cityCoverageLabel}.`,
-        18,
-      ),
-    },
-    {
-      title: 'Quality',
-      icon: Gem,
-      detail: truncateWords(
-        qualitySource ||
-          'Quality checks and durable finishing standards are maintained through every milestone.',
-        18,
-      ),
-    },
-  ]
+  const founderName = about?.founder_name || 'Er. Taran D V'
+  const partnerName = about?.partner_lead_name || 'Er. Sampath Kumar A'
 
   return (
     <section id="about" className="scroll-mt-28 section-space bg-white">
       <div className="section-shell">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.55 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-            About Us
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-[0.04em] text-slate-900 sm:text-4xl">
-            Why Choose Us
-          </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" />
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-            {intro}
-          </p>
-        </motion.div>
-
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center xl:gap-16">
+          {/* Left: Narrative and Philosophy */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-3 sm:gap-4"
+            className="space-y-6"
           >
-            <div className="row-span-2 overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?q=80&w=900&auto=format&fit=crop"
-                alt="Modern architecture"
-                className="h-full w-full object-cover"
-              />
+            <div className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-inkMuted">
+              <Compass size={13} className="text-accent" />
+              Our Story & Philosophy
             </div>
 
-            <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=900&auto=format&fit=crop"
-                alt="Architectural planning"
-                className="h-full w-full object-cover"
-              />
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Engineering with heart.{' '}
+              <span className="italic text-accent font-normal">Constructed to endure.</span>
+            </h2>
+
+            <p className="text-base leading-relaxed text-inkMuted sm:text-lg">
+              {about?.story ||
+                'Founded in 2014, Thozha Associates was established on a simple conviction: building a home or commercial property shouldn’t feel chaotic. It should be an orderly, transparent, and collaborative process led by experienced civil engineers.'}
+            </p>
+
+            {/* Brand Meaning Card */}
+            <div className="rounded-2xl border border-stone-200/90 bg-stone-50/70 p-5 sm:p-6">
+              <p className="font-display text-sm font-semibold uppercase tracking-wider text-accent">
+                The Origin of Thozha
+              </p>
+              <p className="mt-2 text-sm italic leading-relaxed text-ink">
+                {brandMeaning}
+              </p>
             </div>
 
-            <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=900&auto=format&fit=crop"
-                alt="Building facade detail"
-                className="h-full w-full object-cover"
-              />
+            {/* Engineering Principles */}
+            <div className="grid gap-3 pt-2 sm:grid-cols-2">
+              <div className="flex items-start gap-3">
+                <ShieldCheck size={18} className="mt-0.5 text-accent shrink-0" />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-ink">Zero Ambiguity Budgeting</p>
+                  <p className="mt-0.5 text-xs text-inkMuted">Detailed material specifications and stage-wise billing with no surprises.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle2 size={18} className="mt-0.5 text-accent shrink-0" />
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-ink">Structural Discipline</p>
+                  <p className="mt-0.5 text-xs text-inkMuted">Strict adherence to Indian Standard (IS) codes, cube testing, and soil reports.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Leadership mention */}
+            <div className="border-t border-stone-100 pt-5 text-xs text-inkMuted">
+              <p>
+                Led by <strong className="text-ink">{founderName}</strong> (Civil Engineer & Founder) and{' '}
+                <strong className="text-ink">{partnerName}</strong> (Project Management Lead).
+              </p>
             </div>
           </motion.div>
 
+          {/* Right: Dedicated Architectural Imagery & Metric Frame */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="space-y-8"
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
+            className="relative"
           >
-            {highlights.map((item) => {
-              const Icon = item.icon
-
-              return (
-                <article key={item.title} className="flex items-start gap-4">
-                  <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-accent/30 bg-accent/10 text-accent">
-                    <Icon size={18} />
-                  </span>
-
-                  <div>
-                    <h3 className="text-2xl font-semibold uppercase tracking-[0.03em] text-slate-900">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 max-w-xl text-base leading-8 text-slate-600">
-                      {item.detail}
-                    </p>
-                  </div>
-                </article>
-              )
-            })}
-
-            <div className="pt-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                Service Coverage
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <span className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm text-accent">
-                  {cityCoverageLabel}
-                </span>
-                <span className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm text-accent">
-                  Tamil Nadu Region
-                </span>
+            <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white p-3 shadow-soft sm:p-4">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-stone-100 sm:aspect-[4/4]">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1000&auto=format&fit=crop"
+                  alt="Thozha Associates architectural craftsmanship and materiality"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/80">
+                    Regional Craft & Construction
+                  </p>
+                  <p className="font-display text-lg font-semibold sm:text-xl">
+                    Serving Erode, Coimbatore, Salem & Tamil Nadu
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

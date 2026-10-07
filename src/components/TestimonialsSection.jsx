@@ -15,7 +15,7 @@ function TestimonialAvatar({ imageUrl, name }) {
 
   if (!imageUrl || broken) {
     return (
-      <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-accent/15 font-display text-lg font-semibold text-accent">
+      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-stone-100 font-display text-sm font-semibold text-accent">
         {initials}
       </div>
     )
@@ -25,15 +25,14 @@ function TestimonialAvatar({ imageUrl, name }) {
     <img
       src={imageUrl}
       alt={name}
-      className="h-14 w-14 shrink-0 rounded-full border border-slate-200 object-cover"
+      className="h-12 w-12 shrink-0 rounded-full border border-stone-200 object-cover"
       loading="lazy"
-      referrerPolicy="no-referrer"
       onError={() => setBroken(true)}
     />
   )
 }
 
-function TestimonialsSection({ testimonials }) {
+function TestimonialsSection({ testimonials = [] }) {
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
@@ -43,58 +42,65 @@ function TestimonialsSection({ testimonials }) {
 
     const timer = window.setInterval(() => {
       setActiveIndex((value) => (value + 1) % testimonials.length)
-    }, 5200)
+    }, 6000)
 
     return () => {
       window.clearInterval(timer)
     }
   }, [testimonials.length])
 
-  const activeTestimonial = testimonials[activeIndex]
+  if (!testimonials.length) {
+    return null
+  }
+
+  const activeTestimonial = testimonials[activeIndex] || testimonials[0]
 
   return (
-    <section id="testimonials" className="scroll-mt-28 section-space">
+    <section id="testimonials" className="scroll-mt-28 section-space bg-stone-50/40">
       <div className="section-shell">
         <SectionHeader
-          eyebrow="Testimonials"
-          title="What clients say about the way we plan, communicate, and deliver"
-          description="Testimonials come from Supabase when configured and fall back to seeded client-friendly examples during local setup."
+          eyebrow="Client Experiences"
+          title="What clients say about our planning and execution"
+          description="Direct reflections from homeowners and developers across Tamil Nadu who partnered with us for turnkey design and construction."
         />
 
-        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="panel relative overflow-hidden p-8 sm:p-10">
-            <Quote className="mb-6 text-accent" size={42} />
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          {/* Main Featured Testimonial Card */}
+          <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-white p-8 shadow-soft sm:p-10">
+            <Quote className="mb-6 text-accent/30" size={44} />
 
             <AnimatePresence mode="wait">
               <motion.article
                 key={activeTestimonial.id}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -24 }}
-                transition={{ duration: 0.45 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.4 }}
                 className="space-y-6"
               >
-                <div className="flex gap-1 text-accent">
+                <div className="flex gap-1 text-amber-500">
                   {Array.from({ length: activeTestimonial.rating || 5 }).map(
                     (_, index) => (
-                      <Star key={index} size={18} fill="currentColor" />
+                      <Star key={index} size={17} fill="currentColor" />
                     ),
                   )}
                 </div>
-                <p className="max-w-3xl text-2xl leading-relaxed text-slate-900 sm:text-3xl">
+
+                <p className="font-display text-xl leading-relaxed text-ink sm:text-2xl">
                   "{activeTestimonial.message}"
                 </p>
-                <div className="flex items-center gap-4">
+
+                <div className="flex items-center gap-4 border-t border-stone-100 pt-6">
                   <TestimonialAvatar
                     imageUrl={activeTestimonial.image_url}
                     name={activeTestimonial.name}
                   />
                   <div>
-                    <p className="text-lg font-semibold text-slate-900">
+                    <p className="font-display text-base font-semibold text-ink">
                       {activeTestimonial.name}
                     </p>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
-                      {activeTestimonial.project_type || 'Verified client feedback'}
+                    <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-inkMuted">
+                      {activeTestimonial.project_type || 'Verified Homeowner'}
                     </p>
                   </div>
                 </div>
@@ -102,16 +108,17 @@ function TestimonialsSection({ testimonials }) {
             </AnimatePresence>
           </div>
 
-          <div className="space-y-4">
+          {/* Testimonial List Switcher */}
+          <div className="space-y-3.5">
             {testimonials.map((testimonial, index) => (
               <button
                 key={testimonial.id}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`panel w-full p-5 text-left transition ${
+                className={`w-full rounded-2xl border p-4 text-left transition-all sm:p-5 ${
                   activeIndex === index
-                    ? 'border-accent/55 bg-accent/10'
-                    : 'hover:border-slate-400'
+                    ? 'border-accent bg-white shadow-sm ring-1 ring-accent'
+                    : 'border-stone-200/90 bg-white hover:border-stone-300'
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
@@ -121,21 +128,22 @@ function TestimonialsSection({ testimonials }) {
                       name={testimonial.name}
                     />
                     <div>
-                      <p className="font-display text-xl font-semibold text-slate-900">
+                      <p className="font-display text-sm font-semibold text-ink">
                         {testimonial.name}
                       </p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">
-                        {testimonial.project_type || 'Verified client feedback'}
-                      </p>
-                      <p className="mt-2 line-clamp-2 text-sm text-slate-600">
-                        {testimonial.message}
+                      <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-inkMuted">
+                        {testimonial.project_type || 'Verified Client'}
                       </p>
                     </div>
                   </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-800">
-                    {testimonial.rating}/5
-                  </span>
+                  <div className="flex items-center gap-1 text-xs font-bold text-amber-600">
+                    <Star size={13} fill="currentColor" />
+                    <span>{testimonial.rating || 5}.0</span>
+                  </div>
                 </div>
+                <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-inkMuted">
+                  {testimonial.message}
+                </p>
               </button>
             ))}
           </div>

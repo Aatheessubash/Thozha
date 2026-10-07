@@ -18,8 +18,8 @@ function NavbarLogo({ company }) {
 
   if (!company.logo_url || broken) {
     return (
-      <div className="grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
-        <span className="font-display text-lg font-bold">{initials}</span>
+      <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-white shadow-sm">
+        <span className="font-display text-sm font-bold tracking-wider">{initials}</span>
       </div>
     )
   }
@@ -28,7 +28,7 @@ function NavbarLogo({ company }) {
     <img
       src={company.logo_url}
       alt={`${company.name} logo`}
-      className="h-11 w-11 rounded-2xl object-cover"
+      className="h-10 w-10 rounded-xl object-cover border border-stone-200"
       onError={() => setBroken(true)}
     />
   )
@@ -38,27 +38,27 @@ function Navbar({ company }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/90 bg-white/95 backdrop-blur">
-      <div className="section-shell py-2.5">
+    <header className="sticky top-0 z-40 border-b border-stone-200/80 bg-[#FAF9F6]/90 backdrop-blur-md">
+      <div className="section-shell py-3 sm:py-3.5">
         <div className="flex items-center justify-between gap-3 sm:gap-4">
-          <a href="#home" className="flex items-center gap-3">
+          <a href="#home" className="flex items-center gap-3 group">
             <NavbarLogo key={company.logo_url || company.name} company={company} />
             <div>
-              <p className="font-display text-xl font-semibold text-slate-900">
+              <p className="font-display text-lg font-bold tracking-tight text-ink sm:text-xl group-hover:text-accent transition-colors">
                 {company.name}
               </p>
-              <p className="hidden text-[10px] uppercase tracking-[0.2em] text-slate-500 sm:block">
-                {company.location || 'Construction Studio'}
+              <p className="hidden text-[10px] uppercase tracking-[0.22em] text-inkMuted sm:block">
+                Civil Engineering & Architecture
               </p>
             </div>
           </a>
 
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-600 hover:text-slate-900"
+                className="text-xs font-semibold uppercase tracking-[0.16em] text-inkMuted transition hover:text-ink"
               >
                 {item.label}
               </a>
@@ -66,41 +66,44 @@ function Navbar({ company }) {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <a href="#quote" className="cta-primary px-4 py-2 text-[11px]">
-              Get Free Quote
-              <ArrowRight size={16} />
+            <a
+              href="#quote"
+              className="cta-primary px-5 py-2.5 text-[11px] tracking-[0.14em]"
+            >
+              Consult Our Team
+              <ArrowRight size={14} />
             </a>
           </div>
 
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="grid h-10 w-10 place-items-center rounded-md border border-slate-200 bg-white text-slate-900 lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-stone-200 bg-white text-ink lg:hidden"
             aria-label="Toggle menu"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
         {open ? (
-          <div className="mt-3 flex flex-col gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 shadow-[0_14px_30px_rgba(15,23,42,0.08)] lg:hidden">
+          <div className="mt-3 flex flex-col gap-3 rounded-2xl border border-stone-200 bg-white px-5 py-5 shadow-soft lg:hidden">
             {NAV_LINKS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                className="rounded-lg px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-inkMuted hover:bg-stone-50 hover:text-ink"
                 onClick={() => setOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-            <div className="flex flex-col gap-3 pt-3">
+            <div className="pt-2 border-t border-stone-100">
               <a
                 href="#quote"
-                className="cta-primary justify-center"
+                className="cta-primary w-full justify-center text-xs tracking-[0.14em]"
                 onClick={() => setOpen(false)}
               >
-                Get Free Quote
+                Consult Our Team
               </a>
             </div>
           </div>

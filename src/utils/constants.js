@@ -1,29 +1,30 @@
 export const DEFAULT_COMPANY = {
   name: 'Thozha Associates',
-  tagline: 'Building Your Dreams with Trusted Engineering',
+  tagline: 'Thoughtfully Designed. Built for Everyday Life.',
   blurb:
-    'Trusted civil engineers since 2014 for residential and commercial construction, structural design, and project handover with virtual planning and on-site execution support.',
-  phone: import.meta.env.VITE_COMPANY_PHONE || '+919000000000',
-  whatsapp: import.meta.env.VITE_COMPANY_WHATSAPP || '919000000000',
+    'Civil engineering, bespoke architecture, and turnkey construction across Tamil Nadu — from foundational planning to final handover.',
+  phone: import.meta.env.VITE_COMPANY_PHONE || '+91 94422 68288',
+  whatsapp: import.meta.env.VITE_COMPANY_WHATSAPP || '919442268288',
   email:
-    import.meta.env.VITE_COMPANY_EMAIL || 'hello@thozhaassociates.com',
+    import.meta.env.VITE_COMPANY_EMAIL || 'contact@thozhaassociates.com',
   location:
-    import.meta.env.VITE_COMPANY_LOCATION || 'Tamil Nadu, India',
-  logo_url: 'https://images.unsplash.com/photo-1541888086225-ee5b5d848197?q=80&w=200&auto=format&fit=crop',
-  hero_blueprint_url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop',
-  hero_final_url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop',
-  featured_before_after_title: 'Before and after transformation',
-  featured_before_image_url: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop',
-  featured_after_image_url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop',
+    import.meta.env.VITE_COMPANY_LOCATION || 'Erode & Tamil Nadu, India',
+  logo_url: '',
+  hero_blueprint_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+  hero_final_url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
+  featured_before_after_title: 'Courtyard Residence Transformation',
+  featured_before_image_url: 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
+  featured_after_image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
 }
 
 export const COMPANY = DEFAULT_COMPANY
 
 export const NAV_LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Careers', href: '#careers' },
+  { label: 'Process', href: '#process' },
+  { label: 'Services', href: '#services' },
+  { label: 'Reviews', href: '#testimonials' },
   { label: 'Contact', href: '#quote' },
 ]
 
@@ -271,6 +272,117 @@ export const REMOTE_PROJECT_BLUEPRINTS = [
     imageKey: 'heroExterior',
     beforeKey: 'walls',
     afterKey: 'heroExterior',
+  },
+]
+
+export const DEFAULT_PROJECTS = [
+  {
+    id: 'proj-1',
+    title: 'Palm Courtyard Residence',
+    category: 'Residential',
+    location: 'Perundurai, Erode',
+    area_label: '3,450 sq.ft',
+    year: '2024',
+    status: 'Delivered',
+    summary:
+      'A climate-conscious family residence composed around an open-to-sky central courtyard, deep terracotta louvers, and warm exposed aggregate surfaces.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+    featured: true,
+  },
+  {
+    id: 'proj-2',
+    title: 'The Monolith Villa',
+    category: 'Residential',
+    location: 'Coimbatore',
+    area_label: '4,200 sq.ft',
+    year: '2024',
+    status: 'In Progress',
+    summary:
+      'A contemporary two-story villa balancing long-span cantilevers with layered timber screens and private tropical garden terraces.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
+    featured: true,
+  },
+  {
+    id: 'proj-3',
+    title: 'Axis Creative Pavilion',
+    category: 'Commercial',
+    location: 'Salem',
+    area_label: '5,800 sq.ft',
+    year: '2023',
+    status: 'Delivered',
+    summary:
+      'An inspiring commercial work pavilion featuring double-glazed curtain walls, structural steel trusses, and modular collaborative workspaces.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+    featured: false,
+  },
+  {
+    id: 'proj-4',
+    title: 'Heritage Courtyard Renewal',
+    category: 'Renovation',
+    location: 'Tiruppur',
+    area_label: '2,900 sq.ft',
+    year: '2023',
+    status: 'Delivered',
+    summary:
+      'An aging 1980s family property refreshed through structural retrofitting, expanded skylights, and seamless micro-cement flooring.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop',
+    featured: false,
+  },
+  {
+    id: 'proj-5',
+    title: 'Zenith Commercial Tower',
+    category: 'Commercial',
+    location: 'Chennai',
+    area_label: '8,400 sq.ft',
+    year: '2024',
+    status: 'Delivered',
+    summary:
+      'A multi-level corporate facility prioritizing natural illumination, efficient vehicular circulation, and an iconic vertical stone louver facade.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1200&auto=format&fit=crop',
+    featured: false,
+  },
+  {
+    id: 'proj-6',
+    title: 'Terra Biophilic Residence',
+    category: 'Residential',
+    location: 'Madurai',
+    area_label: '3,800 sq.ft',
+    year: '2024',
+    status: 'In Progress',
+    summary:
+      'Earth-toned urban residence featuring exposed wire-cut brickwork, internal green lightwells, and natural passive stack ventilation.',
+    cover_image_url:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
+    before_image_url:
+      'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
+    after_image_url:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
+    featured: false,
   },
 ]
 

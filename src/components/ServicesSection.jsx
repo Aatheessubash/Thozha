@@ -1,163 +1,144 @@
 import { motion } from 'framer-motion'
-import { Building2, ClipboardList, Ruler, Wrench } from 'lucide-react'
+import { ArrowUpRight, Building2, DraftingCompass, Home, RefreshCw } from 'lucide-react'
 
-import { truncateWords } from '@/utils/helpers'
-
-const serviceGroups = [
+const CORE_SERVICES = [
   {
-    key: 'construction',
-    title: 'Construction',
-    summary: 'Residential and commercial build execution from planning to handover.',
-    matcher: /residential|commercial/i,
+    number: '01',
+    icon: Home,
+    title: 'Residential Construction',
+    subtitle: 'Bespoke Turnkey Homes',
+    description:
+      'Complete end-to-end villa and residence construction. We oversee structural foundations, brickwork, waterproofing, electrical/plumbing, and fine architectural finishing.',
+    deliverables: [
+      'Custom architectural floorplans & elevations',
+      'Structural design with IS-standard compliance',
+      'Daily site supervision & milestone progress tracking',
+      'Complete turnkey handover with warranties',
+    ],
+  },
+  {
+    number: '02',
     icon: Building2,
+    title: 'Commercial Construction',
+    subtitle: 'Offices, Warehouses & Retail Blocks',
+    description:
+      'Functional, durable commercial architecture designed for circulation, visual identity, long spans, and rapid execution timelines.',
+    deliverables: [
+      'Industrial warehouses & steel structural sheds',
+      'Commercial retail pavilions & corporate spaces',
+      'HVAC, MEP, and vehicular access planning',
+      'Stringent material testing and safety compliance',
+    ],
   },
   {
-    key: 'technical',
-    title: 'Technical',
-    summary: 'Structural drawings, approvals, and foundation planning support.',
-    matcher: /structural|drawing|approval|soil|foundation/i,
-    icon: Ruler,
+    number: '03',
+    icon: DraftingCompass,
+    title: 'Structural Design & Approvals',
+    subtitle: 'Engineering Rationale & Regulatory Clearances',
+    description:
+      'Robust civil engineering calculations that balance aesthetic ambition with earthquake, soil, and load resistance.',
+    deliverables: [
+      'Soil testing & foundation recommendations',
+      'AutoCAD & BIM structural working drawings',
+      'Local DTCP & Municipal building plan approvals',
+      'Structural stability certificates & retrofitting advice',
+    ],
   },
   {
-    key: 'delivery',
-    title: 'Site Delivery',
-    summary: 'Supervision, coordination, and on-site quality control workflows.',
-    matcher: /project management|site supervision/i,
-    icon: ClipboardList,
-  },
-  {
-    key: 'upgrades',
-    title: 'Upgrades',
-    summary: 'Renovation, remodeling, and interior civil finishing improvements.',
-    matcher: /renovation|remodelling|remodeling|interior/i,
-    icon: Wrench,
+    number: '04',
+    icon: RefreshCw,
+    title: 'Renovation & Interior Civil',
+    subtitle: 'Adaptive Reuse & Modern Refresh',
+    description:
+      'Transforming aging or outdated properties into bright, contemporary spaces through structural reconfiguration, lightwells, and modern civil finishes.',
+    deliverables: [
+      'Load-bearing wall removal & beam insertion',
+      'Natural light optimization & courtyard additions',
+      'Micro-cement, lime wash, and Italian marble flooring',
+      'Exterior facade modernizations & weatherproofing',
+    ],
   },
 ]
 
-function createDetail(group) {
-  if (!group.items.length) {
-    return truncateWords(group.summary, 18)
-  }
-
-  const listed = group.items.slice(0, 3).map((item) => item.title).join(', ')
-
-  return truncateWords(`${group.summary} Includes ${listed}.`, 20)
-}
-
-function ServicesSection({ services = [] }) {
-  const normalizedServices = Array.isArray(services) ? services : []
-
-  const grouped = serviceGroups.map((group) => ({
-    ...group,
-    items: normalizedServices.filter((service) =>
-      group.matcher.test(service?.title || ''),
-    ),
-  }))
-
-  const activeGroups = grouped.filter((group) => group.items.length)
-  const highlights = (activeGroups.length ? activeGroups : grouped).slice(0, 3)
-
+function ServicesSection() {
   return (
-    <section id="services" className="scroll-mt-28 section-space bg-white">
+    <section id="services" className="scroll-mt-28 section-space bg-stone-50/50">
       <div className="section-shell">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.55 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">
-            Services
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-[0.04em] text-slate-900 sm:text-4xl">
-            What We Offer
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-inkMuted shadow-sm">
+            Disciplines & Scope
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            Disciplines built around precision.
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" />
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">
-            Practical service lanes designed for predictable construction outcomes and transparent delivery.
+          <p className="mt-3 text-base text-inkMuted sm:text-lg">
+            From technical foundation calculations to custom residential architecture, our integrated civil engineering team delivers every phase under one roof.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 gap-3 sm:gap-4"
-          >
-            <div className="row-span-2 overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=900&auto=format&fit=crop"
-                alt="Construction site planning"
-                className="h-full w-full object-cover"
-              />
-            </div>
+        {/* 4-Card Architectural Grid */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {CORE_SERVICES.map((service, index) => {
+            const Icon = service.icon
+            return (
+              <motion.div
+                key={service.number}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="group flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-soft"
+              >
+                <div>
+                  <div className="flex items-center justify-between border-b border-stone-100 pb-4">
+                    <span className="font-display text-sm font-bold tracking-widest text-inkMuted">
+                      {service.number}
+                    </span>
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-stone-50 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                      <Icon size={18} />
+                    </span>
+                  </div>
 
-            <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=900&auto=format&fit=crop"
-                alt="Architectural technical review"
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100">
-              <img
-                src="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?q=80&w=900&auto=format&fit=crop"
-                alt="Construction detail and finishing"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="space-y-8"
-          >
-            {highlights.map((item) => {
-              const Icon = item.icon
-
-              return (
-                <article key={item.key} className="flex items-start gap-4">
-                  <span className="mt-1 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-accent/30 bg-accent/10 text-accent">
-                    <Icon size={18} />
-                  </span>
-
-                  <div>
-                    <h3 className="text-2xl font-semibold uppercase tracking-[0.03em] text-slate-900">
-                      {item.title}
+                  <div className="mt-5 space-y-2">
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-accent">
+                      {service.subtitle}
+                    </p>
+                    <h3 className="font-display text-xl font-semibold text-ink">
+                      {service.title}
                     </h3>
-                    <p className="mt-2 max-w-xl text-base leading-8 text-slate-600">
-                      {createDetail(item)}
+                    <p className="mt-2 text-xs leading-relaxed text-inkMuted">
+                      {service.description}
                     </p>
                   </div>
-                </article>
-              )
-            })}
 
-            {normalizedServices.length ? (
-              <div className="pt-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                  All Services
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {normalizedServices.slice(0, 8).map((service) => (
-                    <span
-                      key={service.title}
-                      className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-sm text-accent"
-                    >
-                      {service.title}
-                    </span>
-                  ))}
+                  <div className="mt-6 border-t border-stone-100 pt-4">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-inkMuted">
+                      Key Deliverables
+                    </p>
+                    <ul className="mt-2.5 space-y-2 text-xs text-ink/80">
+                      {service.deliverables.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                          <span className="leading-snug">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            ) : null}
-          </motion.div>
+
+                <div className="mt-6 pt-4 border-t border-stone-100">
+                  <a
+                    href="#quote"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent transition-colors group-hover:text-accentDark"
+                  >
+                    Discuss This Service
+                    <ArrowUpRight size={13} />
+                  </a>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

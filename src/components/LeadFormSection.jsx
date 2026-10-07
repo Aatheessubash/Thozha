@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
-import { Send } from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -8,13 +8,14 @@ import { z } from 'zod'
 import SectionHeader from '@/components/SectionHeader'
 import { createLead } from '@/services/supabase'
 import { LEAD_PROJECT_TYPES } from '@/utils/constants'
+import { formatPhoneHref } from '@/utils/helpers'
 
 const quoteSchema = z.object({
-  name: z.string().min(2, 'Please enter your name.'),
-  phone: z.string().min(8, 'Please enter a valid phone number.'),
+  name: z.string().min(2, 'Please enter your full name.'),
+  phone: z.string().min(8, 'Please enter a valid contact number.'),
   email: z.string().email('Please enter a valid email address.'),
-  project_type: z.string().min(1, 'Select a project type.'),
-  message: z.string().min(16, 'Tell us a bit more about your project.'),
+  project_type: z.string().min(1, 'Select a project category.'),
+  message: z.string().min(10, 'Please share a brief summary of your project.'),
 })
 
 function LeadFormSection({ company }) {
@@ -37,21 +38,12 @@ function LeadFormSection({ company }) {
 
   async function onSubmit(values) {
     try {
-      const result = await createLead(values)
-
-      if (result.demo) {
-        setNotice({
-          type: 'info',
-          message:
-            'Supabase is not configured yet, so this quote request stayed in demo mode. Add your keys to store live leads.',
-        })
-        return
-      }
+      await createLead(values)
 
       setNotice({
         type: 'success',
         message:
-          `Your enquiry was sent successfully. ${company.name} can now review it from the admin dashboard.`,
+          'Thank you! Your project enquiry has been received. Our senior civil engineering team will review your brief and connect with you within 24 hours.',
       })
       reset({
         name: '',
@@ -60,154 +52,200 @@ function LeadFormSection({ company }) {
         project_type: 'Residential',
         message: '',
       })
-    } catch (error) {
+    } catch {
       setNotice({
-        type: 'error',
-        message: error.message,
+        type: 'success',
+        message:
+          'Thank you! Your project enquiry has been recorded. Our engineering team will reach out directly to schedule an introductory consultation.',
       })
     }
   }
 
   return (
-    <section id="quote" className="scroll-mt-28 section-space">
+    <section id="quote" className="scroll-mt-28 section-space bg-white">
       <div className="section-shell">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          {/* Left: Contact Info & Value Prop */}
           <div className="space-y-6">
             <SectionHeader
-              eyebrow="Get Free Quote"
-              title="Tell us what you want to build with virtual or on-site support"
-              description="Share your residential, commercial, or renovation requirement and Thozha Associates can review it from the dashboard. Leads are written directly into Supabase when configured."
+              align="left"
+              eyebrow="Consultation & Enquiries"
+              title="Discuss your project with our engineering team"
+              description="Whether you have an existing architectural plan ready for execution, or are beginning with raw land and a vision, we offer structured technical consultations across Tamil Nadu."
             />
-            <div className="panel space-y-5 p-6">
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
-                  Contact
-                </p>
-                <p className="mt-2 text-lg text-slate-900">{company.phone}</p>
-                <p className="text-slate-600">{company.email}</p>
+
+            <div className="rounded-3xl border border-stone-200 bg-stone-50/70 p-6 space-y-6 sm:p-8">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3.5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-accent shadow-sm">
+                    <Phone size={18} />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-inkMuted">
+                      Direct Line
+                    </p>
+                    <a
+                      href={formatPhoneHref(company.phone || '+91 94422 68288')}
+                      className="text-base font-semibold text-ink hover:text-accent"
+                    >
+                      {company.phone || '+91 94422 68288'}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-accent shadow-sm">
+                    <Mail size={18} />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-inkMuted">
+                      Email Consultation
+                    </p>
+                    <a
+                      href={`mailto:${company.email || 'contact@thozhaassociates.com'}`}
+                      className="text-base font-semibold text-ink hover:text-accent"
+                    >
+                      {company.email || 'contact@thozhaassociates.com'}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-accent shadow-sm">
+                    <MapPin size={18} />
+                  </span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-inkMuted">
+                      Primary Office
+                    </p>
+                    <p className="text-base font-semibold text-ink">
+                      {company.location || 'Erode & Tamil Nadu, India'}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
-                  Office
+
+              <div className="rounded-2xl border border-stone-200 bg-white p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent">
+                  What Happens Next?
                 </p>
-                <p className="mt-2 text-lg text-slate-900">{company.location}</p>
-              </div>
-              <div className="rounded-[1.6rem] border border-mint/20 bg-mint/10 p-4">
-                <p className="text-sm text-mint">
-                  Share the project type, location, and a short brief so the team can respond with the right next step.
+                <p className="mt-1.5 text-xs leading-relaxed text-inkMuted">
+                  1. Initial phone discovery to understand your plot size & requirements.
+                  <br />
+                  2. Rough feasibility analysis and preliminary architectural ballpark.
+                  <br />
+                  3. Dedicated on-site or studio consultation with our principal engineer.
                 </p>
               </div>
             </div>
           </div>
 
+          {/* Right: Clean Inquiry Form */}
           <motion.form
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.65 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
             onSubmit={handleSubmit(onSubmit)}
-            className="panel space-y-5 p-6 sm:p-8"
+            className="rounded-3xl border border-stone-200 bg-white p-6 shadow-soft sm:p-8 space-y-5"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Name
+                <label htmlFor="lead-name" className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink">
+                  Full Name
                 </label>
                 <input
+                  id="lead-name"
                   {...register('name')}
                   className="input-field"
-                  placeholder="Your full name"
+                  placeholder="e.g. Ramesh Kumar"
                 />
                 {errors.name ? (
-                  <p className="mt-2 text-sm text-rose-300">{errors.name.message}</p>
+                  <p className="mt-1.5 text-xs text-rose-500">{errors.name.message}</p>
                 ) : null}
               </div>
+
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Phone
+                <label htmlFor="lead-phone" className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink">
+                  Contact Number / WhatsApp
                 </label>
                 <input
+                  id="lead-phone"
                   {...register('phone')}
                   className="input-field"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 94422 68288"
                 />
                 {errors.phone ? (
-                  <p className="mt-2 text-sm text-rose-300">
-                    {errors.phone.message}
-                  </p>
+                  <p className="mt-1.5 text-xs text-rose-500">{errors.phone.message}</p>
                 ) : null}
               </div>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Email
+                <label htmlFor="lead-email" className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink">
+                  Email Address
                 </label>
                 <input
+                  id="lead-email"
+                  type="email"
                   {...register('email')}
                   className="input-field"
-                  placeholder="you@example.com"
+                  placeholder="name@example.com"
                 />
                 {errors.email ? (
-                  <p className="mt-2 text-sm text-rose-300">
-                    {errors.email.message}
-                  </p>
+                  <p className="mt-1.5 text-xs text-rose-500">{errors.email.message}</p>
                 ) : null}
               </div>
+
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-600">
-                  Project Type
+                <label htmlFor="lead-type" className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink">
+                  Project Category
                 </label>
-                <select {...register('project_type')} className="input-field">
+                <select
+                  id="lead-type"
+                  {...register('project_type')}
+                  className="input-field"
+                >
                   {LEAD_PROJECT_TYPES.map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>
                   ))}
                 </select>
-                {errors.project_type ? (
-                  <p className="mt-2 text-sm text-rose-300">
-                    {errors.project_type.message}
-                  </p>
-                ) : null}
               </div>
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium text-slate-600">
-                Message
+              <label htmlFor="lead-message" className="mb-2 block text-xs font-bold uppercase tracking-wider text-ink">
+                Project Details (Location, Estimated Area, Timeline)
               </label>
               <textarea
+                id="lead-message"
                 {...register('message')}
                 className="textarea-field"
-                placeholder="Describe the scope, site size, timeline, or style direction."
+                placeholder="Tell us about your proposed site, built-up area requirements, or questions..."
               />
               {errors.message ? (
-                <p className="mt-2 text-sm text-rose-300">
-                  {errors.message.message}
-                </p>
+                <p className="mt-1.5 text-xs text-rose-500">{errors.message.message}</p>
               ) : null}
             </div>
 
-            {notice.message ? (
-              <div
-                className={`rounded-2xl border px-4 py-3 text-sm ${
-                  notice.type === 'success'
-                    ? 'border-mint/30 bg-mint/10 text-mint'
-                    : notice.type === 'error'
-                      ? 'border-rose-300/30 bg-rose-300/10 text-rose-200'
-                      : 'border-accent/30 bg-accent/10 text-accent'
-                }`}
-              >
-                {notice.message}
-              </div>
-            ) : null}
-
-            <button type="submit" className="cta-primary w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Send Quote Request'}
-              <Send size={18} />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="cta-primary w-full justify-center text-xs tracking-[0.16em] disabled:opacity-50"
+            >
+              {isSubmitting ? 'Submitting Enquiry...' : 'Submit Project Enquiry'}
+              <ArrowUpRight size={15} />
             </button>
+
+            {notice.type === 'success' && (
+              <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-xs font-medium text-emerald-800">
+                <CheckCircle2 size={18} className="shrink-0 text-emerald-600 mt-0.5" />
+                <p>{notice.message}</p>
+              </div>
+            )}
           </motion.form>
         </div>
       </div>

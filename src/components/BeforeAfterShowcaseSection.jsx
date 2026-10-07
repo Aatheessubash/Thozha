@@ -3,14 +3,14 @@ import { motion } from 'framer-motion'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import SectionHeader from '@/components/SectionHeader'
 
-function BeforeAfterShowcaseSection({ company, projects }) {
+function BeforeAfterShowcaseSection({ company, projects = [] }) {
   const dashboardTransformation =
     company.featured_before_image_url && company.featured_after_image_url
       ? {
           id: 'dashboard-before-after',
           title:
             company.featured_before_after_title ||
-            `${company.name} before and after`,
+            'Courtyard Residence Transformation',
           beforeImage: {
             src: company.featured_before_image_url,
             alt: `${company.name} before`,
@@ -33,28 +33,25 @@ function BeforeAfterShowcaseSection({ company, projects }) {
   }
 
   return (
-    <section className="section-space">
+    <section className="section-space bg-stone-50/40">
       <div className="section-shell">
         <SectionHeader
-          eyebrow="Before / After"
-          title="See how engineering decisions translate into visible change"
-          description="This comparison block helps prospective clients understand the difference between an unfinished condition and the finished construction outcome."
+          eyebrow="Visible Transformation"
+          title="From initial site condition to completed architecture"
+          description="Drag the interactive slider to see how disciplined civil engineering, structural re-alignment, and tactile finishes transform spaces."
         />
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
+          className="mt-8"
         >
           <BeforeAfterSlider
             before={featuredTransformation.beforeImage}
             after={featuredTransformation.afterImage}
-            title={
-              featuredTransformation.id === 'dashboard-before-after'
-                ? featuredTransformation.title
-                : `${featuredTransformation.title} transformation`
-            }
+            title={featuredTransformation.title}
           />
         </motion.div>
       </div>

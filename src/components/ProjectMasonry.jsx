@@ -1,47 +1,80 @@
 import { motion } from 'framer-motion'
-import { MapPin } from 'lucide-react'
+import { ArrowUpRight, MapPin } from 'lucide-react'
 
 function ProjectMasonry({ projects, onSelect }) {
   return (
-    <div className="columns-1 gap-6 sm:columns-2 xl:columns-3">
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project, index) => (
-        <motion.button
+        <motion.article
           key={project.id}
-          type="button"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6, delay: index * 0.04 }}
-          whileHover={{ y: -6 }}
-          onClick={() => onSelect(project)}
-          className="group mb-6 w-full break-inside-avoid overflow-hidden rounded-[2.2rem_1.6rem_2.2rem_1.8rem] border border-slate-200/70 bg-white/80 text-left shadow-soft backdrop-blur"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: index * 0.05 }}
+          className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white transition-all duration-300 hover:shadow-soft"
         >
-          <div className={`relative overflow-hidden ${project.aspect}`}>
+          {/* Unobstructed Architectural Image Container */}
+          <div
+            className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden bg-stone-100"
+            onClick={() => onSelect(project)}
+          >
             <img
               src={project.image?.src}
               alt={project.image?.alt || project.title}
-              className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-            <div className="absolute left-5 right-5 top-5 flex items-start justify-between gap-3">
-              <span className="rounded-full bg-white/85 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-900 backdrop-blur">
+            {/* Category Micro-Pill in Top Corner */}
+            <div className="absolute left-3.5 top-3.5 flex items-center gap-2">
+              <span className="rounded-full border border-white/60 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink shadow-sm backdrop-blur-sm">
                 {project.category}
               </span>
-              <span className="rounded-full bg-accent/92 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                {project.status}
-              </span>
             </div>
-            <div className="absolute inset-x-5 bottom-5">
-              <h3 className="font-display text-2xl font-semibold text-white">
-                {project.title}
-              </h3>
-              <div className="mt-2 flex items-center gap-2 text-sm text-slate-100">
-                <MapPin size={15} />
-                <span>{project.location}</span>
-              </div>
+
+            {/* Quick Inspect Hover Icon */}
+            <div className="absolute right-3.5 bottom-3.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-ink opacity-0 shadow-md backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+              <ArrowUpRight size={16} />
             </div>
           </div>
-        </motion.button>
+
+          {/* Editorial Details Below The Photograph */}
+          <div className="flex flex-1 flex-col justify-between p-5 sm:p-6">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-inkMuted">
+                <span className="flex items-center gap-1 font-medium">
+                  <MapPin size={13} className="text-accent" />
+                  {project.location}
+                </span>
+                {project.year ? (
+                  <span className="font-semibold">{project.year}</span>
+                ) : null}
+              </div>
+
+              <h3
+                onClick={() => onSelect(project)}
+                className="cursor-pointer font-display text-xl font-semibold text-ink transition-colors group-hover:text-accent"
+              >
+                {project.title}
+              </h3>
+
+              <p className="line-clamp-2 text-xs leading-relaxed text-inkMuted">
+                {project.summary}
+              </p>
+            </div>
+
+            {/* Project Specs Pill Row */}
+            <div className="mt-4 flex items-center justify-between border-t border-stone-100 pt-3 text-[11px] font-medium text-inkMuted">
+              <span>{project.areaLabel || 'Turnkey Scope'}</span>
+              <button
+                type="button"
+                onClick={() => onSelect(project)}
+                className="font-semibold text-accent hover:underline"
+              >
+                View Details →
+              </button>
+            </div>
+          </div>
+        </motion.article>
       ))}
     </div>
   )

@@ -1,4 +1,3 @@
-import { Box, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 
 function SectionHeader({
@@ -11,80 +10,47 @@ function SectionHeader({
   const isCentered = align === 'center'
 
   return (
-    <Box
-      component={motion.div}
-      initial={{ opacity: 0, y: 24 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7 }}
-      sx={{
-        mb: { xs: 6, sm: 7 },
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1.8,
-        alignItems: isCentered ? 'center' : 'flex-start',
-        textAlign: isCentered ? 'center' : 'left',
-      }}
+      transition={{ duration: 0.6 }}
+      className={`mb-10 sm:mb-12 flex flex-col gap-3.5 ${
+        isCentered ? 'items-center text-center' : 'items-start text-left'
+      }`}
     >
       {eyebrow ? (
-        <Typography
-          sx={{
-            color: '#0a66c2',
-            fontWeight: 700,
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            fontSize: '0.7rem',
-          }}
-        >
+        <span className="eyebrow self-start sm:self-auto">
           {eyebrow}
-        </Typography>
+        </span>
       ) : null}
 
-      <Box sx={{ maxWidth: '48rem' }}>
-        <Typography
-          component="h2"
-          sx={{
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontSize: { xs: '1.9rem', sm: '2.45rem' },
-            fontWeight: 700,
-            letterSpacing: '-0.01em',
-            lineHeight: 1.1,
-            color: '#111827',
-          }}
-        >
+      <div className="max-w-3xl">
+        <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
           {title}
-        </Typography>
+        </h2>
 
-        <Box
-          sx={{
-            mt: 2,
-            mx: isCentered ? 'auto' : 0,
-            height: 3,
-            width: 62,
-            borderRadius: 999,
-            bgcolor: '#0a66c2',
-          }}
-        />
-
-        <Typography
-          sx={{
-            mt: 1.8,
-            maxWidth: '40rem',
-            mx: isCentered ? 'auto' : 0,
-            fontSize: { xs: '0.98rem', sm: '1.04rem' },
-            color: '#4b5563',
-          }}
-        >
-          {description}
-        </Typography>
-      </Box>
+        {description ? (
+          <p
+            className={`mt-3 text-base leading-relaxed text-inkMuted sm:text-lg ${
+              isCentered ? 'mx-auto max-w-2xl' : 'max-w-2xl'
+            }`}
+          >
+            {description}
+          </p>
+        ) : null}
+      </div>
 
       {actions ? (
-        <Box sx={{ mt: 0.5, width: '100%', display: 'flex', justifyContent: isCentered ? 'center' : 'flex-start' }}>
+        <div
+          className={`mt-2 flex w-full flex-wrap ${
+            isCentered ? 'justify-center' : 'justify-start'
+          }`}
+        >
           {actions}
-        </Box>
+        </div>
       ) : null}
-    </Box>
+    </motion.div>
   )
 }
 

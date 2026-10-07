@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ExternalLink, X } from 'lucide-react'
+import { ArrowUpRight, MapPin, X } from 'lucide-react'
 
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
@@ -27,90 +27,91 @@ function ImageModal({ project, onClose }) {
     <AnimatePresence>
       {project ? (
         <motion.div
-          className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/78 px-4 py-10 backdrop-blur-sm"
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 px-4 py-8 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
         >
           <motion.div
-            className="panel custom-scrollbar relative max-h-[92vh] w-full max-w-5xl overflow-y-auto"
-            initial={{ opacity: 0, y: 32, scale: 0.97 }}
+            className="custom-scrollbar relative max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-3xl border border-stone-200 bg-white p-4 shadow-2xl sm:p-6"
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
-            transition={{ duration: 0.35 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ duration: 0.3 }}
             onClick={(event) => event.stopPropagation()}
           >
             <button
               type="button"
               onClick={onClose}
-              className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full border border-slate-200 bg-white/88 text-slate-900"
+              className="absolute right-6 top-6 z-10 grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white/90 text-ink shadow-sm transition hover:bg-stone-100"
               aria-label="Close modal"
             >
               <X size={18} />
             </button>
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="min-h-[360px] overflow-hidden rounded-[2rem] lg:rounded-r-none">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+              {/* Image Frame */}
+              <div className="overflow-hidden rounded-2xl bg-stone-100">
                 <img
                   src={project.image?.src}
                   alt={project.image?.alt || project.title}
-                  className="h-full w-full object-cover"
+                  className="aspect-[4/3] w-full object-cover lg:aspect-[1/1]"
                 />
               </div>
-              <div className="space-y-6 p-6 lg:p-8">
+
+              {/* Project Information */}
+              <div className="space-y-6 pt-2">
                 <div className="space-y-3">
-                  <span className="eyebrow">{project.category}</span>
-                  <h3 className="font-display text-3xl font-bold text-slate-900">
+                  <span className="inline-flex rounded-full border border-stone-200 bg-stone-50 px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    {project.category}
+                  </span>
+                  <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
                     {project.title}
                   </h3>
-                  <p className="text-base text-slate-600">{project.summary}</p>
+                  <p className="text-sm leading-relaxed text-inkMuted">
+                    {project.summary}
+                  </p>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
+                {/* Specs Grid */}
+                <div className="grid grid-cols-2 gap-3">
                   {detailCards.map((detail) => (
                     <div
                       key={detail.label}
-                      className="rounded-3xl border border-slate-200 bg-white/88 p-4"
+                      className="rounded-xl border border-stone-200/80 bg-stone-50/70 p-3.5"
                     >
-                      <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-inkMuted">
                         {detail.label}
                       </p>
-                      <p className="mt-2 text-lg font-semibold text-slate-900">
+                      <p className="mt-1 text-sm font-semibold text-ink">
                         {detail.value}
                       </p>
                     </div>
                   ))}
                 </div>
 
-                <div className="rounded-3xl border border-slate-200 bg-white/88 p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                    Image Source
-                  </p>
-                  <div className="mt-3 flex items-center justify-between gap-4">
-                    <p className="text-sm text-slate-600">{project.source}</p>
-                    {project.image?.sourceUrl && project.image.sourceUrl !== '#' ? (
-                      <a
-                        href={project.image.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="badge-pill"
-                      >
-                        Source
-                        <ExternalLink size={14} />
-                      </a>
-                    ) : null}
-                  </div>
+                {/* Direct Action Link */}
+                <div className="border-t border-stone-100 pt-4">
+                  <a
+                    href="#quote"
+                    onClick={onClose}
+                    className="cta-primary w-full justify-center text-xs tracking-[0.16em]"
+                  >
+                    Discuss a Similar Project
+                    <ArrowUpRight size={15} />
+                  </a>
                 </div>
               </div>
             </div>
 
+            {/* Before / After comparison if present */}
             {project.beforeImage && project.afterImage ? (
-              <div className="p-6 pt-0 lg:p-8 lg:pt-0">
+              <div className="mt-8 border-t border-stone-100 pt-6">
                 <BeforeAfterSlider
                   before={project.beforeImage}
                   after={project.afterImage}
-                  title={`${project.title} transformation`}
+                  title={`${project.title} Transformation`}
                 />
               </div>
             ) : null}

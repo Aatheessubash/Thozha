@@ -1,17 +1,18 @@
+import { useEffect } from 'react'
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+
 import AboutSection from '@/components/AboutSection'
 import BeforeAfterShowcaseSection from '@/components/BeforeAfterShowcaseSection'
-import CareersSection from '@/components/CareersSection'
 import FloatingActions from '@/components/FloatingActions'
+import FromFirstLineToFrontDoor from '@/components/FromFirstLineToFrontDoor'
 import HeroSection from '@/components/HeroSection'
 import LeadFormSection from '@/components/LeadFormSection'
-import LeadershipSection from '@/components/LeadershipSection'
 import Loader from '@/components/Loader'
 import Navbar from '@/components/Navbar'
 import ProjectsSection from '@/components/ProjectsSection'
 import ServicesSection from '@/components/ServicesSection'
-import { useEffect } from 'react'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import TestimonialsSection from '@/components/TestimonialsSection'
 import { useHomeData } from '@/hooks/useHomeData'
 import { buildProjectHeight, formatPhoneHref } from '@/utils/helpers'
 
@@ -22,7 +23,7 @@ function HomePage() {
     cmsProjects,
     company,
     siteContent,
-    warnings,
+    testimonials,
   } = useHomeData()
 
   const managedProjects = cmsProjects.map((project, index) => ({
@@ -71,6 +72,7 @@ function HomePage() {
         sourceUrl: company.hero_final_url,
       }
     : liveHeroFinal
+
   const brandInitials = (company.name || 'TA')
     .split(' ')
     .map((part) => part[0])
@@ -92,8 +94,6 @@ function HomePage() {
     return matched?.url?.trim() || fallbackUrl
   }
 
-  const whatsappNumber = company.whatsapp?.replace(/\D/g, '') || ''
-
   const footerSocialLinks = [
     {
       label: 'Instagram',
@@ -101,9 +101,9 @@ function HomePage() {
       icon: FaInstagram,
     },
     {
-      label: 'WhatsApp',
-      href: whatsappNumber ? `https://wa.me/${whatsappNumber}` : '',
-      icon: FaWhatsapp,
+      label: 'LinkedIn',
+      href: getSocialUrl('linkedin', 'https://www.linkedin.com'),
+      icon: FaLinkedinIn,
     },
     {
       label: 'Facebook',
@@ -111,20 +111,20 @@ function HomePage() {
       icon: FaFacebookF,
     },
     {
-      label: 'LinkedIn',
-      href: getSocialUrl('linkedin', 'https://www.linkedin.com'),
-      icon: FaLinkedinIn,
+      label: 'WhatsApp',
+      href: `https://wa.me/${company.whatsapp?.replace(/\D/g, '') || '919442268288'}`,
+      icon: FaWhatsapp,
     },
-  ].filter((item) => item.href)
+  ]
 
   useEffect(() => {
-    const brandName = company?.name || 'Thozha Associates'
-    document.title = `${brandName} | Building Your Dreams in Pollachi`
+    const title = `${company.name || 'Thozha Associates'} | Architecture & Civil Engineering`
+    document.title = title
 
-    const iconHref = company?.logo_url || `${import.meta.env.BASE_URL}favicon.svg`
-    const iconRels = ['icon', 'shortcut icon', 'apple-touch-icon']
+    const iconHref = company.logo_url || '/favicon.svg'
+    const linkRels = ['icon', 'shortcut icon', 'apple-touch-icon']
 
-    iconRels.forEach((relValue) => {
+    linkRels.forEach((relValue) => {
       let link = document.querySelector(`link[rel="${relValue}"]`)
 
       if (!link) {
@@ -138,94 +138,106 @@ function HomePage() {
   }, [company?.logo_url, company?.name])
 
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative overflow-x-hidden bg-[#FAF9F6] text-ink antialiased">
       <Loader active={loading} />
       <Navbar company={company} />
 
       <main>
+        {/* 1. Luminous Editorial Hero */}
         <HeroSection
           blueprintImage={heroBlueprint}
           finalImage={heroFinal}
           company={company}
           features={siteContent.hero_features}
         />
-        <AboutSection about={siteContent.about} />
-        <BeforeAfterShowcaseSection company={company} projects={managedProjects} />
-        <ServicesSection services={siteContent.services} />
+
+        {/* 2. Curated Project Showcase (Immediately Follows Hero) */}
         <ProjectsSection projects={managedProjects} />
-        <CareersSection
-          company={company}
-          careers={siteContent.careers}
-          socialLinks={siteContent.social_links}
-        />
+
+        {/* 3. Signature Feature: From First Line to Front Door */}
+        <FromFirstLineToFrontDoor />
+
+        {/* 4. Physical Transformation: Before & After */}
+        <BeforeAfterShowcaseSection company={company} projects={managedProjects} />
+
+        {/* 5. Company Story & Engineering Philosophy */}
+        <AboutSection about={siteContent.about} />
+
+        {/* 6. Disciplines & Key Scope */}
+        <ServicesSection />
+
+        {/* 7. Client Reviews & Feedback */}
+        <TestimonialsSection testimonials={testimonials} />
+
+        {/* 8. Dedicated Consultation & Feasibility Enquiry */}
         <LeadFormSection company={company} />
-        <LeadershipSection about={siteContent.about} />
       </main>
 
       <FloatingActions company={company} />
 
-      <footer className="border-t border-slate-200 bg-white py-10">
+      {/* Clean Architectural Footer */}
+      <footer className="border-t border-stone-200 bg-white py-14">
         <div className="section-shell">
-          <div className="rounded-3xl border border-slate-200 bg-white px-5 py-6 shadow-[0_16px_34px_rgba(15,23,42,0.06)] sm:px-7 sm:py-8">
-            <div className="grid gap-8 lg:grid-cols-[1.25fr_0.8fr_0.95fr]">
-              <div>
-                <div className="flex items-center gap-4">
+          <div className="rounded-3xl border border-stone-200 bg-[#FAF9F6] p-7 sm:p-10 shadow-sm">
+            <div className="grid gap-10 lg:grid-cols-[1.3fr_0.8fr_0.9fr]">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3.5">
                   {company.logo_url ? (
                     <img
                       src={company.logo_url}
                       alt={`${company.name} logo`}
-                      className="h-16 w-16 rounded-[1.2rem] object-cover"
+                      className="h-12 w-12 rounded-xl object-cover border border-stone-200"
                     />
                   ) : (
-                    <div className="grid h-16 w-16 place-items-center rounded-[1.2rem] bg-accent/15 font-display text-xl font-semibold text-accent">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent font-display text-base font-bold text-white shadow-sm">
                       {brandInitials}
                     </div>
                   )}
                   <div>
-                    <p className="font-display text-2xl font-semibold text-slate-900">
+                    <p className="font-display text-xl font-bold text-ink">
                       {company.name}
                     </p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">
-                      Civil Engineering and Construction
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-inkMuted">
+                      Civil Engineering & Architecture • Tamil Nadu
                     </p>
                   </div>
                 </div>
 
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                  {company.name} designs, builds, and renovates spaces with a cinematic
-                  approach to{' '}
-                  <Link
-                    to="/admin"
-                    className="text-slate-600 no-underline hover:text-slate-600"
-                    aria-label="Admin"
+                <p className="max-w-xl text-sm leading-relaxed text-inkMuted">
+                  {company.name} designs, engineers, and constructs bespoke residential homes, commercial facilities, and architectural renovations with uncompromising structural discipline and transparent turnkey execution.
+                </p>
+
+                <p className="text-xs text-inkMuted">
+                  Serving Erode, Coimbatore, Salem, Tiruppur, and clients across South India.
+                </p>
+              </div>
+
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink">
+                  Direct Contact
+                </p>
+                <div className="mt-4 space-y-2.5 text-sm text-inkMuted">
+                  <a
+                    href={formatPhoneHref(company.phone || '+91 94422 68288')}
+                    className="block font-medium text-ink hover:text-accent"
                   >
-                    admin
-                  </Link>{' '}
-                  planning, execution, and handover.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
-                  Contact
-                </p>
-                <div className="mt-4 space-y-3 text-sm text-slate-700">
-                  <a href={formatPhoneHref(company.phone || '')} className="block hover:text-accent">
-                    {company.phone}
+                    {company.phone || '+91 94422 68288'}
                   </a>
-                  <a href={`mailto:${company.email || ''}`} className="block break-all hover:text-accent">
-                    {company.email}
+                  <a
+                    href={`mailto:${company.email || 'contact@thozhaassociates.com'}`}
+                    className="block break-all hover:text-accent"
+                  >
+                    {company.email || 'contact@thozhaassociates.com'}
                   </a>
-                  <p>{company.location}</p>
+                  <p>{company.location || 'Erode & Tamil Nadu, India'}</p>
                 </div>
-
               </div>
 
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
-                  Social Links
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink">
+                  Connect & Social
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2.5">
                   {footerSocialLinks.map((item) => {
                     const Icon = item.icon
 
@@ -237,29 +249,42 @@ function HomePage() {
                         rel="noreferrer"
                         title={item.label}
                         aria-label={item.label}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-accent/20 bg-accent/10 text-accent transition hover:bg-accent hover:text-white"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white text-ink shadow-sm transition hover:border-accent hover:bg-accent hover:text-white"
                       >
                         <Icon size={15} />
                       </a>
                     )
                   })}
                 </div>
+                <div className="mt-6">
+                  <a
+                    href="#quote"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
+                  >
+                    Schedule an On-Site Consultation →
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="mt-7 border-t border-slate-200 pt-4 text-xs uppercase tracking-[0.16em] text-slate-500">
-              © {new Date().getFullYear()} {company.name}. All rights reserved.
+            <div className="mt-10 flex flex-col justify-between gap-4 border-t border-stone-200/80 pt-6 text-xs text-inkMuted sm:flex-row sm:items-center">
+              <div>
+                © {new Date().getFullYear()} {company.name}. All rights reserved.
+              </div>
+              <div className="flex items-center gap-4">
+                <span>Residential & Commercial Civil Engineering</span>
+                <span className="text-stone-300">•</span>
+                <Link
+                  to="/admin"
+                  className="text-stone-400 hover:text-stone-600 transition"
+                  aria-label="Admin Portal"
+                >
+                  Admin Access
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-
-        {warnings.length ? (
-          <div className="section-shell mt-6">
-            <div className="rounded-2xl border border-accent/25 bg-accent/10 px-4 py-3 text-sm text-accent">
-              {warnings.join(' ')}
-            </div>
-          </div>
-        ) : null}
       </footer>
     </div>
   )

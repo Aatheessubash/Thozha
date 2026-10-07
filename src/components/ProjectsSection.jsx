@@ -6,9 +6,7 @@ import SectionHeader from '@/components/SectionHeader'
 import { PROJECT_CATEGORIES } from '@/utils/constants'
 import { cn } from '@/utils/helpers'
 
-function ProjectsSection({
-  projects,
-}) {
+function ProjectsSection({ projects = [] }) {
   const [activeFilter, setActiveFilter] = useState('All')
   const [selectedProject, setSelectedProject] = useState(null)
 
@@ -24,24 +22,20 @@ function ProjectsSection({
     <section id="projects" className="scroll-mt-28 section-space">
       <div className="section-shell">
         <SectionHeader
-          eyebrow="Projects"
-          title="Selected residential, commercial, and renovation work from the dashboard"
-          description={
-            projects.length
-              ? 'Each project shown here is published from the admin dashboard and can be updated with new imagery, area details, and progress notes.'
-              : 'No projects have been published yet. Add projects from the admin dashboard to populate this section.'
-          }
+          eyebrow="Architectural Portfolio"
+          title="Selected residential, commercial, and renovation works"
+          description="A curated look at spaces engineered with structural rigor, spatial generosity, and enduring material craftsmanship."
           actions={
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {PROJECT_CATEGORIES.map((category) => (
                 <button
                   key={category}
                   type="button"
                   className={cn(
-                    'rounded-full border px-4 py-2 text-sm font-medium transition backdrop-blur',
+                    'rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition',
                     activeFilter === category
-                      ? 'border-accent bg-accent text-white shadow-glow'
-                      : 'border-slate-200/80 bg-white/70 text-slate-700 hover:border-slate-400 hover:bg-white/90',
+                      ? 'border border-accent bg-accent text-white shadow-sm'
+                      : 'border border-stone-200 bg-white text-inkMuted hover:border-stone-300 hover:text-ink',
                   )}
                   onClick={() => setActiveFilter(category)}
                 >
@@ -53,17 +47,19 @@ function ProjectsSection({
         />
 
         {filteredProjects.length ? (
-          <ProjectMasonry
-            projects={filteredProjects}
-            onSelect={setSelectedProject}
-          />
+          <div className="mt-10">
+            <ProjectMasonry
+              projects={filteredProjects}
+              onSelect={setSelectedProject}
+            />
+          </div>
         ) : (
-          <div className="panel p-8 text-center">
-            <p className="font-display text-2xl font-semibold text-slate-900">
+          <div className="panel mt-8 p-12 text-center">
+            <p className="font-display text-2xl font-semibold text-ink">
               No projects in this category yet
             </p>
-            <p className="mt-3 text-slate-500">
-              Publish projects from the dashboard to show them here.
+            <p className="mt-3 text-sm text-inkMuted">
+              Publish projects from the dashboard or switch categories to explore other works.
             </p>
           </div>
         )}

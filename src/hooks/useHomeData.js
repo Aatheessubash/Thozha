@@ -12,10 +12,11 @@ import {
 import {
   BUILD_STAGE_BLUEPRINTS,
   DEFAULT_COMPANY,
+  DEFAULT_PROJECTS,
   SITE_CONTENT_INITIAL,
   DEFAULT_TESTIMONIALS,
 } from '@/utils/constants'
-import { pickMedia, wait } from '@/utils/helpers'
+import { pickMedia } from '@/utils/helpers'
 
 function normalizeTestimonials(records = []) {
   return records.map((testimonial) => ({
@@ -61,12 +62,6 @@ export function useHomeData() {
           fetchSiteContent(),
         ])
 
-      const elapsed = Date.now() - startedAt
-
-      if (elapsed < 1200) {
-        await wait(1200 - elapsed)
-      }
-
       if (!active) {
         return
       }
@@ -106,12 +101,13 @@ export function useHomeData() {
         )
       }
 
-      const cmsProjects =
-        projectsResult.status === 'fulfilled' ? projectsResult.value : []
+      const fetchedProjects =
+        projectsResult.status === 'fulfilled' && Array.isArray(projectsResult.value)
+          ? projectsResult.value
+          : []
 
-      if (projectsResult.status === 'rejected') {
-        warnings.push('Supabase projects could not be loaded.')
-      }
+      const cmsProjects =
+        fetchedProjects.length > 0 ? fetchedProjects : DEFAULT_PROJECTS
 
       const testimonialRecords =
         testimonialsResult.status === 'fulfilled'

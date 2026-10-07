@@ -1,5 +1,4 @@
-import { MessageCircleMore, PhoneCall } from 'lucide-react'
-
+import { MessageCircle, Phone } from 'lucide-react'
 import { formatPhoneHref } from '@/utils/helpers'
 
 function FloatingActions({ company }) {
@@ -11,28 +10,28 @@ function FloatingActions({ company }) {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
+    <aside aria-label="Quick contact" className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
       {whatsappNumber ? (
         <a
           href={`https://wa.me/${whatsappNumber}`}
           target="_blank"
           rel="noreferrer"
-          className="cta-primary h-14 w-14 rounded-full p-0"
-          aria-label="Chat on WhatsApp"
+          className="flex h-12 items-center gap-2 rounded-full border border-emerald-500/30 bg-[#25D366] px-4 text-white shadow-lg transition-transform hover:scale-105"
+          aria-label="Direct WhatsApp Enquiry"
         >
-          <MessageCircleMore size={22} />
+          <MessageCircle size={18} fill="currentColor" />
+          <span className="hidden text-xs font-semibold sm:inline">WhatsApp Us</span>
         </a>
-      ) : null}
-      {phoneNumber ? (
+      ) : phoneNumber ? (
         <a
           href={formatPhoneHref(phoneNumber)}
-          className="cta-secondary h-14 w-14 rounded-full p-0"
-          aria-label="Call now"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-stone-200 bg-white text-ink shadow-lg transition-transform hover:scale-105"
+          aria-label="Call Now"
         >
-          <PhoneCall size={22} />
+          <Phone size={18} />
         </a>
       ) : null}
-    </div>
+    </aside>
   )
 }
 
