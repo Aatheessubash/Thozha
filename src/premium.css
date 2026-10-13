@@ -31,15 +31,15 @@
 
 /* Top HUD: Studio branding & Integrated stage navigator */
 .cinematic-hud-top { display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; pointer-events:auto; flex-wrap:wrap; }
-.hud-pill { display:inline-flex; align-items:center; gap:9px; padding:7px 15px; background:rgba(255,255,255,.9); border:1px solid rgba(220,216,208,.88); border-radius:999px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#323b36; box-shadow:0 4px 18px rgba(31,36,33,.06); }
-.hud-pulse { width:7px; height:7px; border-radius:50%; background:#0e4a7d; box-shadow:0 0 0 0 rgba(14,74,125,.7); animation:hudPulseAnim 2s infinite; }
-@keyframes hudPulseAnim { 0% { transform:scale(.95); box-shadow:0 0 0 0 rgba(14,74,125,.7); } 70% { transform:scale(1); box-shadow:0 0 0 7px rgba(14,74,125,0); } 100% { transform:scale(.95); box-shadow:0 0 0 0 rgba(14,74,125,0); } }
+.hud-pill { display:inline-flex; align-items:center; gap:9px; padding:7px 15px; background:#0056b3; border:1px solid #0056b3; border-radius:999px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#ffffff; box-shadow:0 4px 18px rgba(0,86,179,.28); }
+.hud-pulse { width:7px; height:7px; border-radius:50%; background:#38bdf8; box-shadow:0 0 0 0 rgba(56,189,248,.7); animation:hudPulseAnim 2s infinite; }
+@keyframes hudPulseAnim { 0% { transform:scale(.95); box-shadow:0 0 0 0 rgba(56,189,248,.7); } 70% { transform:scale(1); box-shadow:0 0 0 7px rgba(56,189,248,0); } 100% { transform:scale(.95); box-shadow:0 0 0 0 rgba(56,189,248,0); } }
 
-/* Redesigned Cinematic Intro: Completely visible blueprint, non-blocking */
+/* Redesigned Cinematic Intro: Completely visible blueprint, bright high-contrast typography */
 .cinematic-intro { position:absolute; left:clamp(20px,4vw,60px); bottom:clamp(92px,13vh,128px); max-width:560px; width:calc(100% - 40px); padding:0; background:transparent !important; border:0 !important; box-shadow:none !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; transition:opacity .25s cubic-bezier(.16,1,.3,1), transform .25s cubic-bezier(.16,1,.3,1); }
-.cinematic-intro h1 { margin:0; font-size:clamp(38px,4.5vw,66px); line-height:.92; letter-spacing:-.045em; font-weight:600; color:#171c19; text-shadow:0 2px 16px rgba(255,255,255,.92), 0 0 4px rgba(255,255,255,.8); }
-.cinematic-intro h1 em { display:inline; color:#a17c56; font-style:italic; font-weight:400; }
-.cinematic-intro > span { display:block; margin-top:14px; max-width:460px; font-size:14.5px; line-height:1.6; color:#2e3632; text-shadow:0 1px 8px rgba(255,255,255,.9); font-weight:500; }
+.cinematic-intro h1 { margin:0; font-size:clamp(38px,4.5vw,66px); line-height:.92; letter-spacing:-.045em; font-weight:600; color:#0056b3; text-shadow:0 1px 14px rgba(255,255,255,.95), 0 0 3px rgba(255,255,255,.9); }
+.cinematic-intro h1 em { display:inline; color:#d97706; font-style:italic; font-weight:400; text-shadow:0 1px 12px rgba(255,255,255,.95); }
+.cinematic-intro > span { display:block; margin-top:14px; max-width:460px; font-size:14.5px; line-height:1.6; color:#0b2b48; text-shadow:0 1px 8px rgba(255,255,255,.9); font-weight:600; }
 .cinematic-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-top:22px; pointer-events:auto; }
 .hero-primary-cta { display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:#0e4a7d; color:#fff !important; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; border:1px solid #0e4a7d; box-shadow:0 8px 24px rgba(14,74,125,.26); transition:transform .2s, background .2s, box-shadow .2s; text-decoration:none; }
 .hero-primary-cta:hover { background:#093457; transform:translateY(-2px); box-shadow:0 12px 28px rgba(14,74,125,.34); }
@@ -617,7 +617,7 @@
   .capability-strip article:last-child { border-bottom:0; }
   .cinematic-overlay { padding:calc(66px + 10px) 14px 16px; }
   .hud-pill { padding:5px 10px; font-size:8.5px; }
-  .hud-brand-pill span:last-child { max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .hud-brand-pill span:last-child { max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .cinematic-intro { left:16px; bottom:64px; width:calc(100% - 32px); }
   .cinematic-intro h1 { font-size:32px; line-height:1.02; }
   .cinematic-intro > span { font-size:12px; margin-top:8px; }
