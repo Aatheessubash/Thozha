@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, MapPin } from 'lucide-react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import FloatingActions from '@/components/FloatingActions'
+import Footer from '@/components/Footer'
 import LeadFormSection from '@/components/LeadFormSection'
 import Navbar from '@/components/Navbar'
 import { processItems, serviceItems } from '@/data/siteData'
@@ -17,10 +18,6 @@ const pageCopy = {
   process: ['Our process', 'From first line to front door.', 'A clear four-stage path keeps design intent, documentation and site execution aligned.'],
   careers: ['Careers', 'Help build thoughtful places.', 'Current openings will be published here when verified roles are available. You can still contact the studio to introduce yourself.'],
   contact: ['Contact', 'Let’s discuss your project.', 'Share the location, approximate area and the kind of support you need.'],
-}
-
-function SimpleFooter() {
-  return <footer className="inner-footer"><span>THOZHA ASSOCIATES</span><p>Venkatasa Colony, Pollachi, Tamil Nadu 642001 · +91 98431 61705</p><Link to="/admin">Admin</Link></footer>
 }
 
 function InnerPage() {
@@ -55,7 +52,7 @@ function InnerPage() {
 
     {section === 'careers' && <section className="inner-content availability-note"><h2>No verified vacancies are currently published.</h2><p>For future opportunities, introduce yourself through the contact form and include your discipline and experience in the message.</p></section>}
     {section === 'contact' ? <LeadFormSection company={company}/> : <section className="inner-cta"><p className="micro-label">Begin your project</p><h2>Let&apos;s Build Something Meaningful.</h2><Link className="button button-primary" to="/contact">Start a conversation <ArrowRight size={15}/></Link></section>}
-  </main><FloatingActions company={company}/><SimpleFooter/></div>
+  </main><FloatingActions company={company}/><Footer company={company}/></div>
 }
 
 export default InnerPage

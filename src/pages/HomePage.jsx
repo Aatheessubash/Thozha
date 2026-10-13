@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 import ArchitectureScrollHero from '@/components/ArchitectureScrollHero'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import FloatingActions from '@/components/FloatingActions'
+import Footer from '@/components/Footer'
 import LeadFormSection from '@/components/LeadFormSection'
 import Navbar from '@/components/Navbar'
 import { processItems, serviceItems } from '@/data/siteData'
@@ -127,11 +128,6 @@ function Reviews({ testimonials }) {
 
 function FAQ() {
   return <section className="faq-section editorial-section"><div><p className="micro-label">Frequently asked questions</p><h2>Project Planning<br/>Questions</h2><p>Useful starting points before a design or construction consultation.</p></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question}><summary><span>0{index + 1}</span>{question}<i>+</i></summary><p>{answer}</p></details>)}</div></section>
-}
-
-function Footer({ company }) {
-  const phone = company.phone || '+91 98431 61705'
-  return <footer className="site-footer"><div className="footer-brand"><img src={resolveAssetUrl('images/thozha/thozha-logo.png')} alt="தோழா - Thozha Associates" className="footer-logo-img" /><strong>THOZHA</strong><span>ASSOCIATES</span><p>Designing Better Spaces for Everyday Life.</p></div><div><small>Visit</small><a href="https://www.google.com/maps/search/?api=1&query=Venkatasa+Colony+Pollachi+Tamil+Nadu+642001" target="_blank" rel="noreferrer">Venkatasa Colony<br/>Pollachi, Tamil Nadu 642001</a></div><div><small>Speak with us</small><a href={formatPhoneHref(phone)}>{phone}</a><a href={`https://wa.me/${(company.whatsapp || phone).replace(/\D/g, '')}`}>WhatsApp</a></div><div className="footer-links"><Link to="/about">About</Link><Link to="/projects">Projects</Link><Link to="/services">Services</Link><Link to="/process">Process</Link><Link to="/careers">Careers</Link><Link to="/contact">Contact</Link></div><p className="copyright">© {new Date().getFullYear()} Thozha Associates. All rights reserved. <Link to="/admin">Admin</Link></p></footer>
 }
 
 function HomePage() {
