@@ -1,38 +1,24 @@
-import { MessageCircle, Phone } from 'lucide-react'
+import { MessageCircle, Phone, Send } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { formatPhoneHref } from '@/utils/helpers'
 
 function FloatingActions({ company }) {
-  const whatsappNumber = company.whatsapp?.replace(/\D/g, '') || ''
-  const phoneNumber = company.phone?.trim() || ''
+  const [formVisible, setFormVisible] = useState(false)
+  const whatsapp=(company.whatsapp||'919843161705').replace(/\D/g,'')
+  const phone=company.phone||'+91 98431 61705'
 
-  if (!whatsappNumber && !phoneNumber) {
-    return null
-  }
+  useEffect(() => {
+    const form = document.querySelector('#quote')
+    if (!form) return undefined
+    const observer = new IntersectionObserver(([entry]) => setFormVisible(entry.isIntersecting), { threshold: 0.12 })
+    observer.observe(form)
+    return () => observer.disconnect()
+  }, [])
 
-  return (
-    <aside aria-label="Quick contact" className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
-      {whatsappNumber ? (
-        <a
-          href={`https://wa.me/${whatsappNumber}`}
-          target="_blank"
-          rel="noreferrer"
-          className="flex h-12 items-center gap-2 rounded-full border border-emerald-500/30 bg-[#25D366] px-4 text-white shadow-lg transition-transform hover:scale-105"
-          aria-label="Direct WhatsApp Enquiry"
-        >
-          <MessageCircle size={18} fill="currentColor" />
-          <span className="hidden text-xs font-semibold sm:inline">WhatsApp Us</span>
-        </a>
-      ) : phoneNumber ? (
-        <a
-          href={formatPhoneHref(phoneNumber)}
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-stone-200 bg-white text-ink shadow-lg transition-transform hover:scale-105"
-          aria-label="Call Now"
-        >
-          <Phone size={18} />
-        </a>
-      ) : null}
-    </aside>
-  )
+  return <aside aria-label="Quick contact" className={`quick-actions ${formVisible ? 'is-hidden' : ''}`} aria-hidden={formVisible}>
+    <a href={formatPhoneHref(phone)} aria-label="Call Thozha Associates"><Phone size={18}/><span>Call</span></a>
+    <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer" aria-label="WhatsApp Thozha Associates"><MessageCircle size={18}/><span>WhatsApp</span></a>
+    <a href="#quote" aria-label="Open enquiry form"><Send size={18}/><span>Enquire</span></a>
+  </aside>
 }
-
 export default FloatingActions

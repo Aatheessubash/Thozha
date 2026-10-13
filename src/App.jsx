@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 const AdminPage = lazy(() => import('@/pages/AdminPage'))
 const HomePage = lazy(() => import('@/pages/HomePage'))
+const InnerPage = lazy(() => import('@/pages/InnerPage'))
 
 function App() {
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
@@ -21,6 +22,14 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<InnerPage />} />
+          <Route path="/projects" element={<InnerPage />} />
+          <Route path="/projects/:slug" element={<InnerPage />} />
+          <Route path="/services" element={<InnerPage />} />
+          <Route path="/services/:slug" element={<InnerPage />} />
+          <Route path="/process" element={<InnerPage />} />
+          <Route path="/careers" element={<InnerPage />} />
+          <Route path="/contact" element={<InnerPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

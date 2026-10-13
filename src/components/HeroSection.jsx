@@ -2,17 +2,19 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Award, Building, Compass } from 'lucide-react'
 import { useState } from 'react'
 
-function HeroSection({ blueprintImage, finalImage, company, features = [] }) {
+const generatedAsset = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+
+function HeroSection({ blueprintImage, finalImage, company }) {
   const [viewMode, setViewMode] = useState('finished') // 'finished' or 'blueprint'
 
   const heroImageSrc =
     viewMode === 'finished'
       ? finalImage?.src ||
         company.hero_final_url ||
-        'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop'
+        generatedAsset('tropical-residence')
       : blueprintImage?.src ||
         company.hero_blueprint_url ||
-        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop'
+        generatedAsset('planning-studio')
 
   return (
     <section

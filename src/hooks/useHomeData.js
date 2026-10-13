@@ -18,6 +18,12 @@ import {
 } from '@/utils/constants'
 import { pickMedia } from '@/utils/helpers'
 
+const dynamicMediaEnabled = import.meta.env.VITE_ENABLE_DYNAMIC_MEDIA === 'true'
+const localMediaFallback = {
+  collections: {},
+  providers: ['Local project assets'],
+}
+
 function normalizeTestimonials(records = []) {
   return records.map((testimonial) => ({
     ...testimonial,
@@ -36,7 +42,7 @@ export function useHomeData() {
     },
     company: DEFAULT_COMPANY,
     siteContent: SITE_CONTENT_INITIAL,
-    cmsProjects: [],
+    cmsProjects: DEFAULT_PROJECTS,
     testimonials: DEFAULT_TESTIMONIALS,
     warnings: [],
   })
@@ -45,8 +51,6 @@ export function useHomeData() {
     let active = true
 
     async function bootstrap() {
-      const startedAt = Date.now()
-
       const [
         mediaResult,
         projectsResult,
@@ -55,7 +59,7 @@ export function useHomeData() {
         siteContentResult,
       ] =
         await Promise.allSettled([
-          fetchSiteMedia(),
+          dynamicMediaEnabled ? fetchSiteMedia() : Promise.resolve(localMediaFallback),
           fetchProjects(),
           fetchTestimonials(),
           fetchSiteSettings(),
@@ -71,8 +75,7 @@ export function useHomeData() {
         mediaResult.status === 'fulfilled'
           ? mediaResult.value
           : {
-              collections: {},
-              providers: ['Demo Placeholder'],
+              ...localMediaFallback,
             }
 
       if (mediaResult.status === 'rejected') {
@@ -169,7 +172,7 @@ export function useHomeData() {
     ...state,
     buildStages,
     providerSummary: state.media.providers,
-    liveImagesEnabled: hasImageApiKeys,
+    liveImagesEnabled: dynamicMediaEnabled && hasImageApiKeys,
     cmsEnabled: isSupabaseConfigured,
   }
 }

@@ -1,293 +1,145 @@
-import { useEffect } from 'react'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
+import { createElement, useEffect, useMemo, useState } from 'react'
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  Cuboid,
+  FileCheck2,
+  Hammer,
+  MapPin,
+  PencilRuler,
+  Quote,
+  Trees,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import AboutSection from '@/components/AboutSection'
-import BeforeAfterShowcaseSection from '@/components/BeforeAfterShowcaseSection'
+import ArchitectureScrollHero from '@/components/ArchitectureScrollHero'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import FloatingActions from '@/components/FloatingActions'
-import FromFirstLineToFrontDoor from '@/components/FromFirstLineToFrontDoor'
-import HeroSection from '@/components/HeroSection'
 import LeadFormSection from '@/components/LeadFormSection'
-import Loader from '@/components/Loader'
 import Navbar from '@/components/Navbar'
-import ProjectsSection from '@/components/ProjectsSection'
-import ServicesSection from '@/components/ServicesSection'
-import TestimonialsSection from '@/components/TestimonialsSection'
+import { processItems, serviceItems } from '@/data/siteData'
 import { useHomeData } from '@/hooks/useHomeData'
-import { buildProjectHeight, formatPhoneHref } from '@/utils/helpers'
+import { useLenis } from '@/hooks/useLenis'
+import { resolveAssetUrl } from '@/services/frameSequence'
+import { formatPhoneHref, slugify } from '@/utils/helpers'
+
+const capabilities = [
+  [PencilRuler, 'Planning & Design', 'Site-aware layouts and considered architecture.'],
+  [Cuboid, '3D Visualization', 'See form, materials and space before construction.'],
+  [FileCheck2, 'Approvals & Documentation', 'Clear technical drawings and applicable support.'],
+  [Hammer, 'Construction & Handover', 'Coordinated execution through final completion.'],
+]
+
+const faqs = [
+  ['When should I involve your team?', 'Ideally before finalising the plot layout or construction budget. Early coordination helps align spatial needs, applicable approvals and buildability.'],
+  ['Can you support only design or documentation?', 'Yes. The engagement can be scoped around planning, 3D visualisation, approval drawings, estimates, consultancy or coordinated construction.'],
+  ['What information helps start a consultation?', 'Share the project location, approximate site or built-up area, intended use, timeline and any drawings or references already available.'],
+  ['Do you work beyond Pollachi?', 'Project feasibility and the right service model are confirmed during consultation based on location, scope and required site involvement.'],
+]
+
+function CapabilityStrip() {
+  return <section className="capability-strip" aria-label="Core capabilities">{capabilities.map(([icon, title, copy], index) => <article key={title}><span>0{index + 1}</span>{createElement(icon, { size: 24, strokeWidth: 1.35 })}<div><h2>{title}</h2><p>{copy}</p></div></article>)}</section>
+}
+
+function Projects({ projects }) {
+  const [filter, setFilter] = useState('All')
+  const categories = ['All', 'Residential', 'Commercial', 'Renovation', 'Interior', 'Layout', 'Ongoing']
+  const filtered = filter === 'All'
+    ? projects
+    : filter === 'Ongoing'
+      ? projects.filter((project) => /progress|ongoing/i.test(project.status || ''))
+      : projects.filter((project) => project.category === filter)
+
+  return <section id="projects" className="editorial-section projects-section">
+    <div className="section-heading-row"><div><p className="micro-label">Featured projects</p><h2>Spaces We&apos;ve Shaped</h2></div><p>Explore the ideas, craftsmanship and engineering behind our work.</p></div>
+    <div className="filter-row" role="group" aria-label="Filter projects">{categories.map((category) => <button key={category} className={filter === category ? 'active' : ''} onClick={() => setFilter(category)}>{category}</button>)}</div>
+    <div className="project-grid">{filtered.slice(0, 3).map((project, index) => {
+      const illustrative = String(project.id).startsWith('proj-')
+      const slug = project.slug || slugify(project.title)
+      return <article className={`project-card project-${index + 1}`} key={project.id}>
+        <img src={project.cover_image_url} alt={illustrative ? 'Illustrative architectural concept' : project.title} loading={index ? 'lazy' : 'eager'}/>
+        <div className="project-shade"/>
+        <div className="project-meta"><span>{illustrative ? 'Illustrative concept' : project.category}</span><h3>{illustrative ? `${project.category} design study` : project.title}</h3><p><MapPin size={13}/> {illustrative ? 'Reference imagery — not completed Thozha work' : [project.location, project.area_label, project.year].filter(Boolean).join(' · ')}</p></div>
+        <Link to={`/projects/${slug}`} aria-label={`View ${illustrative ? 'illustrative concept' : project.title}`}><ArrowRight size={18}/></Link>
+      </article>
+    })}</div>
+    {!filtered.length && <p className="empty-note">No published projects in this category yet.</p>}
+  </section>
+}
+
+function Philosophy() {
+  return <section className="philosophy-section">
+    <div className="philosophy-visual"><img src={resolveAssetUrl('images/thozha/planning-studio.webp')} alt="Architectural drawings, material samples and study model" loading="lazy"/><span>Ideas · spaces · people</span></div>
+    <div className="material-board" aria-hidden="true"><i/><i/><i/><i/></div>
+    <div className="philosophy-copy"><p className="micro-label">About Thozha Associates</p><h2>Thoughtful Design.<br/>Reliable Engineering.</h2><p>We combine design thinking with practical civil engineering to deliver spaces that work for people, today and for generations to come. Every decision is grounded in the site, the brief and a clear understanding of how the building will be made.</p><Link className="button button-outline" to="/about">Know more about us <ArrowRight size={15}/></Link></div>
+  </section>
+}
+
+function Process() {
+  return <section id="process" className="process-section editorial-section">
+    <div className="process-intro"><p className="micro-label">Our process</p><h2>From First Line<br/>to Front Door</h2><p>A transparent, step-by-step process that turns your vision into a space you&apos;ll love living in.</p><Link className="button button-outline" to="/process">Know our process <ArrowRight size={15}/></Link></div>
+    <div className="process-cards">{processItems.map((item, index) => <article key={item.number}>
+      <header><span>{item.number}</span><h3>{item.title}</h3></header>
+      <img src={item.image} alt="" loading="lazy"/>
+      <p>{item.copy}</p>
+      {index < processItems.length - 1 && <i aria-hidden="true"><ArrowRight size={15}/></i>}
+    </article>)}</div>
+  </section>
+}
+
+function PollachiStory() {
+  return <section id="about" className="pollachi-band">
+    <div className="pollachi-landscape"><img src={resolveAssetUrl('images/thozha/pollachi-landscape.webp')} alt="Coconut groves, irrigation channel and the Western Ghats near Pollachi" loading="lazy"/><div><Trees size={28}/><p className="micro-label">Local knowledge · considered design</p><h2>Rooted in Pollachi.<br/>Designed for Tomorrow.</h2><p>We understand the people, places and practical needs behind every project. Our approach brings together local knowledge, thoughtful design and reliable engineering.</p><Link className="button button-outline light" to="/about">Know more about us <ArrowRight size={15}/></Link></div></div>
+    <div className="credential-paper"><p className="micro-label">Professional practice</p><h3>Credentials supplied by the business</h3><p className="credential-note">Shown subject to supporting verification before publication.</p><article><BadgeCheck/><span><small>Professional credential</small><strong>Registered Engineer Grade-I</strong></span></article><article><Building2/><span><small>Professional membership</small><strong>Executive Committee Member, Engineers Club Tamil Nadu</strong></span></article></div>
+  </section>
+}
+
+function Services() {
+  return <section id="services" className="editorial-section services-section">
+    <div className="section-heading-row"><div><p className="micro-label">Our services</p><h2>Complete Support<br/>for Every Stage</h2></div><p>From concept to completion, practical civil engineering and architectural support under one roof.</p></div>
+    <div className="service-image-grid">{serviceItems.map((service, index) => <Link to={`/services/${service.slug}`} key={service.slug} className="service-image-card">
+      <div className="service-thumb"><img src={service.image} alt="" loading="lazy"/></div>
+      <div className="service-card-copy"><span>0{index + 1}</span>{createElement(service.icon, { size: 21, strokeWidth: 1.4 })}<h3>{service.title}</h3><p>{service.copy}</p><i><ArrowRight size={15}/></i></div>
+    </Link>)}</div>
+  </section>
+}
+
+function CaseStudy({ project }) {
+  if (!project) return null
+  const illustrative = String(project.id).startsWith('proj-')
+  return <section className="case-study-section">
+    <div className="case-study-image"><img src={project.cover_image_url} alt={illustrative ? 'Illustrative residential architecture concept' : project.title} loading="lazy"/><span>{illustrative ? 'Illustrative concept' : 'Featured project'}</span></div>
+    <div className="case-study-copy"><p className="micro-label">Selected study</p><h2>{illustrative ? 'Contemporary Tropical Residence' : project.title}</h2><p>{illustrative ? 'A presentation study showing how climate-responsive planning, shaded openings, natural materials and landscape can work together in a contemporary family home.' : project.summary}</p><dl><div><dt>Category</dt><dd>{project.category || '—'}</dd></div><div><dt>Location</dt><dd>{illustrative ? 'Sample presentation' : project.location || '—'}</dd></div><div><dt>Area</dt><dd>{illustrative ? 'Not published' : project.area_label || '—'}</dd></div><div><dt>Year</dt><dd>{illustrative ? 'Not published' : project.year || '—'}</dd></div></dl><div className="material-palette" aria-label="Material palette"><i/><i/><i/><i/></div></div>
+  </section>
+}
+
+function Transformation({ projects }) {
+  const project = projects.find((item) => !String(item.id).startsWith('proj-') && item.before_image_url && item.after_image_url)
+  if (!project) return null
+  return <section className="editorial-section transformation-section"><div className="section-heading-row"><div><p className="micro-label">Transformation</p><h2>See the Transformation</h2></div><p>Two real views of the same project, from original condition to completed space.</p></div><BeforeAfterSlider title={project.title} before={{ src: project.before_image_url, alt: `${project.title} before` }} after={{ src: project.after_image_url, alt: `${project.title} after` }}/></section>
+}
+
+function Reviews({ testimonials }) {
+  const genuine = testimonials.filter((item) => !String(item.id).startsWith('default-'))
+  return <section id="testimonials" className="editorial-section reviews-section"><div className="section-heading-row"><div><p className="micro-label">Client testimonials</p><h2>Words From Our Clients</h2></div><a className="text-link" href="https://www.google.com/maps/search/?api=1&query=Thozha+Associates+Pollachi" target="_blank" rel="noreferrer">View Google listing <ArrowRight size={16}/></a></div>{genuine.length ? <div className="review-grid">{genuine.slice(0, 3).map((item) => <article key={item.id}><Quote/><p>“{item.message}”</p><strong>{item.name}</strong><small>{item.project_type}</small></article>)}</div> : <div className="review-grid review-empty-grid">{[1, 2, 3].map((item) => <article key={item}><Quote/><p>Verified reviews appear here when connected from an approved source.</p><strong>Review content pending</strong><small>No testimonial has been invented.</small></article>)}</div>}</section>
+}
+
+function FAQ() {
+  return <section className="faq-section editorial-section"><div><p className="micro-label">Frequently asked questions</p><h2>Project Planning<br/>Questions</h2><p>Useful starting points before a design or construction consultation.</p></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question}><summary><span>0{index + 1}</span>{question}<i>+</i></summary><p>{answer}</p></details>)}</div></section>
+}
+
+function Footer({ company }) {
+  const phone = company.phone || '+91 98431 61705'
+  return <footer className="site-footer"><div className="footer-brand"><img src={resolveAssetUrl('images/thozha/thozha-logo.png')} alt="தோழா - Thozha Associates" className="footer-logo-img" /><strong>THOZHA</strong><span>ASSOCIATES</span><p>Designing Better Spaces for Everyday Life.</p></div><div><small>Visit</small><a href="https://www.google.com/maps/search/?api=1&query=Venkatasa+Colony+Pollachi+Tamil+Nadu+642001" target="_blank" rel="noreferrer">Venkatasa Colony<br/>Pollachi, Tamil Nadu 642001</a></div><div><small>Speak with us</small><a href={formatPhoneHref(phone)}>{phone}</a><a href={`https://wa.me/${(company.whatsapp || phone).replace(/\D/g, '')}`}>WhatsApp</a></div><div className="footer-links"><Link to="/about">About</Link><Link to="/projects">Projects</Link><Link to="/services">Services</Link><Link to="/process">Process</Link><Link to="/careers">Careers</Link><Link to="/contact">Contact</Link></div><p className="copyright">© {new Date().getFullYear()} Thozha Associates. All rights reserved. <Link to="/admin">Admin</Link></p></footer>
+}
 
 function HomePage() {
-  const {
-    loading,
-    buildStages,
-    cmsProjects,
-    company,
-    siteContent,
-    testimonials,
-  } = useHomeData()
-
-  const managedProjects = cmsProjects.map((project, index) => ({
-    id: project.id,
-    title: project.title,
-    category: project.category,
-    location: project.location,
-    areaLabel: project.area_label,
-    year: project.year,
-    status: project.status,
-    summary: project.summary,
-    image: {
-      src: project.cover_image_url,
-      alt: project.title,
-      sourceUrl: project.cover_image_url,
-    },
-    beforeImage: project.before_image_url
-      ? {
-          src: project.before_image_url,
-          alt: `${project.title} before`,
-        }
-      : null,
-    afterImage: project.after_image_url
-      ? {
-          src: project.after_image_url,
-          alt: `${project.title} after`,
-        }
-      : null,
-    aspect: buildProjectHeight(index),
-    source: 'Client project library',
-  }))
-
-  const liveHeroBlueprint = buildStages[0]?.image
-  const liveHeroFinal = buildStages.at(-1)?.image || buildStages[0]?.image
-  const heroBlueprint = company.hero_blueprint_url
-    ? {
-        src: company.hero_blueprint_url,
-        alt: `${company.name} blueprint`,
-        sourceUrl: company.hero_blueprint_url,
-      }
-    : liveHeroBlueprint
-  const heroFinal = company.hero_final_url
-    ? {
-        src: company.hero_final_url,
-        alt: `${company.name} completed project`,
-        sourceUrl: company.hero_final_url,
-      }
-    : liveHeroFinal
-
-  const brandInitials = (company.name || 'TA')
-    .split(' ')
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase()
-
-  const socialLinks = Array.isArray(siteContent?.social_links)
-    ? siteContent.social_links
-    : []
-
-  const getSocialUrl = (keyword, fallbackUrl) => {
-    const matched = socialLinks.find((item) =>
-      String(item?.label || '')
-        .toLowerCase()
-        .includes(keyword),
-    )
-
-    return matched?.url?.trim() || fallbackUrl
-  }
-
-  const footerSocialLinks = [
-    {
-      label: 'Instagram',
-      href: getSocialUrl('instagram', 'https://www.instagram.com'),
-      icon: FaInstagram,
-    },
-    {
-      label: 'LinkedIn',
-      href: getSocialUrl('linkedin', 'https://www.linkedin.com'),
-      icon: FaLinkedinIn,
-    },
-    {
-      label: 'Facebook',
-      href: getSocialUrl('facebook', 'https://www.facebook.com'),
-      icon: FaFacebookF,
-    },
-    {
-      label: 'WhatsApp',
-      href: `https://wa.me/${company.whatsapp?.replace(/\D/g, '') || '919442268288'}`,
-      icon: FaWhatsapp,
-    },
-  ]
-
-  useEffect(() => {
-    const title = `${company.name || 'Thozha Associates'} | Architecture & Civil Engineering`
-    document.title = title
-
-    const iconHref = company.logo_url || '/favicon.svg'
-    const linkRels = ['icon', 'shortcut icon', 'apple-touch-icon']
-
-    linkRels.forEach((relValue) => {
-      let link = document.querySelector(`link[rel="${relValue}"]`)
-
-      if (!link) {
-        link = document.createElement('link')
-        link.setAttribute('rel', relValue)
-        document.head.appendChild(link)
-      }
-
-      link.setAttribute('href', iconHref)
-    })
-  }, [company?.logo_url, company?.name])
-
-  return (
-    <div className="relative overflow-x-hidden bg-[#FAF9F6] text-ink antialiased">
-      <Loader active={loading} />
-      <Navbar company={company} />
-
-      <main>
-        {/* 1. Luminous Editorial Hero */}
-        <HeroSection
-          blueprintImage={heroBlueprint}
-          finalImage={heroFinal}
-          company={company}
-          features={siteContent.hero_features}
-        />
-
-        {/* 2. Curated Project Showcase (Immediately Follows Hero) */}
-        <ProjectsSection projects={managedProjects} />
-
-        {/* 3. Signature Feature: From First Line to Front Door */}
-        <FromFirstLineToFrontDoor />
-
-        {/* 4. Physical Transformation: Before & After */}
-        <BeforeAfterShowcaseSection company={company} projects={managedProjects} />
-
-        {/* 5. Company Story & Engineering Philosophy */}
-        <AboutSection about={siteContent.about} />
-
-        {/* 6. Disciplines & Key Scope */}
-        <ServicesSection />
-
-        {/* 7. Client Reviews & Feedback */}
-        <TestimonialsSection testimonials={testimonials} />
-
-        {/* 8. Dedicated Consultation & Feasibility Enquiry */}
-        <LeadFormSection company={company} />
-      </main>
-
-      <FloatingActions company={company} />
-
-      {/* Clean Architectural Footer */}
-      <footer className="border-t border-stone-200 bg-white py-14">
-        <div className="section-shell">
-          <div className="rounded-3xl border border-stone-200 bg-[#FAF9F6] p-7 sm:p-10 shadow-sm">
-            <div className="grid gap-10 lg:grid-cols-[1.3fr_0.8fr_0.9fr]">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3.5">
-                  {company.logo_url ? (
-                    <img
-                      src={company.logo_url}
-                      alt={`${company.name} logo`}
-                      className="h-12 w-12 rounded-xl object-cover border border-stone-200"
-                    />
-                  ) : (
-                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent font-display text-base font-bold text-white shadow-sm">
-                      {brandInitials}
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-display text-xl font-bold text-ink">
-                      {company.name}
-                    </p>
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-inkMuted">
-                      Civil Engineering & Architecture • Tamil Nadu
-                    </p>
-                  </div>
-                </div>
-
-                <p className="max-w-xl text-sm leading-relaxed text-inkMuted">
-                  {company.name} designs, engineers, and constructs bespoke residential homes, commercial facilities, and architectural renovations with uncompromising structural discipline and transparent turnkey execution.
-                </p>
-
-                <p className="text-xs text-inkMuted">
-                  Serving Erode, Coimbatore, Salem, Tiruppur, and clients across South India.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink">
-                  Direct Contact
-                </p>
-                <div className="mt-4 space-y-2.5 text-sm text-inkMuted">
-                  <a
-                    href={formatPhoneHref(company.phone || '+91 94422 68288')}
-                    className="block font-medium text-ink hover:text-accent"
-                  >
-                    {company.phone || '+91 94422 68288'}
-                  </a>
-                  <a
-                    href={`mailto:${company.email || 'contact@thozhaassociates.com'}`}
-                    className="block break-all hover:text-accent"
-                  >
-                    {company.email || 'contact@thozhaassociates.com'}
-                  </a>
-                  <p>{company.location || 'Erode & Tamil Nadu, India'}</p>
-                </div>
-              </div>
-
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink">
-                  Connect & Social
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2.5">
-                  {footerSocialLinks.map((item) => {
-                    const Icon = item.icon
-
-                    return (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        title={item.label}
-                        aria-label={item.label}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-stone-200 bg-white text-ink shadow-sm transition hover:border-accent hover:bg-accent hover:text-white"
-                      >
-                        <Icon size={15} />
-                      </a>
-                    )
-                  })}
-                </div>
-                <div className="mt-6">
-                  <a
-                    href="#quote"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
-                  >
-                    Schedule an On-Site Consultation →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 flex flex-col justify-between gap-4 border-t border-stone-200/80 pt-6 text-xs text-inkMuted sm:flex-row sm:items-center">
-              <div>
-                © {new Date().getFullYear()} {company.name}. All rights reserved.
-              </div>
-              <div className="flex items-center gap-4">
-                <span>Residential & Commercial Civil Engineering</span>
-                <span className="text-stone-300">•</span>
-                <Link
-                  to="/admin"
-                  className="text-stone-400 hover:text-stone-600 transition"
-                  aria-label="Admin Portal"
-                >
-                  Admin Access
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
+  useLenis()
+  const { cmsProjects, company: loadedCompany, testimonials } = useHomeData()
+  const company = useMemo(() => ({ ...loadedCompany, name: loadedCompany.name || 'Thozha Associates', phone: loadedCompany.phone || '+91 98431 61705', whatsapp: loadedCompany.whatsapp || '+91 98431 61705', location: loadedCompany.location || 'Venkatasa Colony, Pollachi, Tamil Nadu 642001' }), [loadedCompany])
+  useEffect(() => { document.title = 'Thozha Associates | Civil Engineering, Design & Construction in Pollachi' }, [])
+  return <div className="site-canvas"><Navbar company={company}/><main><ArchitectureScrollHero company={company}/><CapabilityStrip/><Projects projects={cmsProjects}/><Philosophy/><Process/><PollachiStory/><Services/><CaseStudy project={cmsProjects[0]}/><Transformation projects={cmsProjects}/><Reviews testimonials={testimonials}/><FAQ/><LeadFormSection company={company}/></main><FloatingActions company={company}/><Footer company={company}/></div>
 }
 
 export default HomePage

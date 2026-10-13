@@ -72,6 +72,19 @@ function BeforeAfterSlider({ before, after, title }) {
     setIsDragging(false)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      setPosition((value) => clamp(value - 5, 0, 100))
+    }
+    if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      setPosition((value) => clamp(value + 5, 0, 100))
+    }
+    if (event.key === 'Home') setPosition(0)
+    if (event.key === 'End') setPosition(100)
+  }
+
   return (
     <div className="overflow-hidden rounded-3xl border border-stone-200/90 bg-white p-3 shadow-soft sm:p-5">
       <div className="flex flex-col gap-3 pb-4 sm:flex-row sm:items-center sm:justify-between sm:px-2">
@@ -91,6 +104,12 @@ function BeforeAfterSlider({ before, after, title }) {
 
       <div
         ref={mediaRef}
+        role="slider"
+        tabIndex="0"
+        aria-label="Before and after image comparison"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={position}
         className="relative aspect-[4/3] cursor-col-resize overflow-hidden rounded-2xl select-none sm:aspect-[16/9]"
         style={{ touchAction: 'pan-y' }}
         onPointerDown={handlePointerDown}
@@ -98,6 +117,7 @@ function BeforeAfterSlider({ before, after, title }) {
         onPointerUp={handlePointerEnd}
         onPointerCancel={handlePointerEnd}
         onLostPointerCapture={handlePointerEnd}
+        onKeyDown={handleKeyDown}
       >
         {/* Base Layer: Completed Project (Shows on the Right) */}
         <ComparisonImage

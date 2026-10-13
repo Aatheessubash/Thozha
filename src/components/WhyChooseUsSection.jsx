@@ -10,6 +10,8 @@ import {
 import SectionHeader from '@/components/SectionHeader'
 import { truncateWords } from '@/utils/helpers'
 
+const generatedAsset = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+
 function getTrustIcon(title = '') {
   if (/licensed|engineer/i.test(title)) {
     return ShieldCheck
@@ -87,7 +89,7 @@ function WhyChooseUsSection({ items = [] }) {
                   className="relative grid h-72 w-72 place-items-center rounded-full p-8 shadow-soft"
                   style={{ backgroundImage: createWheelGradient(trustHighlights.length) }}
                 >
-                  <div className="absolute inset-[24px] rounded-full bg-cover bg-center opacity-40 mix-blend-overlay" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1541888086225-ee5b5d848197?q=80&w=800&auto=format&fit=crop)' }} />
+                  <div className="absolute inset-[24px] rounded-full bg-cover bg-center opacity-40 mix-blend-overlay" style={{ backgroundImage: `url(${generatedAsset('planning-studio')})` }} />
                   <div className="absolute inset-[24px] rounded-full bg-canvas/80 backdrop-blur-[8px]" />
                   <div className="absolute inset-[50px] rounded-full border border-slate-200" />
 

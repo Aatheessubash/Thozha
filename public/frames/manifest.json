@@ -1,0 +1,13 @@
+{
+  "count": 262,
+  "desktopCount": 262,
+  "mobileCount": 69,
+  "desktopPattern": "vid/frames_desktop/frames_mobile/frame%05d.webp",
+  "mobilePattern": "vid/responsive/webp/frame%05d.webp",
+  "fallbackPattern": "vid/frames_desktop/frames_mobile/frame%05d.png",
+  "mobileFallbackPattern": "vid/responsive/frame%05d.png",
+  "supportedFormats": ["webp", "png"],
+  "width": 1280,
+  "height": 720,
+  "aspectRatio": 1.7777777777777777
+}

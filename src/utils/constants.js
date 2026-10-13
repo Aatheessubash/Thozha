@@ -1,20 +1,22 @@
+const generatedImage = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+
 export const DEFAULT_COMPANY = {
   name: 'Thozha Associates',
   tagline: 'Thoughtfully Designed. Built for Everyday Life.',
   blurb:
     'Civil engineering, bespoke architecture, and turnkey construction across Tamil Nadu — from foundational planning to final handover.',
-  phone: import.meta.env.VITE_COMPANY_PHONE || '+91 94422 68288',
-  whatsapp: import.meta.env.VITE_COMPANY_WHATSAPP || '919442268288',
+  phone: import.meta.env.VITE_COMPANY_PHONE || '+91 98431 61705',
+  whatsapp: import.meta.env.VITE_COMPANY_WHATSAPP || '919843161705',
   email:
-    import.meta.env.VITE_COMPANY_EMAIL || 'contact@thozhaassociates.com',
+    import.meta.env.VITE_COMPANY_EMAIL || '',
   location:
-    import.meta.env.VITE_COMPANY_LOCATION || 'Erode & Tamil Nadu, India',
+    import.meta.env.VITE_COMPANY_LOCATION || 'Venkatasa Colony, Pollachi, Tamil Nadu 642001',
   logo_url: '',
-  hero_blueprint_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
-  hero_final_url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
+  hero_blueprint_url: generatedImage('planning-studio'),
+  hero_final_url: generatedImage('tropical-residence'),
   featured_before_after_title: 'Courtyard Residence Transformation',
-  featured_before_image_url: 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
-  featured_after_image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+  featured_before_image_url: generatedImage('construction-site'),
+  featured_after_image_url: generatedImage('tropical-residence'),
 }
 
 export const COMPANY = DEFAULT_COMPANY
@@ -45,7 +47,11 @@ export const LEAD_PROJECT_TYPES = [
   'Residential',
   'Commercial',
   'Renovation',
-  'Interior Fit-Out',
+  'Interior Design',
+  'Building Approval',
+  'DTCP Layout Approval',
+  'Engineering Consultation',
+  'Other',
 ]
 
 export const PROJECT_CATEGORIES = [
@@ -278,110 +284,92 @@ export const REMOTE_PROJECT_BLUEPRINTS = [
 export const DEFAULT_PROJECTS = [
   {
     id: 'proj-1',
-    title: 'Palm Courtyard Residence',
+    title: 'Tropical Courtyard Residence',
     category: 'Residential',
-    location: 'Perundurai, Erode',
-    area_label: '3,450 sq.ft',
-    year: '2024',
-    status: 'Delivered',
+    location: '',
+    area_label: '',
+    year: '',
+    status: 'Illustrative',
     summary:
-      'A climate-conscious family residence composed around an open-to-sky central courtyard, deep terracotta louvers, and warm exposed aggregate surfaces.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+      'A climate-responsive family-home study using deep shade, timber screens, local stone and tropical planting.',
+    cover_image_url: generatedImage('tropical-residence'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('tropical-residence'),
     featured: true,
   },
   {
     id: 'proj-2',
-    title: 'The Monolith Villa',
-    category: 'Residential',
-    location: 'Coimbatore',
-    area_label: '4,200 sq.ft',
-    year: '2024',
-    status: 'In Progress',
+    title: 'Shaded High Street',
+    category: 'Commercial',
+    location: '',
+    area_label: '',
+    year: '',
+    status: 'Illustrative',
     summary:
-      'A contemporary two-story villa balancing long-span cantilevers with layered timber screens and private tropical garden terraces.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop',
+      'A mixed-use design study shaped by shaded shopfronts, vertical sun screens and a durable material palette.',
+    cover_image_url: generatedImage('mixed-use-building'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('mixed-use-building'),
     featured: true,
   },
   {
     id: 'proj-3',
-    title: 'Axis Creative Pavilion',
-    category: 'Commercial',
-    location: 'Salem',
-    area_label: '5,800 sq.ft',
-    year: '2023',
-    status: 'Delivered',
+    title: 'Garden Living Interior',
+    category: 'Interior',
+    location: '',
+    area_label: '',
+    year: '',
+    status: 'Illustrative',
     summary:
-      'An inspiring commercial work pavilion featuring double-glazed curtain walls, structural steel trusses, and modular collaborative workspaces.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop',
+      'An interior study connecting living and dining spaces to a shaded tropical courtyard through natural materials.',
+    cover_image_url: generatedImage('tropical-interior'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('tropical-interior'),
     featured: false,
   },
   {
     id: 'proj-4',
-    title: 'Heritage Courtyard Renewal',
+    title: 'Courtyard House Renewal',
     category: 'Renovation',
-    location: 'Tiruppur',
-    area_label: '2,900 sq.ft',
-    year: '2023',
-    status: 'Delivered',
+    location: '',
+    area_label: '',
+    year: '',
+    status: 'Illustrative',
     summary:
-      'An aging 1980s family property refreshed through structural retrofitting, expanded skylights, and seamless micro-cement flooring.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop',
+      'A sensitive renewal concept pairing retained clay-tile roofs and masonry with a light contemporary courtyard addition.',
+    cover_image_url: generatedImage('courtyard-renovation'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('courtyard-renovation'),
     featured: false,
   },
   {
     id: 'proj-5',
-    title: 'Zenith Commercial Tower',
-    category: 'Commercial',
-    location: 'Chennai',
-    area_label: '8,400 sq.ft',
-    year: '2024',
-    status: 'Delivered',
+    title: 'Compact Screen House',
+    category: 'Residential',
+    location: '',
+    area_label: '',
+    year: '',
+    status: 'Illustrative',
     summary:
-      'A multi-level corporate facility prioritizing natural illumination, efficient vehicular circulation, and an iconic vertical stone louver facade.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1200&auto=format&fit=crop',
+      'A compact urban-home study using a terracotta screen, recessed openings and a shaded entry garden for privacy and comfort.',
+    cover_image_url: generatedImage('compact-urban-home'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('compact-urban-home'),
     featured: false,
   },
   {
     id: 'proj-6',
-    title: 'Terra Biophilic Residence',
+    title: 'Structure in Progress',
     category: 'Residential',
-    location: 'Madurai',
-    area_label: '3,800 sq.ft',
-    year: '2024',
+    location: '',
+    area_label: '',
+    year: '',
     status: 'In Progress',
     summary:
-      'Earth-toned urban residence featuring exposed wire-cut brickwork, internal green lightwells, and natural passive stack ventilation.',
-    cover_image_url:
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
-    before_image_url:
-      'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1200&auto=format&fit=crop',
-    after_image_url:
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
+      'A construction-stage study showing the relationship between reinforced-concrete structure, masonry and site coordination.',
+    cover_image_url: generatedImage('construction-site'),
+    before_image_url: generatedImage('planning-studio'),
+    after_image_url: generatedImage('construction-site'),
     featured: false,
   },
 ]

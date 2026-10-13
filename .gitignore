@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .playwright-mcp/
+playwright-report/
+test-results/
 
 # Environment files
 .env

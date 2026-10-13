@@ -2,14 +2,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Compass, Eye, Layers, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 
+const generatedAsset = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+
 const STAGES = [
   {
     id: 'plan',
     step: '01',
     label: 'Architectural CAD & Plan',
     subtitle: 'From spatial brief to verified structural calculation',
-    image:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400&auto=format&fit=crop', // High-res blueprint/elevation
+    image: generatedAsset('planning-studio'),
     blueprintOverlay: true,
     specs: [
       { label: 'Scope', val: 'Floor Plans, 3D Elevation, Structural Analysis' },
@@ -23,8 +24,7 @@ const STAGES = [
     step: '02',
     label: 'Structural RCC & Framing',
     subtitle: 'Precision formwork, reinforced concrete & disciplined masonry',
-    image:
-      'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?q=80&w=1400&auto=format&fit=crop', // Clean construction/structure
+    image: generatedAsset('construction-site'),
     specs: [
       { label: 'Core', val: 'Fe-550D TMT Rebar & M25 Certified Concrete' },
       { label: 'Supervision', val: 'Daily Site In-Charge & Cube Test Reports' },
@@ -37,8 +37,7 @@ const STAGES = [
     step: '03',
     label: 'Turnkey Handover',
     subtitle: 'Warm light, tactile materials, and a home built for everyday life',
-    image:
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400&auto=format&fit=crop', // Finished sunlit villa
+    image: generatedAsset('tropical-residence'),
     specs: [
       { label: 'Finishes', val: 'Lime-Wash Rendering, Teak Joinery & Micro-Cement' },
       { label: 'Efficiency', val: 'Passive Cross-Ventilation & Rainwater Harvesting' },
