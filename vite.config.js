@@ -8,7 +8,9 @@ const __dirname = path.dirname(__filename)
 
 export default defineConfig({
   plugins: [react()],
-  base: '/thozha/',
+  // The site is deployed at the domain root on Vercel, not under /thozha/.
+  // Using /thozha/ here makes production JS/CSS assets resolve to the wrong path.
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
