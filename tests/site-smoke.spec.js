@@ -6,7 +6,7 @@ test('publishes the requested routes and honest fallback labels', async ({ page 
   await expect(page.getByText('Illustrative concept').first()).toBeVisible()
 
   await page.goto('./services')
-  await expect(page.getByRole('link', { name: /2D Building Plans/ })).toBeVisible()
+  await expect(page.getByRole('link', { name: /2D Building Plans/ }).first()).toBeVisible()
 
   await page.goto('./process')
   await expect(page.getByRole('heading', { name: 'Planning & Design' })).toBeVisible()
@@ -29,4 +29,11 @@ test('keeps the redesigned mobile pages inside the viewport', async ({ page }) =
   await page.goto('./services')
   const servicesOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
   expect(servicesOverflow).toBeLessThanOrEqual(1)
+
+  // Verify ultra-narrow 320px viewport (e.g. iPhone SE / DevTools responsive 320px)
+  await page.setViewportSize({ width: 320, height: 568 })
+  await page.goto('./')
+  await expect(page.locator('.cinematic-intro')).toBeVisible({ timeout: 15_000 })
+  const narrowOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+  expect(narrowOverflow).toBeLessThanOrEqual(1)
 })

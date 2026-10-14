@@ -9,10 +9,10 @@ const links = [
   ['Process', '/process'], ['Testimonials', '/#testimonials'], ['Contact', '/contact'],
 ]
 
-function Navbar({ company }) {
+function Navbar({ company = {} }) {
   const [open, setOpen] = useState(false)
   const [compact, setCompact] = useState(false)
-  const phone = company.phone || '+91 98431 61705'
+  const phone = company?.phone || '+91 98431 61705'
   const logoUrl = resolveAssetUrl('images/thozha/thozha-logo.png')
 
   useEffect(() => {

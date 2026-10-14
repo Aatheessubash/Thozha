@@ -12,7 +12,8 @@ function HeroOverlay({
       <div className="cinematic-hud-top">
         <div className="hud-pill hud-brand-pill">
           <span className="hud-pulse" />
-          <span>CIVIL ENGINEERING & ARCHITECTURE • POLLACHI</span>
+          <span className="hud-label-desktop">CIVIL ENGINEERING & ARCHITECTURE • POLLACHI</span>
+          <span className="hud-label-mobile">CIVIL & ARCHITECTURE • POLLACHI</span>
         </div>
       </div>
 
@@ -34,7 +35,7 @@ function HeroOverlay({
         </span>
         <div className="cinematic-actions">
           <a href="#projects" onClick={onExploreClick} className="hero-primary-cta">
-            Explore Selected Works <ArrowRight size={14} />
+            Explore Works <ArrowRight size={14} />
           </a>
           <a href="#process" className="hero-play-cta">
             Our Approach <ArrowRight size={14} />

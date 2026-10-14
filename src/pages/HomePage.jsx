@@ -23,7 +23,7 @@ import { processItems, serviceItems } from '@/data/siteData'
 import { useHomeData } from '@/hooks/useHomeData'
 import { useLenis } from '@/hooks/useLenis'
 import { resolveAssetUrl } from '@/services/frameSequence'
-import { formatPhoneHref, slugify } from '@/utils/helpers'
+import { slugify } from '@/utils/helpers'
 
 const capabilities = [
   [PencilRuler, 'Planning & Design', 'Site-aware layouts and considered architecture.'],

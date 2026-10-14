@@ -1,18 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FrameSequenceCanvas from '@/components/hero/FrameSequenceCanvas'
 import HeroLoader from '@/components/hero/HeroLoader'
 import HeroOverlay from '@/components/hero/HeroOverlay'
 import { ScrollFrameController } from '@/components/hero/ScrollFrameController'
 import { useFrameSequence } from '@/hooks/useFrameSequence'
 
-function ArchitectureScrollHero({ company = {} }) {
+function ArchitectureScrollHero() {
   const sectionRef = useRef(null)
   const canvasRef = useRef(null)
   const lastUiProgressRef = useRef(-1)
   const [scrollProgress, setScrollProgress] = useState(0)
-  const [hasScrolled, setHasScrolled] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const playRafRef = useRef(null)
 
   const { isReady, loadProgress, frameCount, isMobile, getFrame, prioritizeWindow, subscribeFrames } = useFrameSequence({
     defaultCount: 262,
@@ -42,7 +39,6 @@ function ArchitectureScrollHero({ company = {} }) {
           setScrollProgress(progress)
         }
       },
-      onScrollStateChange: setHasScrolled,
     })
 
     return () => controller.destroy()
@@ -50,69 +46,10 @@ function ArchitectureScrollHero({ company = {} }) {
 
   const handleExploreClick = (event) => {
     event?.preventDefault()
-    setIsPlaying(false)
     const target = document.querySelector('#projects')
     if (window.lenis) window.lenis.scrollTo(target, { duration: 1.4 })
     else target?.scrollIntoView({ behavior: 'smooth' })
   }
-
-  const seekToProgress = useCallback((targetProgress) => {
-    setIsPlaying(false)
-    if (!sectionRef.current) return
-    const navOffset = window.innerWidth <= 1100 ? 66 : 78
-    const rect = sectionRef.current.getBoundingClientRect()
-    const sectionTop = window.scrollY + rect.top - navOffset
-    const scrollDistance = sectionRef.current.offsetHeight - window.innerHeight
-    const targetY = sectionTop + Math.max(0, Math.min(1, targetProgress)) * scrollDistance
-    window.scrollTo({ top: targetY, behavior: 'smooth' })
-  }, [])
-
-  const togglePlay = useCallback(() => {
-    setIsPlaying((prev) => !prev)
-  }, [])
-
-  // Auto-play through the walkthrough sequence
-  useEffect(() => {
-    if (!isPlaying || !sectionRef.current) return undefined
-
-    const navOffset = window.innerWidth <= 1100 ? 66 : 78
-    const rect = sectionRef.current.getBoundingClientRect()
-    const currentScroll = window.scrollY
-    const sectionTop = currentScroll + rect.top - navOffset
-    const scrollDistance = sectionRef.current.offsetHeight - window.innerHeight
-
-    let startTimestamp = null
-    const duration = 14000 // 14s smooth cinematic journey
-
-    const currentP = Math.max(0, Math.min(1, (window.scrollY - sectionTop) / scrollDistance))
-    const startP = currentP >= 0.96 ? 0 : currentP
-
-    if (startP === 0) {
-      window.scrollTo({ top: sectionTop })
-    }
-
-    const step = (now) => {
-      if (!startTimestamp) startTimestamp = now
-      const elapsed = now - startTimestamp
-      const nextP = Math.min(1, startP + (elapsed / duration) * (1 - startP))
-      const targetY = sectionTop + nextP * scrollDistance
-      window.scrollTo({ top: targetY })
-
-      if (nextP < 1) {
-        playRafRef.current = requestAnimationFrame(step)
-      } else {
-        setIsPlaying(false)
-      }
-    }
-
-    playRafRef.current = requestAnimationFrame(step)
-
-    return () => {
-      if (playRafRef.current) {
-        cancelAnimationFrame(playRafRef.current)
-      }
-    }
-  }, [isPlaying])
 
   const scrollDistance = isMobile
     ? Math.max(2800, Math.min(3800, frameCount * 11))

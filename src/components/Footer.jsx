@@ -77,7 +77,7 @@ function Footer({ company = {} }) {
             <li><Link to="/about">About Studio <ArrowRight size={12} /></Link></li>
             <li><Link to="/projects">Selected Projects <ArrowRight size={12} /></Link></li>
             <li><Link to="/process">Our 4-Stage Process <ArrowRight size={12} /></Link></li>
-            <li><a href="/#testimonials">Client Reviews <ArrowRight size={12} /></a ></li>
+            <li><Link to="/#testimonials">Client Reviews <ArrowRight size={12} /></Link></li>
             <li><Link to="/careers">Careers & Internships <ArrowRight size={12} /></Link></li>
             <li><Link to="/contact">Contact Studio <ArrowRight size={12} /></Link></li>
           </ul>

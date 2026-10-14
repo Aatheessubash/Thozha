@@ -151,11 +151,13 @@ function BeforeAfterSlider({ before, after, title }) {
         </div>
 
         {/* Verified Position Labels */}
-        <div className="pointer-events-none absolute left-3 top-3 rounded-full border border-white/40 bg-white/90 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-ink shadow-sm backdrop-blur-sm sm:left-5 sm:top-5">
-          Initial Condition
+        <div className="pointer-events-none absolute left-2.5 top-2.5 rounded-full border border-white/40 bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-ink shadow-sm backdrop-blur-sm sm:left-5 sm:top-5 sm:px-3 sm:text-[11px] sm:tracking-[0.16em]">
+          <span className="hidden sm:inline">Initial Condition</span>
+          <span className="sm:hidden">Before</span>
         </div>
-        <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-white/40 bg-accent/90 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white shadow-sm backdrop-blur-sm sm:right-5 sm:top-5">
-          Completed Architecture
+        <div className="pointer-events-none absolute right-2.5 top-2.5 rounded-full border border-white/40 bg-accent/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-sm sm:right-5 sm:top-5 sm:px-3 sm:text-[11px] sm:tracking-[0.16em]">
+          <span className="hidden sm:inline">Completed Architecture</span>
+          <span className="sm:hidden">After</span>
         </div>
       </div>
     </div>
