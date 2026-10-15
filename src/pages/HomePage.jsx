@@ -25,6 +25,7 @@ import {
 import { Link } from 'react-router-dom'
 
 import ArchitectureScrollHero from '@/components/ArchitectureScrollHero'
+import EngineeringBimHero from '@/components/hero/EngineeringBimHero'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import { useHomeData } from '@/hooks/useHomeData'
@@ -209,113 +210,10 @@ function HomePage() {
 
       <main>
         {/* ==========================================================================
-            SECTION 1: HERO SECTION & SHOWCASE (Matching screen.png & screen 01.png)
+            SECTION 1: HERO SECTION & SHOWCASE (Matching media_1792082049715_edebb03f.jpg)
             ========================================================================== */}
-        <section id="about" className="th-hero">
-          <div className="thozha-container">
-            {/* Hero Top Title & Badge */}
-            <div className="th-hero-header">
-              <div className="th-section-badge">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-                PREMIER CIVIL ENGINEERING & ARCHITECTURE • POLLACHI
-              </div>
-              <h1>Crafting timeless architecture & turnkey homes in Pollachi.</h1>
-              <p>
-                From millimeter-accurate drafting to turnkey keys-in-hand delivery. We blend sustainable
-                tropical design, Vaastu harmony, and uncompromising structural strength.
-              </p>
-            </div>
+        <EngineeringBimHero company={company} />
 
-            {/* Showcase Switcher / Card */}
-            <div className="mb-4 flex items-center justify-between flex-wrap gap-3">
-              <div className="inline-flex rounded-full bg-slate-100 p-1 border border-slate-200">
-                <button
-                  type="button"
-                  onClick={() => setHeroMode('handover')}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border-none cursor-pointer ${
-                    heroMode === 'handover'
-                      ? 'bg-slate-900 text-white shadow-sm'
-                      : 'bg-transparent text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  Featured Handover Villa
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setHeroMode('walkthrough')}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border-none cursor-pointer ${
-                    heroMode === 'walkthrough'
-                      ? 'bg-blue-600 text-white shadow-sm'
-                      : 'bg-transparent text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  Interactive 3D Walkthrough
-                </button>
-              </div>
-
-              <a
-                href="#consultation"
-                className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1.5"
-              >
-                Inquire About Your Site <ArrowRight size={14} />
-              </a>
-            </div>
-
-            {/* Hero Display Box */}
-            {heroMode === 'handover' ? (
-              <div className="th-hero-card">
-                <img
-                  src={resolveAssetUrl('images/thozha/hero-anamalai-clean.webp')}
-                  alt="The Anamalai Courtyard Villa - Featured Turnkey Handover in Pollachi"
-                  className="th-hero-card-img"
-                  loading="eager"
-                />
-                <div className="th-hero-card-overlay">
-                  <div className="th-hero-card-meta">
-                    <div className="th-hero-card-text">
-                      <span className="th-hero-card-badge">FEATURED TURNKEY HANDOVER</span>
-                      <h2 className="th-hero-card-title">The Anamalai Courtyard Villa</h2>
-                      <p className="th-hero-card-desc">
-                        4,200 sq.ft contemporary tropical residence facing the Western Ghats.
-                      </p>
-                    </div>
-                    <a href="#portfolio" className="th-hero-card-btn">
-                      View Portfolio Details <ArrowRight size={14} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-lg bg-slate-50">
-                <ArchitectureScrollHero company={company} />
-              </div>
-            )}
-
-            {/* 4-Stat Metric Row */}
-            <div className="th-stats-strip">
-              <div className="th-stat-item">
-                <span className="th-stat-val">15+</span>
-                <span className="th-stat-label">Years of Engineering Practice</span>
-                <span className="th-stat-sub">Pollachi & Coimbatore Belt</span>
-              </div>
-              <div className="th-stat-item">
-                <span className="th-stat-val">180+</span>
-                <span className="th-stat-label">Completed Turnkey Residences</span>
-                <span className="th-stat-sub">Built & Delivered On-Time</span>
-              </div>
-              <div className="th-stat-item">
-                <span className="th-stat-val">100%</span>
-                <span className="th-stat-label">DTCP & Municipal Sanctions</span>
-                <span className="th-stat-sub">Statutory Clearance Rate</span>
-              </div>
-              <div className="th-stat-item">
-                <span className="th-stat-val">M25+</span>
-                <span className="th-stat-label">Certified Concrete Strength</span>
-                <span className="th-stat-sub">Lab Cube Tested Batches</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ==========================================================================
             SECTION 2: CORE PILLARS (Matching screen.png)
