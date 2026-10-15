@@ -1,11 +1,11 @@
-import { ArrowRight, ArrowUp, ArrowUpRight, CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowUp, MapPin, Phone, Clock, Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { resolveAssetUrl } from '@/services/frameSequence'
 import { formatPhoneHref } from '@/utils/helpers'
 
 function Footer({ company = {} }) {
   const phone = company.phone || '+91 98431 61705'
-  const whatsapp = company.whatsapp || '919843161705'
+  const logoUrl = resolveAssetUrl('images/thozha/thozha-logo.png')
 
   const scrollToTop = () => {
     if (window.lenis) {
@@ -16,156 +16,97 @@ function Footer({ company = {} }) {
   }
 
   return (
-    <footer className="site-footer" aria-label="Site footer">
-      {/* Top Architectural Invitation Strip */}
-      <div className="footer-cta-strip">
-        <div className="footer-cta-content">
-          <span className="footer-kicker">ARCHITECTURAL PRACTICE & CIVIL RIGOR</span>
-          <h2 className="footer-cta-title">Ready to bring your architectural vision to life?</h2>
-          <span>
-            Discuss your plot layout, 3D visualization, municipal sanctions, or turnkey construction with our engineering team in Pollachi.
-          </span>
-        </div>
-        <div className="footer-cta-actions">
-          <Link to="/contact" className="footer-cta-btn">
-            Book Consultation <ArrowUpRight size={15} />
-          </Link>
-          <a href={formatPhoneHref(phone)} className="footer-call-btn">
-            <Phone size={14} /> {phone}
-          </a>
-        </div>
-      </div>
-
-      {/* Main 4-Column Architectural Showcase Grid */}
-      <div className="footer-main-grid">
-        {/* Column 1: Studio Identity & Credentials */}
-        <div className="footer-col footer-col-brand">
-          <div className="footer-brand-wrap">
-            <img
-              src={resolveAssetUrl('images/thozha/thozha-logo.png')}
-              alt="தோழா - Thozha Associates"
-              className="footer-logo-img"
-            />
-            <div className="footer-brand-text">
-              <strong>THOZHA</strong>
-              <span>ASSOCIATES</span>
+    <footer className="site-footer bg-white border-t border-slate-200" aria-label="Site footer">
+      <div className="thozha-container py-14">
+        {/* 4-Column Showcase Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-100">
+          {/* Column 1: Studio Identity & Credentials */}
+          <div className="flex flex-col">
+            <Link to="/" className="flex items-center gap-3 mb-4 text-slate-900 no-underline">
+              <img
+                src={logoUrl}
+                alt="தோழா - Thozha Associates"
+                className="h-10 w-auto object-contain"
+              />
+              <div>
+                <strong className="block text-base font-extrabold tracking-widest text-slate-900">THOZHA</strong>
+                <span className="block text-[9px] font-bold tracking-widest text-slate-500">ASSOCIATES</span>
+              </div>
+            </Link>
+            <p className="text-xs text-slate-600 leading-relaxed max-w-sm mb-4">
+              Registered Civil Engineers and Architects crafting durable, elegant turnkey residences in Pollachi and Western Tamil Nadu since 2009.
+            </p>
+            <div className="text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-lg w-fit">
+              ISO 9001:2015 Certified Civil Practice
             </div>
           </div>
-          <p className="footer-brand-desc">
-            Integrated architecture, civil engineering, and turnkey construction practice rooted in Pollachi. Designing functional, timeless living spaces built for everyday life.
-          </p>
-          <div className="footer-credentials">
-            <div className="footer-cred-pill">
-              <CheckCircle2 size={14} />
-              <span>Registered Engineer Grade-I</span>
-            </div>
-            <div className="footer-cred-pill">
-              <CheckCircle2 size={14} />
-              <span>Member, Engineers Club Tamil Nadu</span>
-            </div>
-            <div className="footer-cred-pill">
-              <CheckCircle2 size={14} />
-              <span>10+ Years of Site-Tested Rigor</span>
-            </div>
+
+          {/* Column 2: Architecture Disciplines */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">ARCHITECTURE</h3>
+            <ul className="list-none p-0 m-0 space-y-2.5 text-xs text-slate-600">
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">2D Municipal Blueprints</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">3D Exterior Elevations</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">Interior Spatial Design</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">Vaastu Cardinal Layouts</a></li>
+              <li><a href="#portfolio" className="hover:text-blue-700 transition-colors">Tropical Villa Concepts</a></li>
+            </ul>
           </div>
-        </div>
 
-        {/* Column 2: Studio Navigation */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">STUDIO</h3>
-          <ul className="footer-nav-list">
-            <li><Link to="/about">About Studio <ArrowRight size={12} /></Link></li>
-            <li><Link to="/projects">Selected Projects <ArrowRight size={12} /></Link></li>
-            <li><Link to="/process">Our 4-Stage Process <ArrowRight size={12} /></Link></li>
-            <li><Link to="/#testimonials">Client Reviews <ArrowRight size={12} /></Link></li>
-            <li><Link to="/careers">Careers & Internships <ArrowRight size={12} /></Link></li>
-            <li><Link to="/contact">Contact Studio <ArrowRight size={12} /></Link></li>
-          </ul>
-        </div>
+          {/* Column 3: Civil Engineering Disciplines */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">CIVIL ENGINEERING</h3>
+            <ul className="list-none p-0 m-0 space-y-2.5 text-xs text-slate-600">
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">DTCP &amp; Panchayat Sanctions</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">STAAD Structural Analysis</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">Approved Bank Valuation</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">Turnkey Construction Handover</a></li>
+              <li><a href="#services" className="hover:text-blue-700 transition-colors">M25 Concrete Cube Audits</a></li>
+            </ul>
+          </div>
 
-        {/* Column 3: Expertise & Deliverables */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">EXPERTISE</h3>
-          <ul className="footer-nav-list">
-            <li><Link to="/services/2d-building-plans">2D Building Plans & Vastu</Link></li>
-            <li><Link to="/services/3d-exterior-design">3D Elevation & Photorealism</Link></li>
-            <li><Link to="/services/3d-interior-design">Bespoke Interior Design</Link></li>
-            <li><Link to="/services/building-approval-plans">LPA & Municipal Sanctions</Link></li>
-            <li><Link to="/services/dtcp-layout-approvals">DTCP Layout Approvals</Link></li>
-            <li><Link to="/services/building-construction">Turnkey Building Construction</Link></li>
-            <li><Link to="/services/civil-engineering-consultancy">Civil Engineering Consultancy</Link></li>
-          </ul>
-        </div>
-
-        {/* Column 4: Studio Office & Contact */}
-        <div className="footer-col">
-          <h3 className="footer-col-title">OFFICE & DIRECT CONTACT</h3>
-          <div className="footer-contact-cards">
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <MapPin size={15} />
+          {/* Column 4: Pollachi Head Studio & Office */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-4">POLLACHI HEAD STUDIO</h3>
+            <div className="space-y-3 text-xs text-slate-600">
+              <div className="flex items-start gap-2.5">
+                <MapPin size={16} className="text-blue-700 shrink-0 mt-0.5" />
+                <span>
+                  Thozha Towers, Mahalingapuram Main Road,<br />
+                  Pollachi, Tamil Nadu — 642002
+                </span>
               </div>
-              <div className="footer-contact-text">
-                <strong>Studio Address</strong>
-                <p>Venkatasa Colony, Pollachi,<br />Coimbatore District, Tamil Nadu 642001</p>
-                <small style={{ color: '#88918c', fontSize: '11px', display: 'block', marginTop: '2px' }}>
-                  Serving Pollachi, Coimbatore, Udumalpet & Tiruppur
-                </small>
-              </div>
-            </div>
-
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <Phone size={15} />
-              </div>
-              <div className="footer-contact-text">
-                <strong>Phone & WhatsApp</strong>
-                <a href={formatPhoneHref(phone)}>{phone}</a>
-                <span style={{ margin: '0 6px', color: '#ccc' }}>·</span>
-                <a href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noreferrer">
-                  WhatsApp Direct
+              <div className="flex items-center gap-2.5">
+                <Phone size={15} className="text-blue-700 shrink-0" />
+                <a href={formatPhoneHref(phone)} className="font-bold text-slate-800 hover:text-blue-700">
+                  {phone}
                 </a>
               </div>
-            </div>
-
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <Mail size={15} />
+              <div className="flex items-center gap-2.5">
+                <Clock size={15} className="text-blue-700 shrink-0" />
+                <span>Mon – Sat: 9:00 AM – 8:00 PM</span>
               </div>
-              <div className="footer-contact-text">
-                <strong>Direct Inquiries</strong>
-                <a href="mailto:contact@thozhaassociates.com">contact@thozhaassociates.com</a>
-              </div>
-            </div>
-
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <Clock size={15} />
-              </div>
-              <div className="footer-contact-text">
-                <strong>Practice Hours</strong>
-                <p>Mon – Sat: 9:00 AM – 7:30 PM</p>
+              <div className="pt-1">
+                <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">
+                  DTCP/LPA LICENSED #PLU/E1/2012
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar: Copyright, Legal & Back to Top */}
-      <div className="footer-bottom-bar">
-        <div className="footer-bottom-inner">
-          <p className="footer-copyright">
-            © {new Date().getFullYear()} Thozha Associates. All rights reserved. Registered Civil Engineers & Architectural Practice, Pollachi.
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p className="m-0">
+            © {new Date().getFullYear()} Thozha Associates (தோழா). Civil Engineers &amp; Architects. All rights reserved.
           </p>
-          <div className="footer-bottom-links">
-            <Link to="/about">Professional Practice</Link>
-            <Link to="/contact">Consultation Scope</Link>
-            <Link to="/admin">Admin Portal</Link>
+          <div className="flex items-center gap-5">
+            <Link to="/about" className="hover:text-blue-700 transition-colors">Privacy Policy</Link>
+            <Link to="/contact" className="hover:text-blue-700 transition-colors">Terms of Service</Link>
             <button
               type="button"
               onClick={scrollToTop}
-              className="back-to-top-btn"
-              aria-label="Back to top"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 cursor-pointer text-[11px] font-semibold"
             >
               Back to top <ArrowUp size={12} />
             </button>
