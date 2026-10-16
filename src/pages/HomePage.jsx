@@ -32,7 +32,6 @@ import { useHomeData } from '@/hooks/useHomeData'
 import { useLenis } from '@/hooks/useLenis'
 import { createLead } from '@/services/supabase'
 import { resolveAssetUrl } from '@/services/frameSequence'
-import { formatPhoneHref } from '@/utils/helpers'
 
 // --- Core Pillars Data ---
 const corePillars = [
@@ -406,7 +405,7 @@ function HomePage() {
         {/* ==========================================================================
             SECTION 4: CIVIL INTEGRITY & EVOLUTION (Matching screen.png)
             ========================================================================== */}
-        <section className="th-evolution-section">
+        <section className="th-evolution-section hidden md:block">
           <div className="thozha-container">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="th-section-badge">CIVIL INTEGRITY & EVOLUTION</span>
@@ -465,7 +464,7 @@ function HomePage() {
         {/* ==========================================================================
             SECTION 5: OUR WORK PROCESS (Matching screen.png)
             ========================================================================== */}
-        <section id="process" className="th-process-section">
+        <section id="process" className="th-process-section hidden md:block">
           <div className="thozha-container">
             <span className="th-section-badge">OUR WORK PROCESS</span>
             <h2 className="th-section-title">A transparent path to your dream home.</h2>
@@ -488,7 +487,7 @@ function HomePage() {
         {/* ==========================================================================
             SECTION 6: OUR DISCIPLINES / SERVICES (Matching screen.png)
             ========================================================================== */}
-        <section id="services" className="th-disciplines-section">
+        <section id="services" className="th-disciplines-section hidden md:block">
           <div className="thozha-container">
             <div className="th-section-header-flex">
               <div>
@@ -729,7 +728,7 @@ function HomePage() {
                   Share your site details and requirements for a direct consultation with our principal civil engineer in Pollachi.
                 </p>
 
-                <div className="th-checklist hidden sm:flex">
+                <div className="th-checklist hidden md:flex">
                   <div className="th-checklist-item">
                     <CheckCircle2 size={18} className="th-check-icon" />
                     <div>
@@ -755,7 +754,7 @@ function HomePage() {
                   </div>
                 </div>
 
-                <div className="th-hotline-box mt-4">
+                <div className="th-hotline-box mt-4 hidden md:flex">
                   <div className="th-hotline-icon">
                     <Phone size={18} />
                   </div>
@@ -769,8 +768,8 @@ function HomePage() {
 
               {/* Right Column: Consultation Form (Matching screen 01.png & screen.png) */}
               <div className="th-form-card">
-                <h3 className="hidden sm:block">Book a Free Site Consultation</h3>
-                <p className="hidden sm:block">Discuss your plot orientation and requirements directly with our Chief Engineer.</p>
+                <h3 className="hidden md:block">Book a Free Site Consultation</h3>
+                <p className="hidden md:block">Discuss your plot orientation and requirements directly with our Chief Engineer.</p>
 
                 {submitSuccess ? (
                   <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl text-center">
@@ -876,19 +875,60 @@ function HomePage() {
           ========================================================================== */}
       <nav className="th-mobile-appbar" aria-label="Mobile Quick Nav">
         <div className="th-mobile-appbar-inner">
-          <a href="#about" className="th-appbar-link">
+          <a
+            href="#top"
+            onClick={(e) => {
+              e.preventDefault()
+              if (window.lenis) window.lenis.scrollTo(0, { duration: 1.2 })
+              else window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="th-appbar-link"
+          >
             <Home size={18} />
             <span>Home</span>
           </a>
-          <a href="#portfolio" className="th-appbar-link">
+          <a
+            href="#portfolio"
+            onClick={(e) => {
+              e.preventDefault()
+              const el = document.querySelector('#portfolio')
+              if (el) {
+                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
+                else el.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="th-appbar-link"
+          >
             <Layers size={18} />
             <span>Works</span>
           </a>
-          <a href="#services" className="th-appbar-link">
+          <a
+            href="#expertise"
+            onClick={(e) => {
+              e.preventDefault()
+              const el = document.querySelector('#expertise')
+              if (el) {
+                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
+                else el.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="th-appbar-link"
+          >
             <Wrench size={18} />
             <span>Services</span>
           </a>
-          <a href="#consultation" className="th-appbar-link">
+          <a
+            href="#consultation"
+            onClick={(e) => {
+              e.preventDefault()
+              const el = document.querySelector('#consultation')
+              if (el) {
+                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
+                else el.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="th-appbar-link"
+          >
             <Phone size={18} />
             <span>Contact</span>
           </a>

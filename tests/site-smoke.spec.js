@@ -22,7 +22,7 @@ test('publishes the requested routes and honest fallback labels', async ({ page 
 test('keeps the redesigned mobile pages inside the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto('./')
-  await expect(page.locator('.cinematic-intro')).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('.thozha-app')).toBeVisible({ timeout: 15_000 })
   const homeOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
   expect(homeOverflow).toBeLessThanOrEqual(1)
 
@@ -33,7 +33,7 @@ test('keeps the redesigned mobile pages inside the viewport', async ({ page }) =
   // Verify ultra-narrow 320px viewport (e.g. iPhone SE / DevTools responsive 320px)
   await page.setViewportSize({ width: 320, height: 568 })
   await page.goto('./')
-  await expect(page.locator('.cinematic-intro')).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('.thozha-app')).toBeVisible({ timeout: 15_000 })
   const narrowOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
   expect(narrowOverflow).toBeLessThanOrEqual(1)
 })

@@ -16,7 +16,7 @@ function Footer({ company = {} }) {
   }
 
   return (
-    <footer className="site-footer" aria-label="Site footer">
+    <footer className="th-footer" aria-label="Site footer">
       {/* ==========================================================================
           DESKTOP FOOTER (hidden md:block): Matching screen.png (White 4-Column)
           ========================================================================== */}
@@ -124,14 +124,25 @@ function Footer({ company = {} }) {
           ========================================================================== */}
       <div className="block md:hidden bg-[#0e1726] text-white pt-10 pb-28 px-5 border-t border-slate-800">
         <div className="max-w-md mx-auto">
-          {/* Brand & Tamil Wordmark */}
+          {/* Brand & Tamil Wordmark with Logo */}
           <div className="mb-4">
-            <h2 className="text-lg font-black tracking-wider text-white m-0">
-              THOZHA ASSOCIATES
-            </h2>
-            <p className="text-[11px] font-bold text-blue-300 tracking-wider mt-0.5 mb-3">
-              தோழா கன்ஸ்ட்ரக்சன்ஸ் • ARCHITECTURE &amp; CIVIL
-            </p>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="bg-white rounded-lg p-1 shadow-sm shrink-0 flex items-center justify-center">
+                <img
+                  src={logoUrl}
+                  alt="தோழா - Thozha Associates"
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
+              <div>
+                <h2 className="text-lg font-black tracking-wider text-white m-0 leading-tight">
+                  THOZHA ASSOCIATES
+                </h2>
+                <p className="text-[10.5px] font-bold text-blue-300 tracking-wider mt-0.5 m-0 leading-tight">
+                  தோழா கன்ஸ்ட்ரக்சன்ஸ் • ARCHITECTURE &amp; CIVIL
+                </p>
+              </div>
+            </div>
             <p className="text-xs text-slate-300 leading-relaxed m-0">
               Registered Civil Structural Engineers (Grade-I) &amp; Architectural consultants specializing in turnkey residence development across Western Ghats corridor.
             </p>

@@ -65,28 +65,33 @@ function Navbar({ company = {} }) {
             </div>
           </Link>
 
-          {/* Mobile Left: Menu Toggle Button (matching screen 01.png) */}
-          <div className="flex md:hidden items-center">
+          {/* Mobile Left: Menu Toggle Button & Wordmark with Logo */}
+          <div className="flex md:hidden items-center gap-1.5 sm:gap-2 min-w-0">
             <button
               type="button"
-              className="w-10 h-10 rounded-full bg-transparent flex items-center justify-center text-slate-900 border-none cursor-pointer hover:bg-slate-100 transition-colors"
+              className="w-9 h-9 rounded-full bg-transparent flex items-center justify-center text-slate-900 border-none cursor-pointer hover:bg-slate-100 transition-colors -ml-1 shrink-0"
               onClick={() => setOpen(!open)}
               aria-expanded={open}
               aria-label="Toggle navigation menu"
             >
-              {open ? <X size={22} /> : <Menu size={22} />}
+              {open ? <X size={21} /> : <Menu size={21} />}
             </button>
+            <Link to="/" className="flex items-center gap-2 text-left no-underline min-w-0">
+              <img
+                src={logoUrl}
+                alt="தோழா - Thozha Associates"
+                className="h-8 w-auto max-w-[48px] object-contain shrink-0"
+              />
+              <div className="flex flex-col min-w-0">
+                <span className="text-[15px] sm:text-[16px] font-black tracking-[0.12em] text-[#0b2b48] leading-tight truncate">
+                  THOZHA
+                </span>
+                <span className="text-[7.5px] sm:text-[8px] font-bold tracking-[0.18em] text-slate-500 uppercase leading-none mt-0.5 truncate">
+                  ARCHITECTURE &amp; CIVIL
+                </span>
+              </div>
+            </Link>
           </div>
-
-          {/* Mobile Center: Brand Wordmark (matching screen 01.png) */}
-          <Link to="/" className="flex md:hidden flex-col items-center text-center no-underline">
-            <span className="text-[17px] font-black tracking-[0.16em] text-[#0b2b48] leading-tight">
-              THOZHA
-            </span>
-            <span className="text-[8.5px] font-bold tracking-[0.22em] text-slate-500 uppercase leading-none mt-0.5">
-              ARCHITECTURE &amp; CIVIL
-            </span>
-          </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="th-nav-links" aria-label="Main Navigation">
@@ -117,13 +122,13 @@ function Navbar({ company = {} }) {
             </a>
 
             {/* Mobile Actions: Phone + User Profile Avatar (matching screen 01.png) */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-1.5 shrink-0">
               <a
                 href={formatPhoneHref(phone)}
-                className="w-9 h-9 rounded-full flex items-center justify-center text-slate-800 hover:bg-slate-100 transition-colors"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:bg-slate-100 transition-colors"
                 aria-label="Call Thozha Associates"
               >
-                <Phone size={17} />
+                <Phone size={16} />
               </a>
               <a
                 href="#consultation"

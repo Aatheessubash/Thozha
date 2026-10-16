@@ -93,12 +93,20 @@
   height: 72px;
 }
 
-.th-nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: inherit;
+@media (min-width: 769px) {
+  .th-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+@media (max-width: 768px) {
+  .th-nav-brand {
+    display: none !important;
+  }
 }
 
 .th-nav-logo {
@@ -1171,9 +1179,29 @@
 }
 
 @media (max-width: 768px) {
+  .th-nav-brand {
+    display: none !important;
+  }
+  .th-btn-primary {
+    display: none !important;
+  }
   .th-nav-links,
   .th-inquiry-phone {
-    display: none;
+    display: none !important;
+  }
+  .th-trust-layout {
+    display: none !important;
+  }
+  .th-checklist {
+    display: none !important;
+  }
+  .th-hotline-box {
+    display: none !important;
+  }
+  .th-evolution-section,
+  .th-process-section,
+  .th-disciplines-section {
+    display: none !important;
   }
   .th-mobile-appbar {
     display: block;
@@ -1210,30 +1238,32 @@
   .th-form-card {
     padding: 24px 18px;
   }
-  .site-footer {
-    padding-bottom: 74px !important;
+  .th-footer {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
   }
 }
 
 @media (max-width: 480px) {
   .thozha-container {
     width: calc(100% - 24px);
+    max-width: 100%;
   }
   .th-nav-inner {
-    height: 64px;
+    height: 60px;
   }
   .th-hero {
-    padding: 28px 0 20px;
+    padding: 24px 0 16px;
   }
   .th-pillars-section,
   .th-portfolio-section,
-  .th-evolution-section,
-  .th-process-section,
-  .th-disciplines-section,
   .th-quality-section,
   .th-trust-section,
   .th-consultation-section {
-    padding: 48px 0;
+    padding: 40px 0;
   }
 }
 
