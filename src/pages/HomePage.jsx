@@ -149,6 +149,31 @@ const qualityBenchmarks = [
   },
 ]
 
+// --- Mobile Structured Workflow Cards (Matching screen 01.png) ---
+const mobileWorkflowCards = [
+  {
+    step: '01 / SPATIAL & 2D PLANNING',
+    title: 'Vaastu-Aligned Structural Layouts',
+    desc: 'Architectural floor plans synchronized with classical solar orientation and local climatic micro-winds, bundled with seamless DTCP and LPA statutory approvals.',
+    tags: ['VAASTU COMPLIANT', 'DTCP FAST-TRACK', 'SETBACK CAD AUDIT'],
+    icon: Compass,
+  },
+  {
+    step: '02 / 3D BIM & VISUALIZATION',
+    title: 'Interactive Spatial Simulations',
+    desc: 'Photorealistic daylight simulations, ventilation cross-flow studies, and tactile material mapping before structural foundation excavation begins.',
+    tags: ['REVIT BIM 3D', 'SOLAR LUX MODELING', 'VIRTUAL WALKTHROUGH'],
+    icon: Cuboid,
+  },
+  {
+    step: '03 / TURNKEY CIVIL EXECUTION',
+    title: 'Strict Structural Discipline',
+    desc: 'End-to-end execution utilizing lab-tested M25 concrete mixes, certified Fe-550D primary steel rebar, and dedicated daily site supervisory engineers.',
+    tags: ['FE-550D REBAR', 'CUBE COMPRESSION TEST', 'DAILY LOG REPORTING'],
+    icon: HardHat,
+  },
+]
+
 function HomePage() {
   useLenis()
   const { company: loadedCompany } = useHomeData()
@@ -167,8 +192,8 @@ function HomePage() {
     document.title = 'Thozha Associates | Civil Engineering & Turnkey Architecture in Pollachi'
   }, [])
 
-  // View state for Hero Showcase: 'handover' (Anamalai Villa) vs 'walkthrough' (3D Scroll sequence)
-  const [heroMode, setHeroMode] = useState('handover')
+  // View state for Mobile Benchmark tab ('thozha' | 'market')
+  const [benchmarkTab, setBenchmarkTab] = useState('thozha')
 
   // Consultation form state
   const [formData, setFormData] = useState({
@@ -216,91 +241,161 @@ function HomePage() {
 
 
         {/* ==========================================================================
-            SECTION 2: CORE PILLARS (Matching screen.png)
+            SECTION 2: CORE PILLARS / EXPERTISE
+            Desktop (hidden md:block): Matching screen.png 4-pillar grid
+            Mobile (block md:hidden): Matching screen 01.png 3-step structured cards with tags
             ========================================================================== */}
         <section id="expertise" className="th-pillars-section">
           <div className="thozha-container">
-            <span className="th-section-badge">OUR CORE PILLARS</span>
-            <h2 className="th-section-title">Comprehensive civil mastery under one studio roof.</h2>
-            <p className="th-section-subtitle">
-              We eliminate contractor finger-pointing by integrating architectural vision, structural engineering, and on-site execution under strict civil discipline.
-            </p>
+            {/* Desktop View */}
+            <div className="hidden md:block">
+              <span className="th-section-badge">OUR CORE PILLARS</span>
+              <h2 className="th-section-title">Comprehensive civil mastery under one studio roof.</h2>
+              <p className="th-section-subtitle">
+                We eliminate contractor finger-pointing by integrating architectural vision, structural engineering, and on-site execution under strict civil discipline.
+              </p>
 
-            <div className="th-pillars-grid">
-              {corePillars.map((pillar) => (
-                <div key={pillar.title} className="th-pillar-card">
-                  <div>
-                    <div className="th-pillar-icon">
-                      {createElement(pillar.icon, { size: 22, strokeWidth: 1.5 })}
+              <div className="th-pillars-grid">
+                {corePillars.map((pillar) => (
+                  <div key={pillar.title} className="th-pillar-card">
+                    <div>
+                      <div className="th-pillar-icon">
+                        {createElement(pillar.icon, { size: 22, strokeWidth: 1.5 })}
+                      </div>
+                      <h3>{pillar.title}</h3>
+                      <p>{pillar.desc}</p>
                     </div>
-                    <h3>{pillar.title}</h3>
-                    <p>{pillar.desc}</p>
+                    <span className="th-pillar-tag">{pillar.tag}</span>
                   </div>
-                  <span className="th-pillar-tag">{pillar.tag}</span>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Mobile View (Directly matching screen 01.png) */}
+            <div className="block md:hidden">
+              <span className="text-[11px] font-extrabold text-blue-700 tracking-wider uppercase block mb-1.5">
+                CORE EXPERTISE
+              </span>
+              <h2 className="text-2xl font-black text-[#0b2b48] leading-tight tracking-tight mb-4">
+                Structured workflow from soil testing to keys.
+              </h2>
+
+              <div className="space-y-3.5">
+                {mobileWorkflowCards.map((card) => (
+                  <div
+                    key={card.step}
+                    className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs"
+                  >
+                    <div className="flex items-center justify-between text-blue-700 mb-2">
+                      <span className="text-[11px] font-extrabold tracking-wider uppercase">
+                        {card.step}
+                      </span>
+                      {createElement(card.icon, { size: 18, strokeWidth: 1.5, className: 'text-slate-400' })}
+                    </div>
+                    <h3 className="text-base font-extrabold text-[#0b2b48] mb-2 leading-snug">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed mb-3.5">
+                      {card.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {card.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 rounded bg-[#eff6ff] text-blue-800 text-[9.5px] font-bold tracking-wider uppercase border border-blue-100"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ==========================================================================
-            SECTION 3: PORTFOLIO HIGHLIGHTS (Matching screen.png)
+            SECTION 3: PORTFOLIO / SELECTED WORKS (Matching screen.png & screen 01.png)
             ========================================================================== */}
         <section id="portfolio" className="th-portfolio-section">
           <div className="thozha-container">
             <div className="th-section-header-flex">
               <div>
-                <span className="th-section-badge">PORTFOLIO HIGHLIGHTS</span>
-                <h2 className="th-section-title">Homes and spaces built to endure.</h2>
+                <span className="th-section-badge">PORTFOLIO</span>
+                <h2 className="th-section-title">Selected Works</h2>
               </div>
               <p className="th-section-subtitle">
-                A selection of modern villas and commercial facilities constructed across Pollachi, Kinathukadavu, and the Anamalai corridor.
+                Recent completions in Pollachi, Udumalpet, and Coimbatore.
               </p>
             </div>
 
             <div className="th-portfolio-grid">
-              {/* Project Card 1: The Anamalai Courtyard Villa */}
+              {/* Project Card 1: Anamalai Courtyard Residence */}
               <article className="th-project-card">
                 <div className="th-project-img-wrap">
-                  <span className="th-project-status-pill">Residential Handover</span>
+                  <span className="th-project-status-pill">COMPLETED • HANDOVER</span>
                   <img
                     src={resolveAssetUrl('images/thozha/portfolio-anamalai-photo.webp')}
-                    alt="The Anamalai Courtyard Villa in Pollachi"
+                    alt="The Anamalai Courtyard Residence in Pollachi"
                     loading="lazy"
                   />
                 </div>
                 <div className="th-project-body">
-                  <span className="th-project-loc">ANAMALAI FOOTHILLS, POLLACHI</span>
-                  <h3 className="th-project-title">The Anamalai Courtyard Villa</h3>
+                  <div className="flex items-center justify-between text-[11px] font-bold tracking-wider uppercase text-slate-500 mb-1.5">
+                    <span>RESIDENTIAL • VALPARAI ROAD</span>
+                    <span className="text-blue-700 font-extrabold">2024</span>
+                  </div>
+                  <h3 className="th-project-title">Anamalai Courtyard Residence</h3>
                   <p className="th-project-desc">
-                    A 4,200 sq.ft contemporary sanctuary engineered with integrated Burma teak louvers, central rainwater courtyard, and natural cross-ventilation designed for tropical microclimates.
+                    Biophilic split-level courtyard residence balancing open outdoor pool terraces with natural stone cladding and teak screens.
                   </p>
-                  <div className="th-project-footer">
-                    <span>Plot: 12 Cents • Built-up: 4,200 sq.ft</span>
-                    <strong>Delivered in 14 Months</strong>
+                  <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-slate-100">
+                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
+                      4,200 sq.ft
+                    </span>
+                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
+                      14 Months
+                    </span>
+                    <span className="px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+                      Complete Turnkey
+                    </span>
                   </div>
                 </div>
               </article>
 
-              {/* Project Card 2: G+3 Commercial & Retail Center */}
+              {/* Project Card 2: G+3 Apex Trade Center */}
               <article className="th-project-card">
                 <div className="th-project-img-wrap">
-                  <span className="th-project-status-pill">Ongoing Commercial Site</span>
+                  <span className="th-project-status-pill flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                    ACTIVE SITE • SLAB CASTING
+                  </span>
                   <img
                     src={resolveAssetUrl('images/thozha/portfolio-commercial-photo.webp')}
-                    alt="G+3 Commercial & Retail Center in Udumalpet"
+                    alt="G+3 Apex Trade Center in Udumalpet"
                     loading="lazy"
                   />
                 </div>
                 <div className="th-project-body">
-                  <span className="th-project-loc">UDUMALPET HIGHWAY CORRIDOR</span>
-                  <h3 className="th-project-title">G+3 Commercial & Retail Center</h3>
+                  <div className="flex items-center justify-between text-[11px] font-bold tracking-wider uppercase text-slate-500 mb-1.5">
+                    <span>COMMERCIAL • UDUMALPET HIGHWAY</span>
+                    <span className="text-blue-700 font-extrabold">Q3 2025</span>
+                  </div>
+                  <h3 className="th-project-title">G+3 Apex Trade Center</h3>
                   <p className="th-project-desc">
-                    An 8,400 sq.ft reinforced concrete commercial structure with heavy floor loads, seismic-resistant STAAD-Pro frame engineering, and optimal column spans for retail flexibility.
+                    Engineered commercial hub featuring post-tensioned beam-free slabs for flexible retail floorplans and basement dual-level parking.
                   </p>
-                  <div className="th-project-footer">
-                    <span>Built-up: 8,400 sq.ft • M25 Grade RCC</span>
-                    <strong>On-Schedule Progress</strong>
+                  <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-slate-100">
+                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
+                      8,400 sq.ft
+                    </span>
+                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
+                      RCC PT Slabs
+                    </span>
+                    <span className="px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
+                      Structural + MEP
+                    </span>
                   </div>
                 </div>
               </article>
@@ -421,10 +516,12 @@ function HomePage() {
 
         {/* ==========================================================================
             SECTION 7: QUALITY BENCHMARKS (Zero Compromise Engineering)
+            Desktop (hidden md:block): 3-column table matching screen.png
+            Mobile (block md:hidden): Segmented toggle tabs matching screen 01.png
             ========================================================================== */}
         <section className="th-quality-section">
           <div className="thozha-container">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl mb-6">
               <span className="th-section-badge">QUALITY BENCHMARKS</span>
               <h2 className="th-section-title">Zero Compromise Engineering</h2>
               <p className="th-section-subtitle">
@@ -432,7 +529,8 @@ function HomePage() {
               </p>
             </div>
 
-            <div className="th-benchmark-table">
+            {/* Desktop Table View */}
+            <div className="hidden md:block th-benchmark-table">
               <div className="th-benchmark-row th-benchmark-header">
                 <div>ENGINEERING SPEC</div>
                 <div className="text-blue-700 font-bold">THOZHA STANDARDS</div>
@@ -446,18 +544,71 @@ function HomePage() {
                 </div>
               ))}
             </div>
+
+            {/* Mobile Tabbed View (Directly matching screen 01.png) */}
+            <div className="block md:hidden">
+              {/* Segmented Pill Switcher */}
+              <div className="grid grid-cols-2 p-1 rounded-xl bg-slate-200/80 mb-4 text-xs font-bold">
+                <button
+                  type="button"
+                  onClick={() => setBenchmarkTab('thozha')}
+                  className={`py-2 rounded-lg transition-all border-none cursor-pointer text-center ${
+                    benchmarkTab === 'thozha'
+                      ? 'bg-white text-blue-700 shadow-sm font-extrabold'
+                      : 'bg-transparent text-slate-600 font-semibold'
+                  }`}
+                >
+                  Thozha Standards
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBenchmarkTab('market')}
+                  className={`py-2 rounded-lg transition-all border-none cursor-pointer text-center ${
+                    benchmarkTab === 'market'
+                      ? 'bg-white text-slate-800 shadow-sm font-extrabold'
+                      : 'bg-transparent text-slate-600 font-semibold'
+                  }`}
+                >
+                  Market Conventional
+                </button>
+              </div>
+
+              {/* Mobile Benchmark Cards */}
+              <div className="space-y-2">
+                {qualityBenchmarks.map((b) => (
+                  <div
+                    key={b.metric}
+                    className="p-3.5 rounded-xl bg-[#eff6ff]/70 border border-blue-100 flex items-center justify-between gap-3"
+                  >
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-500 w-28 shrink-0">
+                      {b.metric}
+                    </span>
+                    <span
+                      className={`text-xs font-bold text-right leading-tight ${
+                        benchmarkTab === 'thozha' ? 'text-slate-900' : 'text-slate-600'
+                      }`}
+                    >
+                      {benchmarkTab === 'thozha' ? b.ours : b.market}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* ==========================================================================
-            SECTION 8: TRUST & HERITAGE + TESTIMONIALS (Matching screen.png)
+            SECTION 8: TRUST & HERITAGE + TESTIMONIALS
+            Desktop (hidden md:block): Split layout matching screen.png
+            Mobile (block md:hidden): Highlight review card matching screen 01.png
             ========================================================================== */}
         <section className="th-trust-section">
           <div className="thozha-container">
-            <div className="th-trust-layout">
+            {/* Desktop View */}
+            <div className="hidden md:grid th-trust-layout">
               {/* Left Column: Trust & Heritage */}
               <div className="th-trust-col-left">
-                <span className="th-section-badge">TRUST & HERITAGE</span>
+                <span className="th-section-badge">TRUST &amp; HERITAGE</span>
                 <h2>Rooted in Pollachi since 2009.</h2>
                 <p>
                   We combine regional knowledge of Pollachi&apos;s climate and soil with institutional civil engineering rigor. Over 15 years, our studio has earned the trust of homeowners and institutions across Western Tamil Nadu.
@@ -470,7 +621,7 @@ function HomePage() {
                     </div>
                     <div>
                       <strong>Registered Civil Engineer Grade-I</strong>
-                      <span>Pollachi Municipality & Directorate of Town and Country Planning (DTCP).</span>
+                      <span>Pollachi Municipality &amp; Directorate of Town and Country Planning (DTCP).</span>
                     </div>
                   </div>
 
@@ -490,7 +641,7 @@ function HomePage() {
                     </div>
                     <div>
                       <strong>Professional Guild Membership</strong>
-                      <span>Association of Consulting Civil Engineers (ACCE) & Engineers Club Tamil Nadu.</span>
+                      <span>Association of Consulting Civil Engineers (ACCE) &amp; Engineers Club Tamil Nadu.</span>
                     </div>
                   </div>
                 </div>
@@ -529,24 +680,56 @@ function HomePage() {
                 </article>
               </div>
             </div>
+
+            {/* Mobile View (Directly matching screen 01.png) */}
+            <div className="block md:hidden">
+              <div className="p-6 rounded-2xl bg-[#eff6ff] border border-blue-200/80 mb-6 relative shadow-xs">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex gap-1 text-amber-400">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={15} fill="#f59e0b" />
+                    ))}
+                  </div>
+                  <span className="text-3xl text-slate-300 font-serif leading-none font-bold select-none">
+                    ”
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm italic text-slate-800 leading-relaxed mb-5">
+                  &ldquo;Building in Pollachi while stationed in Singapore seemed daunting until we engaged Thozha. Weekly drone footage, cube test certificates, and flawless Vaastu planning resulted in our dream courtyard home completed on the agreed date.&rdquo;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-blue-200 text-blue-800 font-bold text-xs flex items-center justify-center shrink-0">
+                    RS
+                  </div>
+                  <div>
+                    <strong className="block text-xs font-bold text-slate-900">
+                      Dr. Rajesh &amp; Sangeetha
+                    </strong>
+                    <span className="block text-[9.5px] font-semibold text-slate-500 tracking-wider uppercase">
+                      ANAMALAI FOOTHILLS VILLA • VERIFIED HOMEOWNERS
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* ==========================================================================
-            SECTION 9: DIRECT SITE CONSULTATION & FEASIBILITY (Matching screen.png)
+            SECTION 9: DIRECT SITE CONSULTATION & FEASIBILITY (Matching screen.png & screen 01.png)
             ========================================================================== */}
         <section id="consultation" className="th-consultation-section">
           <div className="thozha-container">
             <div className="th-consultation-grid">
               {/* Left Column: Feasibility Overview */}
               <div className="th-consultation-info">
-                <span className="th-section-badge">CONSULTATION & FEASIBILITY</span>
-                <h2>Direct Chief Engineer Site Consultation &amp; Feasibility.</h2>
+                <span className="th-section-badge">DIRECT CONSULTATION</span>
+                <h2>Start Your Architectural Consultation</h2>
                 <p>
-                  Initiate your homebuilding journey with personalized guidance from Pollachi&apos;s seasoned structural engineers. We inspect your site, evaluate statutory regulations, and map out architectural possibilities before any commitment.
+                  Share your site details and requirements for a direct consultation with our principal civil engineer in Pollachi.
                 </p>
 
-                <div className="th-checklist">
+                <div className="th-checklist hidden sm:flex">
                   <div className="th-checklist-item">
                     <CheckCircle2 size={18} className="th-check-icon" />
                     <div>
@@ -572,7 +755,7 @@ function HomePage() {
                   </div>
                 </div>
 
-                <div className="th-hotline-box">
+                <div className="th-hotline-box mt-4">
                   <div className="th-hotline-icon">
                     <Phone size={18} />
                   </div>
@@ -584,10 +767,10 @@ function HomePage() {
                 </div>
               </div>
 
-              {/* Right Column: Book a Free Site Consultation Form */}
+              {/* Right Column: Consultation Form (Matching screen 01.png & screen.png) */}
               <div className="th-form-card">
-                <h3>Book a Free Site Consultation</h3>
-                <p>Discuss your plot orientation and requirements directly with our Chief Engineer.</p>
+                <h3 className="hidden sm:block">Book a Free Site Consultation</h3>
+                <p className="hidden sm:block">Discuss your plot orientation and requirements directly with our Chief Engineer.</p>
 
                 {submitSuccess ? (
                   <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl text-center">
@@ -596,48 +779,52 @@ function HomePage() {
                     <span className="text-xs">Our chief engineer will contact you shortly to confirm the site visit.</span>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} className="space-y-3.5">
                     <div className="th-form-group">
-                      <label htmlFor="client-name">Full Name</label>
+                      <label htmlFor="client-name">FULL NAME</label>
                       <input
                         id="client-name"
                         type="text"
                         required
-                        placeholder="e.g. Senthil Nathan"
+                        placeholder="e.g. Er. Karthikeyan or Senthil Nathan"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="th-form-input"
                       />
                     </div>
 
-                    <div className="th-form-row">
-                      <div className="th-form-group">
-                        <label htmlFor="client-phone">Phone / WhatsApp</label>
+                    <div className="th-form-group">
+                      <label htmlFor="client-phone">WHATSAPP / CONTACT NUMBER</label>
+                      <div className="flex rounded-lg border border-slate-300 overflow-hidden bg-slate-50 focus-within:border-blue-600 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+                        <span className="px-3.5 py-2.5 bg-slate-100 text-slate-700 text-xs font-bold border-r border-slate-300 flex items-center shrink-0">
+                          +91
+                        </span>
                         <input
                           id="client-phone"
                           type="tel"
                           required
-                          placeholder="+91 98431 00000"
+                          placeholder="98430 12345"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="th-form-input"
-                        />
-                      </div>
-                      <div className="th-form-group">
-                        <label htmlFor="client-loc">Site Location</label>
-                        <input
-                          id="client-loc"
-                          type="text"
-                          placeholder="e.g. Mahalingapuram, Pollachi"
-                          value={formData.location}
-                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                          className="th-form-input"
+                          className="w-full px-3 py-2.5 text-xs text-slate-800 outline-none bg-transparent"
                         />
                       </div>
                     </div>
 
                     <div className="th-form-group">
-                      <label htmlFor="client-scope">Project Scope / Type</label>
+                      <label htmlFor="client-loc">SITE LOCATION / TOWN</label>
+                      <input
+                        id="client-loc"
+                        type="text"
+                        placeholder="e.g. Mahalingapuram, Pollachi / Udumalpet"
+                        value={formData.location}
+                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                        className="th-form-input"
+                      />
+                    </div>
+
+                    <div className="th-form-group">
+                      <label htmlFor="client-scope">PROJECT SCOPE / TYPE</label>
                       <select
                         id="client-scope"
                         value={formData.scope}
@@ -653,22 +840,29 @@ function HomePage() {
                     </div>
 
                     <div className="th-form-group">
-                      <label htmlFor="client-details">Project Details (Optional)</label>
+                      <label htmlFor="client-details">BRIEF REQUIREMENT / NOTE (Optional)</label>
                       <textarea
                         id="client-details"
-                        placeholder="Plot size (e.g. 2,400 sq.ft), preferred layout style, or questions..."
+                        rows={3}
+                        placeholder="e.g. 2,400 sq.ft north-facing plot with Vaastu courtyard requirement..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         className="th-form-textarea"
                       />
                     </div>
 
-                    <button type="submit" disabled={submitting} className="th-form-submit">
-                      {submitting ? 'Submitting Details...' : 'Schedule Free Engineering Site Audit'}
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full py-3.5 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs tracking-wider uppercase text-center shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99] border-none mt-2"
+                    >
+                      {submitting ? 'Submitting Details...' : 'Request Site Consultation →'}
                     </button>
-                    <p className="th-form-guarantee">
-                      Direct consultation with chief engineer • No spam guaranteed
-                    </p>
+
+                    <div className="flex items-center gap-2 justify-center text-[10.5px] text-slate-500 mt-2 text-center">
+                      <ShieldCheck size={14} className="text-blue-600 shrink-0" />
+                      <span>Direct response from our registered Grade-I structural engineer within 24 hours. No sales spam.</span>
+                    </div>
                   </form>
                 )}
               </div>
@@ -701,7 +895,7 @@ function HomePage() {
         </div>
       </nav>
 
-      {/* Architectural White Footer */}
+      {/* Architectural Footer */}
       <Footer company={company} />
     </div>
   )
