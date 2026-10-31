@@ -4,29 +4,34 @@
    ========================================================================== */
 
 :root {
-  --th-bg: #ffffff;
-  --th-canvas: #f8fafc;
-  --th-blue: #0056b3;
-  --th-blue-hover: #004494;
-  --th-blue-light: #eff6ff;
-  --th-navy: #0b2b48;
-  --th-slate: #1e293b;
-  --th-muted: #64748b;
-  --th-border: #e2e8f0;
-  --th-radius-sm: 8px;
-  --th-radius-md: 14px;
-  --th-radius-lg: 20px;
-  --th-radius-xl: 28px;
-  --th-shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
-  --th-shadow-md: 0 10px 28px rgba(15, 23, 42, 0.06);
-  --th-shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.09);
+  --th-bg: #FAF8F5;
+  --th-canvas: #F4F0E6;
+  --th-gold: #B88628;
+  --th-gold-hover: #9E711E;
+  --th-gold-dark: #8C6215;
+  --th-gold-light: #FBF7EE;
+  --th-gold-border: rgba(184, 134, 40, 0.28);
+  --th-blue: #18181B;
+  --th-blue-hover: #27272A;
+  --th-blue-light: #F4EBD6;
+  --th-navy: #18181B;
+  --th-slate: #27272A;
+  --th-muted: #52525B;
+  --th-border: #E8E4DC;
+  --th-radius-sm: 12px;
+  --th-radius-md: 20px;
+  --th-radius-lg: 28px;
+  --th-radius-xl: 36px;
+  --th-shadow-sm: 0 4px 16px rgba(30, 25, 18, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --th-shadow-md: 0 12px 32px rgba(30, 25, 18, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --th-shadow-lg: 0 24px 54px rgba(30, 25, 18, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 /* Base resets & typography */
 .thozha-app {
   background-color: var(--th-bg);
   color: var(--th-slate);
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: clip;
 }
 
@@ -41,37 +46,39 @@
   }
 }
 
-/* --- Section Headers --- */
+/* --- Section Headers (Commanding Big Editorial Scale) --- */
 .th-section-badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 5px 13px;
+  gap: 8px;
+  padding: 6px 16px;
   border-radius: 999px;
-  background-color: var(--th-blue-light);
-  border: 1px solid #bfdbfe;
-  color: #1d4ed8;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  background-color: #F4F0E6;
+  border: 1px solid #E8E4DC;
+  color: #B88628;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(184, 134, 40, 0.08);
 }
 
 .th-section-title {
-  font-size: clamp(28px, 3.4vw, 44px);
-  font-weight: 700;
-  line-height: 1.12;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 4.8vw, 62px);
+  font-weight: 600;
+  line-height: 1.05;
   letter-spacing: -0.025em;
   color: var(--th-navy);
-  margin: 0 0 12px;
+  margin: 0 0 16px;
 }
 
 .th-section-subtitle {
-  font-size: clamp(14px, 1.2vw, 16px);
-  line-height: 1.65;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.7;
   color: var(--th-muted);
-  max-width: 640px;
+  max-width: 680px;
   margin: 0;
 }
 
@@ -193,14 +200,19 @@
   letter-spacing: 0.02em;
   text-decoration: none;
   border: 1px solid var(--th-navy);
-  transition: all 0.25s ease;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .th-btn-primary:hover {
   background-color: #051a2e;
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(11, 43, 72, 0.25);
+}
+
+.th-btn-primary:active {
+  transform: scale(0.97);
 }
 
 .th-btn-cobalt {
@@ -382,56 +394,62 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 26px 22px;
-  border-radius: var(--th-radius-md);
+  padding: 28px 24px;
+  border-radius: var(--th-radius-lg);
   border: 1px solid var(--th-border);
-  background: #ffffff;
-  transition: all 0.25s ease;
-  min-height: 230px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 240px;
 }
 
 .th-pillar-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--th-shadow-md);
-  border-color: #cbd5e1;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(212, 168, 83, 0.45);
 }
 
 .th-pillar-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--th-blue-light);
-  color: var(--th-blue);
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fcf9f2 0%, #f5ecd7 100%);
+  border: 1px solid rgba(212, 168, 83, 0.35);
+  color: var(--th-gold-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .th-pillar-card h3 {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 17.5px;
+  font-weight: 800;
   color: var(--th-navy);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  letter-spacing: -0.015em;
 }
 
 .th-pillar-card p {
-  font-size: 12.5px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.65;
   color: #64748b;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
   flex-grow: 1;
 }
 
 .th-pillar-tag {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 5px 12px;
   background: #f1f5f9;
-  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
   font-size: 10.5px;
-  font-weight: 600;
+  font-weight: 700;
   color: #475569;
   width: fit-content;
+  letter-spacing: 0.02em;
 }
 
 /* --- Section 4: Portfolio Highlights --- */
@@ -458,18 +476,19 @@
 
 .th-project-card {
   background: #ffffff;
-  border-radius: var(--th-radius-lg);
+  border-radius: var(--th-radius-xl);
   overflow: hidden;
   border: 1px solid var(--th-border);
-  box-shadow: var(--th-shadow-sm);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
 
 .th-project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--th-shadow-lg);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(212, 168, 83, 0.45);
 }
 
 .th-project-img-wrap {
@@ -477,33 +496,36 @@
   width: 100%;
   aspect-ratio: 16 / 9.5;
   overflow: hidden;
-  background: #0f172a;
+  background: #0a1118;
 }
 
 .th-project-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .th-project-card:hover .th-project-img-wrap img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .th-project-status-pill {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 5px 12px;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 17, 24, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .th-project-body {
@@ -747,19 +769,24 @@
 
 .th-benchmark-table {
   background: #ffffff;
-  border-radius: var(--th-radius-md);
+  border-radius: var(--th-radius-xl);
   border: 1px solid var(--th-border);
   overflow: hidden;
   margin-top: 28px;
-  box-shadow: var(--th-shadow-sm);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .th-benchmark-row {
   display: grid;
-  grid-template-columns: 240px 1fr 1fr;
+  grid-template-columns: 240px 1.2fr 1fr;
   align-items: center;
-  padding: 16px 24px;
+  padding: 18px 26px;
   border-bottom: 1px solid var(--th-border);
+  transition: background-color 0.2s ease;
+}
+
+.th-benchmark-row:hover:not(.th-benchmark-header) {
+  background-color: #fafbfc;
 }
 
 .th-benchmark-row:last-child {
@@ -768,25 +795,28 @@
 
 .th-benchmark-header {
   background: #f8fafc;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 11px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--th-navy);
 }
 
 .th-benchmark-label {
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #64748b;
 }
 
 .th-benchmark-ours {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--th-blue);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #047857;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .th-benchmark-market {
@@ -830,38 +860,46 @@
 .th-cred-box {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 16px 18px;
-  background: #f8fafc;
+  gap: 16px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
   border: 1px solid var(--th-border);
-  border-radius: var(--th-radius-md);
+  border-radius: var(--th-radius-lg);
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.25s ease;
+}
+
+.th-cred-box:hover {
+  border-color: rgba(212, 168, 83, 0.4);
+  transform: translateX(4px);
 }
 
 .th-cred-box-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: #ffffff;
-  border: 1px solid var(--th-border);
-  color: var(--th-blue);
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fcf9f2 0%, #f5ecd7 100%);
+  border: 1px solid rgba(212, 168, 83, 0.35);
+  color: var(--th-gold-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .th-cred-box strong {
   display: block;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
   color: var(--th-navy);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .th-cred-box span {
   font-size: 12px;
   color: #64748b;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* Testimonial Cards */
@@ -872,11 +910,18 @@
 }
 
 .th-testimonial-card {
-  padding: 24px;
-  background: #ffffff;
+  padding: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
   border: 1px solid var(--th-border);
-  border-radius: var(--th-radius-md);
-  box-shadow: var(--th-shadow-sm);
+  border-radius: var(--th-radius-xl);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.th-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(212, 168, 83, 0.45);
 }
 
 .th-testimonial-stars {
@@ -1016,11 +1061,11 @@
 
 /* Consultation Form Card */
 .th-form-card {
-  padding: 32px 28px;
+  padding: 36px 32px;
   background: #ffffff;
-  border-radius: var(--th-radius-lg);
+  border-radius: var(--th-radius-xl);
   border: 1px solid var(--th-border);
-  box-shadow: var(--th-shadow-md);
+  box-shadow: 0 12px 40px -8px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .th-form-card h3 {
@@ -1028,19 +1073,20 @@
   font-weight: 800;
   color: var(--th-navy);
   margin: 0 0 6px;
+  letter-spacing: -0.015em;
 }
 
 .th-form-card > p {
-  font-size: 12.5px;
+  font-size: 13px;
   color: #64748b;
-  margin: 0 0 20px;
+  margin: 0 0 22px;
 }
 
 .th-form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
 .th-form-group label {
@@ -1055,22 +1101,30 @@
 .th-form-select,
 .th-form-textarea {
   width: 100%;
-  padding: 11px 14px;
-  border-radius: 8px;
+  padding: 12px 15px;
+  border-radius: 12px;
   border: 1px solid var(--th-border);
   background: #f8fafc;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--th-slate);
   outline: none;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .th-form-input,
+  .th-form-select,
+  .th-form-textarea {
+    font-size: 16px !important; /* Prevents unwanted iOS Safari viewport auto-zoom */
+  }
 }
 
 .th-form-input:focus,
 .th-form-select:focus,
 .th-form-textarea:focus {
-  border-color: var(--th-blue);
+  border-color: var(--th-gold);
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.2);
 }
 
 .th-form-textarea {
@@ -1086,21 +1140,25 @@
 
 .th-form-submit {
   width: 100%;
-  padding: 13px 20px;
+  padding: 14px 22px;
   border-radius: 999px;
-  background: var(--th-navy);
+  background: linear-gradient(135deg, #d4a853 0%, #c59940 50%, #b88628 100%);
   color: #ffffff;
   border: none;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 6px;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+  box-shadow: 0 4px 16px rgba(212, 168, 83, 0.35);
 }
 
 .th-form-submit:hover {
-  background: #051a2e;
-  box-shadow: 0 6px 18px rgba(11, 43, 72, 0.25);
+  background: linear-gradient(135deg, #c59940 0%, #b88628 50%, #a4731c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(212, 168, 83, 0.45);
 }
 
 .th-form-guarantee {
@@ -1146,15 +1204,20 @@
   font-weight: 700;
   min-width: 56px;
   min-height: 44px;
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  border-radius: 12px;
+  transition: transform 0.15s ease-out, color 0.15s ease, background-color 0.15s ease;
+  touch-action: manipulation;
 }
 
 .th-appbar-link.active,
 .th-appbar-link:hover,
 .th-appbar-link:active {
-  color: var(--th-blue);
-  background-color: var(--th-blue-light);
+  color: var(--th-gold-dark);
+  background-color: var(--th-gold-light);
+}
+
+.th-appbar-link:active {
+  transform: scale(0.95);
 }
 
 /* Responsive Overrides */
@@ -1267,3 +1330,597 @@
   }
 }
 
+
+
+/* ==========================================================================
+   EMIL KOWALSKI PROTOTYPE PICKER (PICKER.md SPEC)
+   ========================================================================== */
+.proto-picker {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.84);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 8px 24px rgba(0, 0, 0, 0.24),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.proto-picker-highlight {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  will-change: transform;
+}
+
+.proto-picker[data-ready] .proto-picker-highlight {
+  transition:
+    transform 250ms cubic-bezier(0.23, 1, 0.32, 1),
+    width 250ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-picker[data-ready] .proto-picker-highlight { transition: none; }
+}
+
+.proto-picker-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 150ms ease-out;
+  white-space: nowrap;
+}
+
+.proto-picker-item:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.proto-picker-item:active {
+  transform: scale(0.97);
+}
+
+.proto-picker-item:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.proto-picker-item[data-active] {
+  color: #fff;
+  font-weight: 700;
+}
+
+.proto-picker-divider {
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.proto-picker-replay {
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .proto-picker {
+    bottom: 74px; /* Sits cleanly above sticky mobile appbar */
+    font-size: 11px;
+    padding: 3px;
+    gap: 1px;
+  }
+  .proto-picker-item {
+    height: 26px;
+    padding: 0 8px;
+  }
+  .proto-picker-highlight {
+    height: 26px;
+  }
+}
+
+/* ==========================================================================
+   FLAGSHIP TEMPLATE: WARM WHITE ATELIER (DATA-TEMPLATE="WARM")
+   Editorial Alabaster Canvas, Travertine Cards, Rich Charcoal Serif Typography
+   ========================================================================== */
+.thozha-app[data-template="warm"],
+.thozha-app[data-template="bento"] {
+  --th-bg: #FAF8F5;
+  --th-canvas: #F4F0E6;
+  --th-navy: #18181B;
+  --th-slate: #27272A;
+  --th-muted: #52525B;
+  --th-border: #E8E4DC;
+  --th-gold: #B88628;
+  --th-gold-hover: #9E711E;
+  --th-gold-dark: #8C6215;
+  --th-gold-light: #FBF7EE;
+  --th-gold-border: rgba(184, 134, 40, 0.28);
+  background-color: #FAF8F5;
+  color: #27272A;
+}
+
+.thozha-app[data-template="warm"] .th-pillars-section,
+.thozha-app[data-template="bento"] .th-pillars-section,
+.thozha-app[data-template="warm"] .th-evolution-section,
+.thozha-app[data-template="bento"] .th-evolution-section,
+.thozha-app[data-template="warm"] .th-disciplines-section,
+.thozha-app[data-template="bento"] .th-disciplines-section,
+.thozha-app[data-template="warm"] .th-trust-section,
+.thozha-app[data-template="bento"] .th-trust-section {
+  background-color: #FAF8F5;
+}
+
+.thozha-app[data-template="warm"] .th-portfolio-section,
+.thozha-app[data-template="bento"] .th-portfolio-section,
+.thozha-app[data-template="warm"] .th-process-section,
+.thozha-app[data-template="bento"] .th-process-section,
+.thozha-app[data-template="warm"] .th-quality-section,
+.thozha-app[data-template="bento"] .th-quality-section,
+.thozha-app[data-template="warm"] .th-consultation-section,
+.thozha-app[data-template="bento"] .th-consultation-section {
+  background-color: #F4F0E6;
+}
+
+.thozha-app[data-template="warm"] .th-pillar-card,
+.thozha-app[data-template="bento"] .th-pillar-card,
+.thozha-app[data-template="warm"] .th-bento-card,
+.thozha-app[data-template="bento"] .th-bento-card,
+.thozha-app[data-template="warm"] .th-project-card,
+.thozha-app[data-template="bento"] .th-project-card,
+.thozha-app[data-template="warm"] .th-evolution-card,
+.thozha-app[data-template="bento"] .th-evolution-card,
+.thozha-app[data-template="warm"] .th-process-step,
+.thozha-app[data-template="bento"] .th-process-step,
+.thozha-app[data-template="warm"] .th-discipline-card,
+.thozha-app[data-template="bento"] .th-discipline-card,
+.thozha-app[data-template="warm"] .th-cred-box,
+.thozha-app[data-template="bento"] .th-cred-box,
+.thozha-app[data-template="warm"] .th-testimonial-card,
+.thozha-app[data-template="bento"] .th-testimonial-card,
+.thozha-app[data-template="warm"] .th-form-card,
+.thozha-app[data-template="bento"] .th-form-card,
+.thozha-app[data-template="warm"] .th-hotline-box,
+.thozha-app[data-template="bento"] .th-hotline-box {
+  background: #FFFFFF !important;
+  border-color: #E8E4DC !important;
+  color: #27272A !important;
+  box-shadow: 0 10px 30px rgba(30, 25, 18, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+.thozha-app[data-template="warm"] .th-pillar-card h3,
+.thozha-app[data-template="bento"] .th-pillar-card h3,
+.thozha-app[data-template="warm"] .th-bento-card h3,
+.thozha-app[data-template="bento"] .th-bento-card h3,
+.thozha-app[data-template="warm"] .th-project-title,
+.thozha-app[data-template="bento"] .th-project-title,
+.thozha-app[data-template="warm"] .th-evolution-body h3,
+.thozha-app[data-template="bento"] .th-evolution-body h3,
+.thozha-app[data-template="warm"] .th-process-step h3,
+.thozha-app[data-template="bento"] .th-process-step h3,
+.thozha-app[data-template="warm"] .th-discipline-card h3,
+.thozha-app[data-template="bento"] .th-discipline-card h3,
+.thozha-app[data-template="warm"] .th-cred-box strong,
+.thozha-app[data-template="bento"] .th-cred-box strong,
+.thozha-app[data-template="warm"] .th-testimonial-author strong,
+.thozha-app[data-template="bento"] .th-testimonial-author strong,
+.thozha-app[data-template="warm"] .th-form-card h3,
+.thozha-app[data-template="bento"] .th-form-card h3 {
+  color: #18181B !important;
+}
+
+.thozha-app[data-template="warm"] .th-benchmark-table,
+.thozha-app[data-template="bento"] .th-benchmark-table {
+  background: #FFFFFF !important;
+  border-color: #E8E4DC !important;
+}
+
+.thozha-app[data-template="warm"] .th-benchmark-header,
+.thozha-app[data-template="bento"] .th-benchmark-header {
+  background: #FAF8F5 !important;
+  border-bottom-color: #E8E4DC !important;
+  color: #18181B !important;
+}
+
+.thozha-app[data-template="warm"] .th-benchmark-row,
+.thozha-app[data-template="bento"] .th-benchmark-row {
+  border-bottom-color: #E8E4DC !important;
+}
+
+.thozha-app[data-template="warm"] .th-benchmark-label,
+.thozha-app[data-template="bento"] .th-benchmark-label {
+  color: #52525B !important;
+}
+
+.thozha-app[data-template="warm"] .th-benchmark-market,
+.thozha-app[data-template="bento"] .th-benchmark-market {
+  color: #71717A !important;
+}
+
+.thozha-app[data-template="warm"] .th-form-input,
+.thozha-app[data-template="bento"] .th-form-input,
+.thozha-app[data-template="warm"] .th-form-select,
+.thozha-app[data-template="bento"] .th-form-select,
+.thozha-app[data-template="warm"] .th-form-textarea,
+.thozha-app[data-template="bento"] .th-form-textarea {
+  background: #FAF8F5 !important;
+  border-color: #E8E4DC !important;
+  color: #18181B !important;
+}
+
+/* ==========================================================================
+   TEMPLATE 3: OBSIDIAN ATELIER LUXURY THEME
+   ========================================================================== */
+.thozha-app[data-template="obsidian"] {
+  --th-bg: #070d14;
+  --th-canvas: #0c141f;
+  --th-navy: #f8fafc;
+  --th-slate: #cbd5e1;
+  --th-muted: #94a3b8;
+  --th-border: rgba(255, 255, 255, 0.1);
+  --th-gold-light: rgba(212, 168, 83, 0.12);
+  --th-gold-border: rgba(212, 168, 83, 0.35);
+  --th-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --th-shadow-md: 0 16px 36px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --th-shadow-lg: 0 28px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background-color: #070d14;
+  color: #cbd5e1;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav {
+  background: rgba(7, 13, 20, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.thozha-app[data-template="obsidian"] .th-pillar-card,
+.thozha-app[data-template="obsidian"] .th-portfolio-card,
+.thozha-app[data-template="obsidian"] .th-process-step,
+.thozha-app[data-template="obsidian"] .th-discipline-card,
+.thozha-app[data-template="obsidian"] .th-cred-box,
+.thozha-app[data-template="obsidian"] .th-testimonial-card,
+.thozha-app[data-template="obsidian"] .th-form-card {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+  color: #cbd5e1;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.thozha-app[data-template="obsidian"] .th-pillar-card h3,
+.thozha-app[data-template="obsidian"] .th-portfolio-card h3,
+.thozha-app[data-template="obsidian"] .th-process-step h3,
+.thozha-app[data-template="obsidian"] .th-discipline-card h3,
+.thozha-app[data-template="obsidian"] .th-cred-box strong,
+.thozha-app[data-template="obsidian"] .th-testimonial-author strong,
+.thozha-app[data-template="obsidian"] .th-form-card h3 {
+  color: #ffffff;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-table {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-header {
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom-color: rgba(255, 255, 255, 0.09);
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-row {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-label {
+  color: #cbd5e1;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-market {
+  color: #64748b;
+}
+
+.thozha-app[data-template="obsidian"] .th-hotline-box {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.thozha-app[data-template="obsidian"] .th-hotline-box a {
+  color: #ffffff;
+}
+
+.thozha-app[data-template="obsidian"] .th-form-input,
+.thozha-app[data-template="obsidian"] .th-form-select,
+.thozha-app[data-template="obsidian"] .th-form-textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.thozha-app[data-template="obsidian"] .th-mobile-appbar {
+  background: rgba(7, 13, 20, 0.94);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+
+/* Obsidian Theme overrides for process & before/after components */
+.thozha-app[data-template="obsidian"] #process.bg-stone-50\/70,
+.thozha-app[data-template="obsidian"] .bg-stone-50\/70,
+.thozha-app[data-template="obsidian"] .bg-stone-50\/40 {
+  background-color: transparent !important;
+}
+
+.thozha-app[data-template="obsidian"] #process .bg-white,
+.thozha-app[data-template="obsidian"] #process .bg-stone-50\/60 {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+.thozha-app[data-template="obsidian"] #process .text-ink {
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] #process .text-inkMuted {
+  color: #94a3b8 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-bento-card {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.09);
+  color: #cbd5e1;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.thozha-app[data-template="obsidian"] .th-bento-card h3 {
+  color: #ffffff;
+}
+
+/* Apple Bento Grid layout styling */
+.th-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.th-bento-col-8 {
+  grid-column: span 8;
+}
+
+.th-bento-col-4 {
+  grid-column: span 4;
+}
+
+.th-bento-card {
+  position: relative;
+  border-radius: 28px;
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid var(--th-border);
+  box-shadow: var(--th-shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.th-bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--th-shadow-lg);
+}
+
+@media (max-width: 1024px) {
+  .th-bento-col-8,
+  .th-bento-col-4 {
+    grid-column: span 12;
+  }
+}
+
+
+/* ==========================================================================
+   MOBILE-FIRST RESPONSIVE POLISH & OBSIDIAN (V=3) MOBILE RULES
+   ========================================================================== */
+
+/* Universal mobile-native baseline */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+button, a, [role="button"], input, select, textarea {
+  touch-action: manipulation;
+}
+
+button, [role="button"], .th-appbar-link, .proto-picker-item {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Obsidian Theme: Mobile Header & Drawer */
+.thozha-app[data-template="obsidian"] .th-nav {
+  background: rgba(7, 13, 20, 0.92) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav .text-slate-900,
+.thozha-app[data-template="obsidian"] .th-nav .text-slate-800 {
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav .bg-slate-100,
+.thozha-app[data-template="obsidian"] .th-nav .bg-slate-100\/70,
+.thozha-app[data-template="obsidian"] .th-nav .bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav .border-slate-200,
+.thozha-app[data-template="obsidian"] .th-nav .border-slate-200\/80,
+.thozha-app[data-template="obsidian"] .th-nav .border-slate-200\/60 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav .text-slate-700,
+.thozha-app[data-template="obsidian"] .th-nav .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav-drawer {
+  background: rgba(7, 13, 20, 0.96) !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav-drawer a {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-nav-drawer a:hover {
+  color: #d4a853 !important;
+}
+
+/* Obsidian Theme: Mobile Workflow Cards */
+.thozha-app[data-template="obsidian"] .th-mobile-heading {
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-mobile-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-mobile-card-title {
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-mobile-card-desc {
+  color: #cbd5e1 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-mobile-card-tag {
+  background: rgba(212, 168, 83, 0.12) !important;
+  border-color: rgba(212, 168, 83, 0.35) !important;
+  color: #d4a853 !important;
+}
+
+/* Obsidian Theme: Mobile Benchmark Switcher & Cards */
+.thozha-app[data-template="obsidian"] .th-benchmark-mobile-tabbar {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-mobile-btn-active {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-mobile-btn-inactive {
+  color: #94a3b8 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-mobile-card-thozha {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-benchmark-mobile-card-market {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Obsidian Theme: Mobile Review Card */
+.thozha-app[data-template="obsidian"] .th-review-mobile-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-review-mobile-card p {
+  color: #cbd5e1 !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-review-author {
+  color: #ffffff !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-review-rating {
+  color: #ffffff !important;
+}
+
+/* Obsidian Theme: Sticky Mobile Bottom App Bar */
+.thozha-app[data-template="obsidian"] .th-mobile-appbar {
+  background: rgba(7, 13, 20, 0.94) !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.7) !important;
+}
+
+.thozha-app[data-template="obsidian"] .th-appbar-link {
+  color: #94a3b8;
+}
+
+.thozha-app[data-template="obsidian"] .th-appbar-link:hover,
+.thozha-app[data-template="obsidian"] .th-appbar-link:active,
+.thozha-app[data-template="obsidian"] .th-appbar-link.active {
+  color: #d4a853 !important;
+  background-color: rgba(212, 168, 83, 0.12) !important;
+}
+
+/* Safe area insets & mobile ergonomics */
+@media (max-width: 768px) {
+  .th-mobile-appbar {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  
+  .proto-picker {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+  
+  .th-section-title {
+    font-size: clamp(32px, 8vw, 42px);
+    letter-spacing: -0.025em;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.08;
+    color: var(--th-navy);
+  }
+  
+  .th-section-subtitle {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--th-muted);
+  }
+  
+  /* Input minimum 16px to prevent iOS auto-zoom */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}

@@ -105,10 +105,10 @@ function FromFirstLineToFrontDoor() {
                   setActiveStageIndex(index)
                   setActiveHotspot(null)
                 }}
-                className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] transition ${
+                className={`flex items-center gap-2.5 rounded-full px-4 sm:px-5 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-[0.14em] transition-[transform,colors] active:scale-[0.97] touch-manipulation ${
                   isSelected
-                    ? 'border border-accent bg-accent text-white shadow-md'
-                    : 'border border-stone-200 bg-white text-inkMuted hover:border-stone-300 hover:text-ink'
+                    ? 'border border-[#d4a853] bg-[#d4a853] text-slate-950 font-black shadow-md'
+                    : 'border border-stone-200 bg-white/80 text-inkMuted hover:border-stone-300 hover:text-ink'
                 }`}
               >
                 <span
@@ -164,7 +164,7 @@ function FromFirstLineToFrontDoor() {
                           <button
                             type="button"
                             onClick={() => setActiveHotspot(isOpen ? null : spot)}
-                            className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white/95 text-accent shadow-lg transition-transform hover:scale-110 focus:outline-none"
+                            className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-[#b88628] shadow-lg transition-transform active:scale-[0.92] hover:scale-110 focus:outline-none touch-manipulation before:absolute before:-inset-2 before:content-['']"
                             aria-label={`View detail: ${spot.title}`}
                           >
                             <span className="absolute h-full w-full rounded-full bg-white/50 animate-ping" />

@@ -18,16 +18,19 @@ import {
   PencilRuler,
   Phone,
   ShieldCheck,
+  Sparkles,
   Star,
   Trees,
   Wrench,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import ArchitectureScrollHero from '@/components/ArchitectureScrollHero'
+// Luxury Architecture & Civil Engineering Hero
 import EngineeringBimHero from '@/components/hero/EngineeringBimHero'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import FromFirstLineToFrontDoor from '@/components/FromFirstLineToFrontDoor'
+import BeforeAfterShowcaseSection from '@/components/BeforeAfterShowcaseSection'
 import { useHomeData } from '@/hooks/useHomeData'
 import { useLenis } from '@/hooks/useLenis'
 import { createLead } from '@/services/supabase'
@@ -173,6 +176,66 @@ const mobileWorkflowCards = [
   },
 ]
 
+// --- Portfolio Projects Data ---
+const portfolioProjects = [
+  {
+    id: 'anamalai-residence',
+    title: 'Anamalai Courtyard Residence',
+    category: 'RESIDENTIAL',
+    location: 'VALPARAI ROAD, POLLACHI',
+    year: '2024',
+    status: 'COMPLETED • HANDOVER',
+    isActive: false,
+    area: '4,200 sq.ft',
+    timeline: '14 Months',
+    scope: 'Complete Turnkey',
+    desc: 'Biophilic split-level courtyard residence balancing open outdoor pool terraces with natural stone cladding and teak screens.',
+    image: resolveAssetUrl('images/thozha/portfolio-anamalai-photo.webp'),
+  },
+  {
+    id: 'apex-trade-center',
+    title: 'G+3 Apex Trade Center',
+    category: 'COMMERCIAL',
+    location: 'UDUMALPET HIGHWAY, POLLACHI',
+    year: 'Q3 2025',
+    status: 'ACTIVE SITE • SLAB CASTING',
+    isActive: true,
+    area: '8,400 sq.ft',
+    timeline: 'RCC PT Slabs',
+    scope: 'Structural + MEP',
+    desc: 'Engineered commercial hub featuring post-tensioned beam-free slabs for flexible retail floorplans and basement dual-level parking.',
+    image: resolveAssetUrl('images/thozha/portfolio-commercial-photo.webp'),
+  },
+  {
+    id: 'vettaikaranpudur-villa',
+    title: 'Vettaikaranpudur Tropical Estate',
+    category: 'RESIDENTIAL',
+    location: 'VETTAIKARANPUDUR, POLLACHI',
+    year: '2024',
+    status: 'COMPLETED • HANDOVER',
+    isActive: false,
+    area: '5,600 sq.ft',
+    timeline: '16 Months',
+    scope: 'Architecture & Civil',
+    desc: 'Vaastu-aligned agricultural sanctuary with natural rainwater harvesting, exposed brick jali cooling facades, and expansive verandahs.',
+    image: resolveAssetUrl('images/thozha/evolution-stage2-photo.webp'),
+  },
+  {
+    id: 'kinathukadavu-hub',
+    title: 'Kinathukadavu Logistics Hub',
+    category: 'COMMERCIAL',
+    location: 'COIMBATORE BYPASS, KINATHUKADAVU',
+    year: '2025',
+    status: 'FOUNDATION AUDITED',
+    isActive: false,
+    area: '14,200 sq.ft',
+    timeline: 'Industrial PEB',
+    scope: 'Turnkey Industrial',
+    desc: 'Heavy-duty industrial facility with laser-leveled FM2 flooring, pre-engineered steel portal frames, and high-cube clearance.',
+    image: resolveAssetUrl('images/thozha/evolution-stage1-photo.webp'),
+  },
+]
+
 function HomePage() {
   useLenis()
   const { company: loadedCompany } = useHomeData()
@@ -190,6 +253,13 @@ function HomePage() {
   useEffect(() => {
     document.title = 'Thozha Associates | Civil Engineering & Turnkey Architecture in Pollachi'
   }, [])
+
+  // Locked to Flagship Warm White Atelier Theme
+  const template = 'warm'
+  const isBentoOrObsidian = true
+
+  // Portfolio filter state ('ALL' | 'RESIDENTIAL' | 'COMMERCIAL')
+  const [selectedCategory, setSelectedCategory] = useState('ALL')
 
   // View state for Mobile Benchmark tab ('thozha' | 'market')
   const [benchmarkTab, setBenchmarkTab] = useState('thozha')
@@ -228,54 +298,163 @@ function HomePage() {
   }
 
   return (
-    <div className="thozha-app">
+    <div className="thozha-app" data-template="warm">
       {/* Top Sticky Navigation */}
       <Navbar company={company} />
 
       <main>
         {/* ==========================================================================
-            SECTION 1: HERO SECTION & SHOWCASE (Matching media_1792082049715_edebb03f.jpg)
+            SECTION 1: HERO SECTION & SHOWCASE
             ========================================================================== */}
         <EngineeringBimHero company={company} />
 
-
         {/* ==========================================================================
             SECTION 2: CORE PILLARS / EXPERTISE
-            Desktop (hidden md:block): Matching screen.png 4-pillar grid
-            Mobile (block md:hidden): Matching screen 01.png 3-step structured cards with tags
+            Bento / Obsidian Mode: Apple Bento Grid with dynamic spans
+            Classic Mode: Original 4-column cards
+            Mobile: Structured workflow cards with tags
             ========================================================================== */}
         <section id="expertise" className="th-pillars-section">
           <div className="thozha-container">
             {/* Desktop View */}
             <div className="hidden md:block">
-              <span className="th-section-badge">OUR CORE PILLARS</span>
+              <span className="th-section-badge">
+                {isBentoOrObsidian ? 'OUR CORE PILLARS • BENTO ARCHITECTURE' : 'OUR CORE PILLARS'}
+              </span>
               <h2 className="th-section-title">Comprehensive civil mastery under one studio roof.</h2>
               <p className="th-section-subtitle">
                 We eliminate contractor finger-pointing by integrating architectural vision, structural engineering, and on-site execution under strict civil discipline.
               </p>
 
-              <div className="th-pillars-grid">
-                {corePillars.map((pillar) => (
-                  <div key={pillar.title} className="th-pillar-card">
-                    <div>
-                      <div className="th-pillar-icon">
-                        {createElement(pillar.icon, { size: 22, strokeWidth: 1.5 })}
+              {isBentoOrObsidian ? (
+                /* Apple Bento Grid */
+                <div className="th-bento-grid">
+                  {/* Card 1: 2D Drafting (Span 8) */}
+                  <div className="th-bento-card th-bento-col-8 group">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf7ee] text-[#b88628] text-[10px] font-extrabold uppercase tracking-widest border border-[#d4a853]/30 mb-3">
+                          <BadgeCheck size={13} className="text-[#b88628]" />
+                          DTCP &amp; Panchayat Approved Blueprints
+                        </span>
+                        <h3 className="font-serif text-2xl lg:text-3xl font-semibold text-stone-900 tracking-tight mb-2 group-hover:text-[#b88628] transition-colors">
+                          2D Architectural Drafting &amp; Vaastu Planning
+                        </h3>
+                        <p className="text-sm text-stone-600 max-w-xl leading-relaxed">
+                          Precision architectural layouts, plumbing &amp; electrical blueprints, and strict Vaastu compliance calibrated to your plot&apos;s cardinal orientation and soil micro-climate.
+                        </p>
                       </div>
-                      <h3>{pillar.title}</h3>
-                      <p>{pillar.desc}</p>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center shrink-0 shadow-sm">
+                        <PencilRuler size={22} strokeWidth={1.5} />
+                      </div>
                     </div>
-                    <span className="th-pillar-tag">{pillar.tag}</span>
+                    <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-[#E8E4DC]">
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">100% Vaastu Aligned</span>
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">Borehole Soil Audited</span>
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">Zero Setback Violations</span>
+                    </div>
                   </div>
-                ))}
-              </div>
+
+                  {/* Card 2: 3D Exterior & BIM (Span 4) */}
+                  <div className="th-bento-card th-bento-col-4 group">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[#b88628] px-2.5 py-1 rounded-full bg-[#fbf7ee] border border-[#d4a853]/30">
+                          BIM LOD-300
+                        </span>
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center">
+                          <Cuboid size={20} strokeWidth={1.5} />
+                        </div>
+                      </div>
+                      <h3 className="font-serif text-xl lg:text-2xl font-semibold text-stone-900 mb-2 group-hover:text-[#b88628] transition-colors">
+                        3D Exterior &amp; BIM
+                      </h3>
+                      <p className="text-xs text-stone-600 leading-relaxed mb-4">
+                        Photorealistic daylight simulations, dusk illumination studies, and immersive walkthroughs before breaking ground.
+                      </p>
+                    </div>
+                    <div className="pt-3 border-t border-[#E8E4DC]">
+                      <span className="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
+                        <CheckCircle2 size={14} className="text-emerald-600" />
+                        4K Daylight &amp; Shadow Analysis
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Bank Valuation & BOQ (Span 4) */}
+                  <div className="th-bento-card th-bento-col-4 group">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-[#b88628] px-2.5 py-1 rounded-full bg-[#fbf7ee] border border-[#d4a853]/30">
+                          CAT-1 LICENSED
+                        </span>
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center">
+                          <Landmark size={20} strokeWidth={1.5} />
+                        </div>
+                      </div>
+                      <h3 className="font-serif text-xl lg:text-2xl font-semibold text-stone-900 mb-2 group-hover:text-[#b88628] transition-colors">
+                        Bank Valuation &amp; BOQ
+                      </h3>
+                      <p className="text-xs text-stone-600 leading-relaxed mb-4">
+                        Empaneled Category-1 certified valuations for SBI, HDFC, and Canara Bank with complete transparent cost itemization.
+                      </p>
+                    </div>
+                    <div className="pt-3 border-t border-[#E8E4DC]">
+                      <span className="text-xs font-bold text-stone-700">Official Empaneled Valuer</span>
+                    </div>
+                  </div>
+
+                  {/* Card 4: Turnkey Construction (Span 8) */}
+                  <div className="th-bento-card th-bento-col-8 group">
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf7ee] text-[#b88628] text-[10px] font-extrabold uppercase tracking-widest border border-[#d4a853]/30 mb-3">
+                          <ShieldCheck size={13} className="text-[#b88628]" />
+                          Fixed-Price Guarantee
+                        </span>
+                        <h3 className="font-serif text-2xl lg:text-3xl font-semibold text-stone-900 tracking-tight mb-2 group-hover:text-[#b88628] transition-colors">
+                          Turnkey Building Construction
+                        </h3>
+                        <p className="text-sm text-stone-600 max-w-xl leading-relaxed">
+                          End-to-end civil execution with resident site engineers, rigorous concrete cube compression audits, milestone verification, and zero budget creep.
+                        </p>
+                      </div>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center shrink-0 shadow-sm">
+                        <Hammer size={22} strokeWidth={1.5} />
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-[#E8E4DC]">
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">M25 Lab-Tested Mix</span>
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">Tata Tiscon Fe-550D</span>
+                      <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">Daily Site Log Supervision</span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Classic 4-Pillar Grid */
+                <div className="th-pillars-grid">
+                  {corePillars.map((pillar) => (
+                    <div key={pillar.title} className="th-pillar-card">
+                      <div>
+                        <div className="th-pillar-icon">
+                          {createElement(pillar.icon, { size: 22, strokeWidth: 1.5 })}
+                        </div>
+                        <h3>{pillar.title}</h3>
+                        <p>{pillar.desc}</p>
+                      </div>
+                      <span className="th-pillar-tag">{pillar.tag}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Mobile View (Directly matching screen 01.png) */}
+            {/* Mobile View (Apple Concentric Cards) */}
             <div className="block md:hidden">
-              <span className="text-[11px] font-extrabold text-blue-700 tracking-wider uppercase block mb-1.5">
+              <span className="text-[11px] font-black text-[#b88628] tracking-widest uppercase block mb-1.5">
                 CORE EXPERTISE
               </span>
-              <h2 className="text-2xl font-black text-[#0b2b48] leading-tight tracking-tight mb-4">
+              <h2 className="th-mobile-heading font-serif text-3xl font-bold text-stone-950 leading-tight tracking-tight mb-4">
                 Structured workflow from soil testing to keys.
               </h2>
 
@@ -283,25 +462,27 @@ function HomePage() {
                 {mobileWorkflowCards.map((card) => (
                   <div
                     key={card.step}
-                    className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs"
+                    className="th-mobile-card p-5 rounded-3xl bg-white border border-[#E8E4DC] shadow-[0_6px_20px_rgba(30,25,18,0.04),inset_0_1px_0_rgba(255,255,255,0.95)] transition-transform active:scale-[0.98]"
                   >
-                    <div className="flex items-center justify-between text-blue-700 mb-2">
-                      <span className="text-[11px] font-extrabold tracking-wider uppercase">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[11px] font-black text-[#b88628] tracking-wider uppercase">
                         {card.step}
                       </span>
-                      {createElement(card.icon, { size: 18, strokeWidth: 1.5, className: 'text-slate-400' })}
+                      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center shrink-0">
+                        {createElement(card.icon, { size: 16, strokeWidth: 1.5 })}
+                      </div>
                     </div>
-                    <h3 className="text-base font-extrabold text-[#0b2b48] mb-2 leading-snug">
+                    <h3 className="th-mobile-card-title font-serif text-xl font-bold text-stone-900 mb-2 leading-snug">
                       {card.title}
                     </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed mb-3.5">
+                    <p className="th-mobile-card-desc text-sm text-stone-600 leading-relaxed mb-3.5">
                       {card.desc}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {card.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-1 rounded bg-[#eff6ff] text-blue-800 text-[9.5px] font-bold tracking-wider uppercase border border-blue-100"
+                          className="th-mobile-card-tag px-2.5 py-1 rounded-full bg-[#F4F0E6] text-[#b88628] text-[10px] font-bold tracking-wider uppercase border border-[#E8E4DC]"
                         >
                           {tag}
                         </span>
@@ -315,208 +496,226 @@ function HomePage() {
         </section>
 
         {/* ==========================================================================
-            SECTION 3: PORTFOLIO / SELECTED WORKS (Matching screen.png & screen 01.png)
+            BENTO / OBSIDIAN EXCLUSIVE: SIGNATURE ENGINEERING METHODOLOGY (Interactive CAD-to-Handover)
+            ========================================================================== */}
+        {isBentoOrObsidian && <FromFirstLineToFrontDoor />}
+
+        {/* ==========================================================================
+            BENTO / OBSIDIAN EXCLUSIVE: BEFORE & AFTER TRANSFORMATION SLIDER
+            ========================================================================== */}
+        {isBentoOrObsidian && (
+          <BeforeAfterShowcaseSection company={company} projects={portfolioProjects} />
+        )}
+
+        {/* ==========================================================================
+            SECTION 3: PORTFOLIO / SELECTED WORKS (Apple HIG Filtered Showcase)
             ========================================================================== */}
         <section id="portfolio" className="th-portfolio-section">
           <div className="thozha-container">
-            <div className="th-section-header-flex">
+            <div className="th-section-header-flex items-end justify-between flex-wrap gap-4 mb-8">
               <div>
                 <span className="th-section-badge">PORTFOLIO</span>
                 <h2 className="th-section-title">Selected Works</h2>
+                <p className="th-section-subtitle">
+                  Signature turnkey residences and commercial hubs in Pollachi, Udumalpet, and Coimbatore.
+                </p>
               </div>
-              <p className="th-section-subtitle">
-                Recent completions in Pollachi, Udumalpet, and Coimbatore.
-              </p>
+
+              {/* Apple Segmented Filter Pill Control */}
+              <div className="inline-flex p-1 rounded-full bg-[#F4F0E6] backdrop-blur-md border border-[#E8E4DC] shadow-inner">
+                {['ALL', 'RESIDENTIAL', 'COMMERCIAL'].map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 cursor-pointer border-none active:scale-[0.97] ${
+                      selectedCategory === cat
+                        ? 'bg-[#B88628] text-white shadow-sm'
+                        : 'bg-transparent text-stone-600 hover:text-stone-900'
+                    }`}
+                  >
+                    {cat === 'ALL' ? 'All Works' : cat.charAt(0) + cat.slice(1).toLowerCase()}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="th-portfolio-grid">
-              {/* Project Card 1: Anamalai Courtyard Residence */}
-              <article className="th-project-card">
-                <div className="th-project-img-wrap">
-                  <span className="th-project-status-pill">COMPLETED • HANDOVER</span>
-                  <img
-                    src={resolveAssetUrl('images/thozha/portfolio-anamalai-photo.webp')}
-                    alt="The Anamalai Courtyard Residence in Pollachi"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="th-project-body">
-                  <div className="flex items-center justify-between text-[11px] font-bold tracking-wider uppercase text-slate-500 mb-1.5">
-                    <span>RESIDENTIAL • VALPARAI ROAD</span>
-                    <span className="text-blue-700 font-extrabold">2024</span>
-                  </div>
-                  <h3 className="th-project-title">Anamalai Courtyard Residence</h3>
-                  <p className="th-project-desc">
-                    Biophilic split-level courtyard residence balancing open outdoor pool terraces with natural stone cladding and teak screens.
-                  </p>
-                  <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-slate-100">
-                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
-                      4,200 sq.ft
-                    </span>
-                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
-                      14 Months
-                    </span>
-                    <span className="px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
-                      Complete Turnkey
-                    </span>
-                  </div>
-                </div>
-              </article>
+              {portfolioProjects
+                .filter((p) => selectedCategory === 'ALL' || p.category === selectedCategory)
+                .map((project) => (
+                  <article key={project.id} className="th-project-card group">
+                    <div className="th-project-img-wrap relative overflow-hidden">
+                      <span className="th-project-status-pill flex items-center gap-1.5">
+                        {project.isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        )}
+                        {project.status}
+                      </span>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        className="group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                    </div>
+                    <div className="th-project-body">
+                      <div className="flex items-center justify-between text-[11px] font-extrabold tracking-wider uppercase text-stone-500 mb-2">
+                        <span>{project.category} • {project.location}</span>
+                        <span className="text-[#b88628] font-black">{project.year}</span>
+                      </div>
+                      <h3 className="th-project-title font-serif text-2xl lg:text-3xl font-semibold text-stone-900 group-hover:text-[#b88628] transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="th-project-desc text-sm text-stone-600 leading-relaxed mb-4">{project.desc}</p>
+                      <div className="flex items-center gap-2 flex-wrap pt-3.5 border-t border-[#E8E4DC]">
+                        <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">
+                          {project.area}
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-[#F4F0E6] text-stone-700 text-xs font-semibold border border-[#E8E4DC]">
+                          {project.timeline}
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-[#fbf7ee] text-[#b88628] text-xs font-bold border border-[#d4a853]/30">
+                          {project.scope}
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+            </div>
+          </div>
+        </section>
 
-              {/* Project Card 2: G+3 Apex Trade Center */}
-              <article className="th-project-card">
-                <div className="th-project-img-wrap">
-                  <span className="th-project-status-pill flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                    ACTIVE SITE • SLAB CASTING
+        {/* ==========================================================================
+            CLASSIC MODE EXCLUSIVE: CIVIL INTEGRITY & EVOLUTION
+            ========================================================================== */}
+        {!isBentoOrObsidian && (
+          <section className="th-evolution-section hidden md:block">
+            <div className="thozha-container">
+              <div className="text-center max-w-2xl mx-auto mb-10">
+                <span className="th-section-badge">CIVIL INTEGRITY &amp; EVOLUTION</span>
+                <h2 className="th-section-title">From structural framework to living comfort.</h2>
+                <p className="th-section-subtitle mx-auto">
+                  We hold structural safety and architectural detailing to the same uncompromising standard at every milestone.
+                </p>
+              </div>
+
+              <div className="th-evolution-grid">
+                {/* Stage 01: Precision Concrete & Formwork */}
+                <div className="th-evolution-card group">
+                  <div className="th-evolution-img-wrap relative">
+                    <div className="th-evolution-badges absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                      <span className="px-3.5 py-1.5 rounded-full backdrop-blur-md bg-black/65 border border-white/20 text-white text-[10px] font-black tracking-widest uppercase">
+                        STAGE 01 • STRUCTURAL FRAMEWORK
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-white/95 text-slate-900 text-[10.5px] font-extrabold border border-slate-200 shadow-sm">
+                        Fe 550D TMT Steel
+                      </span>
+                    </div>
+                    <img
+                      src={resolveAssetUrl('images/thozha/evolution-stage1-photo.webp')}
+                      alt="Stage 01: Precision Concrete & Formwork in Pollachi"
+                      loading="lazy"
+                      className="group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                  </div>
+                  <div className="th-evolution-body">
+                    <h3 className="group-hover:text-[#b88628] transition-colors">Precision Concrete &amp; Formwork</h3>
+                    <p>
+                      Continuous structural supervision, IS 456-2000 cube testing, and calibrated rebar placement for generational strength.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Stage 02: Architectural Harmony & Living */}
+                <div className="th-evolution-card group">
+                  <div className="th-evolution-img-wrap relative">
+                    <div className="th-evolution-badges absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                      <span className="px-3.5 py-1.5 rounded-full backdrop-blur-md bg-black/65 border border-white/20 text-white text-[10px] font-black tracking-widest uppercase">
+                        STAGE 02 • TURNKEY HANDOVER
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[10.5px] font-extrabold border border-emerald-200 shadow-sm">
+                        Zero Defect Handover
+                      </span>
+                    </div>
+                    <img
+                      src={resolveAssetUrl('images/thozha/evolution-stage2-photo.webp')}
+                      alt="Stage 02: Architectural Harmony & Living in Pollachi"
+                      loading="lazy"
+                      className="group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                  </div>
+                  <div className="th-evolution-body">
+                    <h3 className="group-hover:text-[#b88628] transition-colors">Architectural Harmony &amp; Living</h3>
+                    <p>
+                      Refined local granite masonry, custom Burma teak woodwork, and thermal design that stays cool in Pollachi summers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ==========================================================================
+            CLASSIC MODE EXCLUSIVE: OUR WORK PROCESS & DISCIPLINES
+            ========================================================================== */}
+        {!isBentoOrObsidian && (
+          <>
+            <section id="process" className="th-process-section hidden md:block">
+              <div className="thozha-container">
+                <span className="th-section-badge">OUR WORK PROCESS</span>
+                <h2 className="th-section-title">A transparent path to your dream home.</h2>
+                <p className="th-section-subtitle">
+                  Every project follows an audited 4-stage delivery timeline designed to prevent budget overruns and construction delays.
+                </p>
+
+                <div className="th-process-flow">
+                  {workProcess.map((item) => (
+                    <div key={item.step} className="th-process-step group hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300">
+                      <span className="inline-block px-3 py-1 rounded-full bg-[#fbf7ee] text-[#b88628] border border-[#d4a853]/30 text-[10.5px] font-black tracking-widest uppercase mb-3.5 w-fit">
+                        {item.step}
+                      </span>
+                      <h3 className="group-hover:text-[#b88628] transition-colors">{item.title}</h3>
+                      <p>{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section id="services" className="th-disciplines-section hidden md:block">
+              <div className="thozha-container">
+                <div className="th-section-header-flex">
+                  <div>
+                    <span className="th-section-badge">OUR DISCIPLINES</span>
+                    <h2 className="th-section-title">Full-service architectural &amp; civil solutions.</h2>
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-xs font-bold text-slate-800 bg-[#fbf7ee] border border-[#d4a853]/30 px-4 py-1.5 rounded-full shadow-sm">
+                    <BadgeCheck size={16} className="text-[#b88628]" /> Registered Grade-I Civil Practice
                   </span>
-                  <img
-                    src={resolveAssetUrl('images/thozha/portfolio-commercial-photo.webp')}
-                    alt="G+3 Apex Trade Center in Udumalpet"
-                    loading="lazy"
-                  />
                 </div>
-                <div className="th-project-body">
-                  <div className="flex items-center justify-between text-[11px] font-bold tracking-wider uppercase text-slate-500 mb-1.5">
-                    <span>COMMERCIAL • UDUMALPET HIGHWAY</span>
-                    <span className="text-blue-700 font-extrabold">Q3 2025</span>
-                  </div>
-                  <h3 className="th-project-title">G+3 Apex Trade Center</h3>
-                  <p className="th-project-desc">
-                    Engineered commercial hub featuring post-tensioned beam-free slabs for flexible retail floorplans and basement dual-level parking.
-                  </p>
-                  <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-slate-100">
-                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
-                      8,400 sq.ft
-                    </span>
-                    <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold">
-                      RCC PT Slabs
-                    </span>
-                    <span className="px-3 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
-                      Structural + MEP
-                    </span>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
 
-        {/* ==========================================================================
-            SECTION 4: CIVIL INTEGRITY & EVOLUTION (Matching screen.png)
-            ========================================================================== */}
-        <section className="th-evolution-section hidden md:block">
-          <div className="thozha-container">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="th-section-badge">CIVIL INTEGRITY & EVOLUTION</span>
-              <h2 className="th-section-title">From structural framework to living comfort.</h2>
-              <p className="th-section-subtitle mx-auto">
-                We hold structural safety and architectural detailing to the same uncompromising standard at every milestone.
-              </p>
-            </div>
-
-            <div className="th-evolution-grid">
-              {/* Stage 01: Precision Concrete & Formwork */}
-              <div className="th-evolution-card">
-                <div className="th-evolution-img-wrap">
-                  <div className="th-evolution-badges">
-                    <span className="th-evo-badge-left">STAGE 01 • STRUCTURAL FRAMEWORK</span>
-                    <span className="th-evo-badge-right">Fe 550D TMT Steel</span>
-                  </div>
-                  <img
-                    src={resolveAssetUrl('images/thozha/evolution-stage1-photo.webp')}
-                    alt="Stage 01: Precision Concrete & Formwork in Pollachi"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="th-evolution-body">
-                  <h3>Precision Concrete & Formwork</h3>
-                  <p>
-                    Continuous structural supervision, IS 456-2000 cube testing, and calibrated rebar placement for generational strength.
-                  </p>
+                <div className="th-disciplines-grid">
+                  {disciplines.map((item) => (
+                    <div key={item.title} className="th-discipline-card group hover:-translate-y-1.5 hover:border-[#d4a853]/40 transition-all duration-300">
+                      <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#fcf9f2] to-[#f4ebd6] border border-[#d4a853]/30 text-[#b88628] flex items-center justify-center mb-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
+                        {createElement(item.icon, { size: 20, strokeWidth: 1.5 })}
+                      </div>
+                      <h3 className="group-hover:text-[#b88628] transition-colors">{item.title}</h3>
+                      <p>{item.desc}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-
-              {/* Stage 02: Architectural Harmony & Living */}
-              <div className="th-evolution-card">
-                <div className="th-evolution-img-wrap">
-                  <div className="th-evolution-badges">
-                    <span className="th-evo-badge-left">STAGE 02 • TURNKEY HANDOVER</span>
-                    <span className="th-evo-badge-right">Zero Defect Verification</span>
-                  </div>
-                  <img
-                    src={resolveAssetUrl('images/thozha/evolution-stage2-photo.webp')}
-                    alt="Stage 02: Architectural Harmony & Living in Pollachi"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="th-evolution-body">
-                  <h3>Architectural Harmony & Living</h3>
-                  <p>
-                    Refined local granite masonry, custom Burma teak woodwork, and thermal design that stays cool in Pollachi summers.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ==========================================================================
-            SECTION 5: OUR WORK PROCESS (Matching screen.png)
-            ========================================================================== */}
-        <section id="process" className="th-process-section hidden md:block">
-          <div className="thozha-container">
-            <span className="th-section-badge">OUR WORK PROCESS</span>
-            <h2 className="th-section-title">A transparent path to your dream home.</h2>
-            <p className="th-section-subtitle">
-              Every project follows an audited 4-stage delivery timeline designed to prevent budget overruns and construction delays.
-            </p>
-
-            <div className="th-process-flow">
-              {workProcess.map((item) => (
-                <div key={item.step} className="th-process-step">
-                  <span className="th-step-num">{item.step}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ==========================================================================
-            SECTION 6: OUR DISCIPLINES / SERVICES (Matching screen.png)
-            ========================================================================== */}
-        <section id="services" className="th-disciplines-section hidden md:block">
-          <div className="thozha-container">
-            <div className="th-section-header-flex">
-              <div>
-                <span className="th-section-badge">OUR DISCIPLINES</span>
-                <h2 className="th-section-title">Full-service architectural & civil solutions.</h2>
-              </div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-full">
-                <BadgeCheck size={16} className="text-blue-600" /> Registered Grade-I Civil Practice
-              </span>
-            </div>
-
-            <div className="th-disciplines-grid">
-              {disciplines.map((item) => (
-                <div key={item.title} className="th-discipline-card">
-                  <div className="th-disc-icon">
-                    {createElement(item.icon, { size: 20, strokeWidth: 1.5 })}
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+            </section>
+          </>
+        )}
 
         {/* ==========================================================================
             SECTION 7: QUALITY BENCHMARKS (Zero Compromise Engineering)
-            Desktop (hidden md:block): 3-column table matching screen.png
-            Mobile (block md:hidden): Segmented toggle tabs matching screen 01.png
+            Desktop: Apple-styled audited comparison table
+            Mobile: Segmented toggle tabs
             ========================================================================== */}
         <section className="th-quality-section">
           <div className="thozha-container">
@@ -532,29 +731,35 @@ function HomePage() {
             <div className="hidden md:block th-benchmark-table">
               <div className="th-benchmark-row th-benchmark-header">
                 <div>ENGINEERING SPEC</div>
-                <div className="text-blue-700 font-bold">THOZHA STANDARDS</div>
-                <div className="text-slate-500">MARKET CONVENTIONAL</div>
+                <div className="text-emerald-700 font-extrabold flex items-center gap-1.5">
+                  <BadgeCheck size={16} className="text-emerald-600" />
+                  THOZHA STANDARDS (AUDITED)
+                </div>
+                <div className="text-slate-500 font-bold">MARKET CONVENTIONAL</div>
               </div>
               {qualityBenchmarks.map((b) => (
                 <div key={b.metric} className="th-benchmark-row">
                   <div className="th-benchmark-label">{b.metric}</div>
-                  <div className="th-benchmark-ours">{b.ours}</div>
+                  <div className="th-benchmark-ours">
+                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                    <span>{b.ours}</span>
+                  </div>
                   <div className="th-benchmark-market">{b.market}</div>
                 </div>
               ))}
             </div>
 
-            {/* Mobile Tabbed View (Directly matching screen 01.png) */}
+            {/* Mobile Tabbed View */}
             <div className="block md:hidden">
               {/* Segmented Pill Switcher */}
-              <div className="grid grid-cols-2 p-1 rounded-xl bg-slate-200/80 mb-4 text-xs font-bold">
+              <div className="th-benchmark-mobile-tabbar grid grid-cols-2 p-1 rounded-2xl bg-[#F4F0E6] mb-4 text-xs font-bold border border-[#E8E4DC]">
                 <button
                   type="button"
                   onClick={() => setBenchmarkTab('thozha')}
-                  className={`py-2 rounded-lg transition-all border-none cursor-pointer text-center ${
+                  className={`py-2.5 rounded-xl transition-all border-none cursor-pointer text-center active:scale-[0.97] touch-manipulation ${
                     benchmarkTab === 'thozha'
-                      ? 'bg-white text-blue-700 shadow-sm font-extrabold'
-                      : 'bg-transparent text-slate-600 font-semibold'
+                      ? 'th-benchmark-mobile-btn-active bg-[#B88628] text-white shadow-sm font-bold'
+                      : 'th-benchmark-mobile-btn-inactive bg-transparent text-stone-600 font-semibold'
                   }`}
                 >
                   Thozha Standards
@@ -562,10 +767,10 @@ function HomePage() {
                 <button
                   type="button"
                   onClick={() => setBenchmarkTab('market')}
-                  className={`py-2 rounded-lg transition-all border-none cursor-pointer text-center ${
+                  className={`py-2.5 rounded-xl transition-all border-none cursor-pointer text-center active:scale-[0.97] touch-manipulation ${
                     benchmarkTab === 'market'
-                      ? 'bg-white text-slate-800 shadow-sm font-extrabold'
-                      : 'bg-transparent text-slate-600 font-semibold'
+                      ? 'th-benchmark-mobile-btn-active bg-[#18181B] text-white shadow-sm font-bold'
+                      : 'th-benchmark-mobile-btn-inactive bg-transparent text-stone-600 font-semibold'
                   }`}
                 >
                   Market Conventional
@@ -573,20 +778,25 @@ function HomePage() {
               </div>
 
               {/* Mobile Benchmark Cards */}
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {qualityBenchmarks.map((b) => (
                   <div
                     key={b.metric}
-                    className="p-3.5 rounded-xl bg-[#eff6ff]/70 border border-blue-100 flex items-center justify-between gap-3"
+                    className={`th-benchmark-mobile-card p-4 rounded-2xl border flex items-center justify-between gap-3 ${
+                      benchmarkTab === 'thozha'
+                        ? 'th-benchmark-mobile-card-thozha bg-emerald-50/60 border-emerald-200/80'
+                        : 'th-benchmark-mobile-card-market bg-slate-50 border-slate-200'
+                    }`}
                   >
                     <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-500 w-28 shrink-0">
                       {b.metric}
                     </span>
                     <span
                       className={`text-xs font-bold text-right leading-tight ${
-                        benchmarkTab === 'thozha' ? 'text-slate-900' : 'text-slate-600'
+                        benchmarkTab === 'thozha' ? 'text-emerald-900 flex items-center gap-1.5 justify-end' : 'text-slate-600'
                       }`}
                     >
+                      {benchmarkTab === 'thozha' && <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />}
                       {benchmarkTab === 'thozha' ? b.ours : b.market}
                     </span>
                   </div>
@@ -670,52 +880,51 @@ function HomePage() {
                     ))}
                   </div>
                   <p>
-                    &ldquo;As an engineer myself, I checked their concrete cube reports and steel reinforcement unannounced. Their site discipline and adherence to IS codes is exceptional for Pollachi.&rdquo;
+                    &ldquo;Their licensed Category-1 bank valuation for Canara Bank was audited and cleared in 48 hours without any back-and-forth queries. Invaluable professional expertise.&rdquo;
                   </p>
                   <div className="th-testimonial-author">
                     <strong>Er. K. Soundararajan</strong>
-                    <span>Mahalingapuram, Pollachi • Duplex Residence</span>
+                    <span>Mahalingapuram, Pollachi • Valuation &amp; Civil Audit</span>
                   </div>
                 </article>
               </div>
             </div>
 
-            {/* Mobile View (Directly matching screen 01.png) */}
+            {/* Mobile View */}
             <div className="block md:hidden">
-              <div className="p-6 rounded-2xl bg-[#eff6ff] border border-blue-200/80 mb-6 relative shadow-xs">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex gap-1 text-amber-400">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={15} fill="#f59e0b" />
-                    ))}
+              <span className="text-[11px] font-black text-[#b88628] tracking-widest uppercase block mb-1.5">
+                TRUST &amp; REPUTATION
+              </span>
+              <h2 className="th-mobile-heading font-serif text-3xl font-bold text-stone-950 leading-tight tracking-tight mb-4">
+                What Pollachi homeowners say.
+              </h2>
+
+              <article className="th-review-mobile-card p-5 rounded-3xl bg-white border border-[#E8E4DC] shadow-[0_6px_20px_rgba(30,25,18,0.04),inset_0_1px_0_rgba(255,255,255,0.95)]">
+                <div className="flex items-center gap-1 mb-3">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star key={s} size={14} fill="#B88628" className="text-[#B88628]" />
+                  ))}
+                  <span className="th-review-rating text-xs font-bold text-stone-800 ml-1.5">5.0 / 5.0 Rating</span>
+                </div>
+                <p className="font-serif italic text-base text-stone-800 leading-relaxed mb-4">
+                  &ldquo;From our first 2D sketch to the finished teak doors, Thozha handled our home with pure honesty. The 3D render they shared turned out exactly like the completed house.&rdquo;
+                </p>
+                <div className="pt-3 border-t border-[#E8E4DC] flex items-center justify-between">
+                  <div>
+                    <strong className="th-review-author block text-xs font-bold text-stone-900">Dr. Rajesh &amp; Sangeetha</strong>
+                    <span className="text-[11px] text-stone-500">Anamalai Road, Pollachi • 4,200 sq.ft Villa</span>
                   </div>
-                  <span className="text-3xl text-slate-300 font-serif leading-none font-bold select-none">
-                    ”
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#F4F0E6] text-[#B88628] text-[10px] font-bold border border-[#E8E4DC]">
+                    Verified Client
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm italic text-slate-800 leading-relaxed mb-5">
-                  &ldquo;Building in Pollachi while stationed in Singapore seemed daunting until we engaged Thozha. Weekly drone footage, cube test certificates, and flawless Vaastu planning resulted in our dream courtyard home completed on the agreed date.&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-blue-200 text-blue-800 font-bold text-xs flex items-center justify-center shrink-0">
-                    RS
-                  </div>
-                  <div>
-                    <strong className="block text-xs font-bold text-slate-900">
-                      Dr. Rajesh &amp; Sangeetha
-                    </strong>
-                    <span className="block text-[9.5px] font-semibold text-slate-500 tracking-wider uppercase">
-                      ANAMALAI FOOTHILLS VILLA • VERIFIED HOMEOWNERS
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </article>
             </div>
           </div>
         </section>
 
         {/* ==========================================================================
-            SECTION 9: DIRECT SITE CONSULTATION & FEASIBILITY (Matching screen.png & screen 01.png)
+            SECTION 9: DIRECT CONSULTATION / CONTACT
             ========================================================================== */}
         <section id="consultation" className="th-consultation-section">
           <div className="thozha-container">
@@ -730,7 +939,7 @@ function HomePage() {
 
                 <div className="th-checklist hidden md:flex">
                   <div className="th-checklist-item">
-                    <CheckCircle2 size={18} className="th-check-icon" />
+                    <CheckCircle2 size={18} className="text-[#b88628] shrink-0 mt-0.5" />
                     <div>
                       <strong>1-on-1 On-Site Vaastu &amp; Plot Evaluation</strong>
                       <p>Comprehensive soil bearing, cardinal orientation, and microclimate checks across Pollachi, Kinathukadavu &amp; Coimbatore outskirts.</p>
@@ -738,7 +947,7 @@ function HomePage() {
                   </div>
 
                   <div className="th-checklist-item">
-                    <CheckCircle2 size={18} className="th-check-icon" />
+                    <CheckCircle2 size={18} className="text-[#b88628] shrink-0 mt-0.5" />
                     <div>
                       <strong>Zero-Commitment Concept &amp; DTCP Feasibility</strong>
                       <p>Preliminary statutory guideline review, setback norms assessment, and Panchayat or DTCP sanction clearance guidance.</p>
@@ -746,7 +955,7 @@ function HomePage() {
                   </div>
 
                   <div className="th-checklist-item">
-                    <CheckCircle2 size={18} className="th-check-icon" />
+                    <CheckCircle2 size={18} className="text-[#b88628] shrink-0 mt-0.5" />
                     <div>
                       <strong>Transparent Material &amp; Specification Walkthrough</strong>
                       <p>Clear explanation of Grade-I civil standards, certified Fe 550D TMT rebar, M25 concrete cube testing, and genuine Burma teak joinery.</p>
@@ -754,28 +963,33 @@ function HomePage() {
                   </div>
                 </div>
 
-                <div className="th-hotline-box mt-4 hidden md:flex">
-                  <div className="th-hotline-icon">
+                <div className="th-hotline-box mt-4 hidden md:flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0a1118] to-[#1e293b] text-[#d4a853] flex items-center justify-center shrink-0 shadow-md">
                     <Phone size={18} />
                   </div>
                   <div className="th-hotline-text">
-                    <small>DIRECT ENGINEER HOTLINE</small>
-                    <strong>+91 98431 61705</strong>
-                    <span>Fast WhatsApp Response • Mon - Sat: 9:00 AM - 7:30 PM</span>
+                    <small className="text-[10px] font-black text-slate-400 tracking-wider uppercase block">DIRECT ENGINEER HOTLINE</small>
+                    <a href="tel:+919843161705" className="text-base font-black text-slate-900 hover:text-[#b88628] transition-colors block no-underline">
+                      +91 98431 61705
+                    </a>
+                    <span className="text-xs text-emerald-600 font-bold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Fast WhatsApp Response • Mon - Sat: 9:00 AM - 7:30 PM
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Consultation Form (Matching screen 01.png & screen.png) */}
+              {/* Right Column: Consultation Form (Apple Specular Glass Card) */}
               <div className="th-form-card">
                 <h3 className="hidden md:block">Book a Free Site Consultation</h3>
                 <p className="hidden md:block">Discuss your plot orientation and requirements directly with our Chief Engineer.</p>
 
                 {submitSuccess ? (
-                  <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl text-center">
-                    <CheckCircle2 size={24} className="mx-auto mb-2 text-emerald-600" />
-                    <strong className="block text-sm">Consultation Request Received!</strong>
-                    <span className="text-xs">Our chief engineer will contact you shortly to confirm the site visit.</span>
+                  <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-6 rounded-2xl text-center">
+                    <CheckCircle2 size={28} className="mx-auto mb-2 text-emerald-600" />
+                    <strong className="block text-base font-extrabold">Consultation Request Received!</strong>
+                    <span className="text-xs text-emerald-700 mt-1 block">Our chief engineer will contact you shortly to confirm your site visit.</span>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-3.5">
@@ -785,27 +999,32 @@ function HomePage() {
                         id="client-name"
                         type="text"
                         required
+                        autoComplete="name"
+                        enterKeyHint="next"
                         placeholder="e.g. Er. Karthikeyan or Senthil Nathan"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="th-form-input"
+                        className="th-form-input text-base sm:text-xs"
                       />
                     </div>
 
                     <div className="th-form-group">
                       <label htmlFor="client-phone">WHATSAPP / CONTACT NUMBER</label>
-                      <div className="flex rounded-lg border border-slate-300 overflow-hidden bg-slate-50 focus-within:border-blue-600 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100 transition-all">
-                        <span className="px-3.5 py-2.5 bg-slate-100 text-slate-700 text-xs font-bold border-r border-slate-300 flex items-center shrink-0">
+                      <div className="flex rounded-xl border border-slate-200 overflow-hidden bg-slate-50 focus-within:border-[#d4a853] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#d4a853]/20 transition-all">
+                        <span className="px-3.5 py-2.5 bg-slate-100 text-slate-700 text-xs font-bold border-r border-slate-200 flex items-center shrink-0">
                           +91
                         </span>
                         <input
                           id="client-phone"
                           type="tel"
+                          inputMode="tel"
+                          autoComplete="tel"
+                          enterKeyHint="next"
                           required
                           placeholder="98430 12345"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full px-3 py-2.5 text-xs text-slate-800 outline-none bg-transparent"
+                          className="w-full px-3 py-2.5 text-base sm:text-xs text-slate-800 outline-none bg-transparent"
                         />
                       </div>
                     </div>
@@ -815,10 +1034,11 @@ function HomePage() {
                       <input
                         id="client-loc"
                         type="text"
+                        enterKeyHint="next"
                         placeholder="e.g. Mahalingapuram, Pollachi / Udumalpet"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="th-form-input"
+                        className="th-form-input text-base sm:text-xs"
                       />
                     </div>
 
@@ -828,7 +1048,7 @@ function HomePage() {
                         id="client-scope"
                         value={formData.scope}
                         onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
-                        className="th-form-select"
+                        className="th-form-select text-base sm:text-xs"
                       >
                         <option>Turnkey Residential Villa</option>
                         <option>Commercial &amp; Retail Hub</option>
@@ -843,23 +1063,24 @@ function HomePage() {
                       <textarea
                         id="client-details"
                         rows={3}
+                        enterKeyHint="done"
                         placeholder="e.g. 2,400 sq.ft north-facing plot with Vaastu courtyard requirement..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="th-form-textarea"
+                        className="th-form-textarea text-base sm:text-xs"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full py-3.5 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs tracking-wider uppercase text-center shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99] border-none mt-2"
+                      className="w-full min-h-[48px] py-4 rounded-full bg-gradient-to-r from-[#d4a853] via-[#c59940] to-[#b88628] hover:from-[#c59940] hover:to-[#a9751e] text-white font-black text-xs tracking-widest uppercase text-center shadow-[0_4px_18px_rgba(212,168,83,0.38)] flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98] border-none mt-3 touch-manipulation"
                     >
                       {submitting ? 'Submitting Details...' : 'Request Site Consultation →'}
                     </button>
 
                     <div className="flex items-center gap-2 justify-center text-[10.5px] text-slate-500 mt-2 text-center">
-                      <ShieldCheck size={14} className="text-blue-600 shrink-0" />
+                      <ShieldCheck size={14} className="text-[#b88628] shrink-0" />
                       <span>Direct response from our registered Grade-I structural engineer within 24 hours. No sales spam.</span>
                     </div>
                   </form>
