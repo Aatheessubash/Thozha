@@ -97,7 +97,8 @@ function BeforeAfterShowcaseSection({ company = {}, projects = [] }) {
                   }`}>
                     {proj.index}
                   </span>
-                  <span>{proj.tabLabel}</span>
+                  <span className="hidden sm:inline">{proj.tabLabel}</span>
+                  <span className="inline sm:hidden">{idx === 0 ? 'Foothills Villa' : 'Courtyard Sanctuary'}</span>
                 </button>
               )
             })}
@@ -137,10 +138,18 @@ function BeforeAfterShowcaseSection({ company = {}, projects = [] }) {
                     {currentProject.subtitle}
                   </p>
                 </div>
-                <div className="flex items-center gap-3 self-start lg:self-auto shrink-0">
+                <div className="flex items-center gap-3 self-start lg:self-auto shrink-0 w-full sm:w-auto">
                   <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1E1912] hover:bg-stone-800 text-white text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md active:scale-[0.97]"
+                    href="#consultation"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const el = document.querySelector('#consultation')
+                      if (el) {
+                        if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
+                        else el.scrollIntoView({ behavior: 'smooth' })
+                      }
+                    }}
+                    className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1E1912] hover:bg-stone-800 text-white text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md active:scale-[0.97] touch-manipulation min-h-[44px]"
                   >
                     <span>Request Site Assessment</span>
                     <span>→</span>
@@ -149,7 +158,7 @@ function BeforeAfterShowcaseSection({ company = {}, projects = [] }) {
               </div>
 
               {/* Verified Civil Specs Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-5 sm:pt-6">
                 {currentProject.specs.map((spec, sIdx) => (
                   <div
                     key={sIdx}
@@ -158,9 +167,9 @@ function BeforeAfterShowcaseSection({ company = {}, projects = [] }) {
                     <div className="text-[11px] font-bold uppercase tracking-wider text-stone-500 mb-1">
                       {spec.label}
                     </div>
-                    <div className="text-sm sm:text-base font-semibold text-stone-900 flex items-center gap-1.5">
+                    <div className="text-xs sm:text-sm font-semibold text-stone-900 flex items-center gap-1.5 leading-snug">
                       <CheckCircle2 size={14} className="text-[#B88628] shrink-0" />
-                      <span className="truncate">{spec.value}</span>
+                      <span>{spec.value}</span>
                     </div>
                   </div>
                 ))}

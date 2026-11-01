@@ -146,12 +146,12 @@ export default function EngineeringBimHero() {
       {/* ══════════════════════════════════════════════════════════════════════
           MOBILE HERO: WARM WHITE WITH BIG CLEAN TYPOGRAPHY
           ══════════════════════════════════════════════════════════════════════ */}
-      <div className="flex lg:hidden flex-col justify-between relative w-full min-h-[100svh] bg-[#FAF8F5] overflow-hidden pt-16">
+      <div className="flex lg:hidden flex-col justify-between relative w-full min-h-[100svh] bg-[#FAF8F5] overflow-hidden pt-[72px]">
 
         {/* Background Visual Section */}
         <div className="relative w-full flex-1 flex flex-col justify-between">
           {/* Vertical Hero Photo */}
-          <div className="relative w-full h-[50vh] overflow-hidden">
+          <div className="relative w-full h-[46vh] sm:h-[50vh] overflow-hidden">
             <img
               src={mobileHeroImg}
               alt="Thozha Associates Villa in Valparai Foothills"
@@ -159,59 +159,59 @@ export default function EngineeringBimHero() {
               loading="eager"
             />
             {/* Top Scrim */}
-            <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
 
             {/* Seamless Bottom Gradient Fading to Warm White */}
             <div
-              className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+              className="absolute inset-x-0 bottom-0 h-44 pointer-events-none"
               style={{
                 background:
-                  'linear-gradient(to bottom, transparent 0%, rgba(250, 248, 245, 0.75) 55%, #FAF8F5 100%)',
+                  'linear-gradient(to bottom, transparent 0%, rgba(250, 248, 245, 0.8) 55%, #FAF8F5 100%)',
               }}
             />
 
-            {/* Top Pill Tag */}
-            <div className="absolute top-4 inset-x-0 flex justify-center z-20">
-              <div className="px-4 py-1.5 rounded-full backdrop-blur-md bg-white/85 border border-white/60 text-stone-900 text-xs font-bold shadow-md">
+            {/* Top Pill Tag with Proper Navbar Clearance */}
+            <div className="absolute top-4 inset-x-0 flex justify-center z-20 pointer-events-none">
+              <div className="px-4 py-1.5 rounded-full backdrop-blur-md bg-white/95 border border-white text-stone-900 text-[11px] font-bold shadow-md tracking-wide">
                 Featured Handover • Valparai Foothills
               </div>
             </div>
           </div>
 
           {/* Content Layer with BIG BOLD CLEAN FONTS */}
-          <div className="relative z-20 px-6 pb-8 pt-1 flex flex-col items-center text-center">
+          <div className="relative z-20 px-5 sm:px-6 pb-8 pt-0 flex flex-col items-center text-center">
             {/* BIG Editorial Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl font-bold text-stone-950 leading-[1.05] tracking-tight max-w-sm">
+            <h1 className="font-serif text-[36px] sm:text-5xl font-bold text-stone-950 leading-[1.06] tracking-tight max-w-sm">
               Spaces crafted with
             </h1>
-            <h1 className="font-serif text-4xl sm:text-5xl font-bold italic text-[#B88628] leading-[1.05] tracking-tight max-w-sm mt-0.5">
+            <h1 className="font-serif text-[36px] sm:text-5xl font-bold italic text-[#B88628] leading-[1.06] tracking-tight max-w-sm mt-0.5">
               quiet precision.
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-3.5 text-sm sm:text-base text-stone-600 max-w-sm leading-relaxed font-normal">
+            <p className="mt-3 text-xs sm:text-sm text-stone-600 max-w-sm leading-relaxed font-normal">
               Sustainable tropical architecture &amp; turnkey structural engineering across Western Tamil Nadu.
             </p>
 
             {/* 3 Badge Pills Centered */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-              <span className="px-4 py-1.5 rounded-full bg-white border border-stone-200/90 text-xs font-semibold text-stone-800 shadow-2xs">
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-3.5">
+              <span className="px-3.5 py-1 rounded-full bg-white border border-[#E8E4DC] text-[11px] font-semibold text-stone-800 shadow-2xs">
                 DTCP Grade-1
               </span>
-              <span className="px-4 py-1.5 rounded-full bg-white border border-stone-200/90 text-xs font-semibold text-stone-800 shadow-2xs">
+              <span className="px-3.5 py-1 rounded-full bg-white border border-[#E8E4DC] text-[11px] font-semibold text-stone-800 shadow-2xs">
                 M30 Concrete
               </span>
-              <span className="px-4 py-1.5 rounded-full bg-white border border-stone-200/90 text-xs font-semibold text-stone-800 shadow-2xs">
+              <span className="px-3.5 py-1 rounded-full bg-white border border-[#E8E4DC] text-[11px] font-semibold text-stone-800 shadow-2xs">
                 Vaastu Certified
               </span>
             </div>
 
             {/* Glowing Warm Gold Primary CTA Button */}
-            <div className="w-full max-w-[320px] mt-6">
+            <div className="w-full max-w-[320px] mt-5">
               <a
                 href="#consultation"
                 onClick={(e) => scrollTo(e, '#consultation')}
-                className="w-full py-4 px-7 rounded-full bg-gradient-to-r from-[#B88628] via-[#C59940] to-[#A07420] text-white font-black text-xs tracking-widest uppercase flex items-center justify-center gap-2 shadow-[0_6px_24px_rgba(184,134,40,0.32)] active:scale-[0.97] transition-all no-underline touch-manipulation hover:shadow-[0_8px_30px_rgba(184,134,40,0.45)]"
+                className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-gradient-to-r from-[#B88628] via-[#C59940] to-[#A07420] text-white font-black text-xs tracking-widest uppercase flex items-center justify-center gap-2 shadow-[0_6px_24px_rgba(184,134,40,0.32)] active:scale-[0.97] transition-all no-underline touch-manipulation hover:shadow-[0_8px_30px_rgba(184,134,40,0.45)]"
               >
                 <span>Request Site Consultation</span>
                 <ArrowRight size={14} className="text-white" />
@@ -222,7 +222,7 @@ export default function EngineeringBimHero() {
             <a
               href="#expertise"
               onClick={(e) => scrollTo(e, '#expertise')}
-              className="mt-4 inline-flex flex-col items-center text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors no-underline active:scale-[0.96] touch-manipulation"
+              className="mt-3.5 inline-flex flex-col items-center text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors no-underline active:scale-[0.96] touch-manipulation"
             >
               <ChevronDown size={14} className="animate-bounce text-[#B88628]" />
               <span>Explore Works &amp; Disciplines ↓</span>

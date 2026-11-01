@@ -140,16 +140,16 @@ export default function Navbar({ company = {} }) {
           <Link
             to="/"
             onClick={(e) => handleNavClick(e, navLinks[0])}
-            className="flex items-center gap-2 text-[11px] font-black tracking-wider text-[#18181B] uppercase truncate no-underline"
+            className="flex items-center gap-2 text-xs font-black tracking-wider text-[#18181B] uppercase truncate no-underline"
           >
-            <img src={logoUrl} alt="தோழா" className="h-5 w-auto object-contain" />
-            <span>THOZHA ASSOCIATES <span className="text-stone-400 font-normal">|</span> CIVIL</span>
+            <img src={logoUrl} alt="தோழா" className="h-5 w-auto object-contain shrink-0" />
+            <span className="font-extrabold text-[11px] sm:text-xs tracking-wider truncate">THOZHA ASSOCIATES</span>
           </Link>
 
           <div className="flex items-center gap-2 shrink-0">
             <a
               href={formatPhoneHref(phone)}
-              className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 border border-[#E8E4DC] text-stone-800 flex items-center justify-center active:scale-[0.92] transition-transform no-underline"
+              className="w-9 h-9 rounded-full bg-white hover:bg-stone-50 border border-[#E8E4DC] text-stone-800 flex items-center justify-center active:scale-[0.93] transition-transform no-underline shadow-2xs touch-manipulation"
               aria-label="Call engineer"
             >
               <Phone size={14} className="text-[#B88628]" />
@@ -157,7 +157,7 @@ export default function Navbar({ company = {} }) {
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 border border-[#E8E4DC] text-stone-800 flex items-center justify-center active:scale-[0.92] transition-transform cursor-pointer"
+              className="w-9 h-9 rounded-full bg-white hover:bg-stone-50 border border-[#E8E4DC] text-stone-800 flex items-center justify-center active:scale-[0.93] transition-transform cursor-pointer shadow-2xs touch-manipulation"
               aria-label="Toggle menu"
             >
               {open ? <X size={15} /> : <Menu size={15} />}
@@ -173,7 +173,7 @@ export default function Navbar({ company = {} }) {
                 key={item.label}
                 href={item.hash || item.path}
                 onClick={(e) => handleNavClick(e, item)}
-                className="py-2.5 px-3 rounded-xl text-xs font-bold text-stone-700 hover:text-stone-950 hover:bg-stone-100 transition-colors flex items-center justify-between no-underline"
+                className="py-3 px-3 rounded-xl text-xs font-bold text-stone-700 hover:text-stone-950 hover:bg-stone-100 transition-colors flex items-center justify-between no-underline min-h-[44px] touch-manipulation"
               >
                 <span>{item.label}</span>
                 <span className="text-[#B88628] text-xs">→</span>
@@ -193,7 +193,7 @@ export default function Navbar({ company = {} }) {
                     }
                   }
                 }}
-                className="w-full py-3 rounded-full bg-gradient-to-r from-[#B88628] via-[#A87920] to-[#8C6215] text-white font-black text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 no-underline shadow-md active:scale-[0.97]"
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#B88628] via-[#A87920] to-[#8C6215] text-white font-black text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 no-underline shadow-md active:scale-[0.97] min-h-[44px] touch-manipulation"
               >
                 <span>Book Site Consultation</span>
                 <ArrowRight size={13} />

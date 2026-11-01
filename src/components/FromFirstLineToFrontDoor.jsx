@@ -93,7 +93,7 @@ function FromFirstLineToFrontDoor() {
         </div>
 
         {/* Stage Selector Tabs */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {STAGES.map((stage, index) => {
             const isSelected = activeStageIndex === index
             return (
@@ -104,7 +104,7 @@ function FromFirstLineToFrontDoor() {
                   setActiveStageIndex(index)
                   setActiveHotspot(null)
                 }}
-                className={`flex items-center gap-2.5 rounded-full px-4 sm:px-5 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-[0.14em] transition-[transform,colors] active:scale-[0.97] touch-manipulation ${
+                className={`flex items-center gap-2 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[44px] text-[11px] sm:text-xs font-semibold uppercase tracking-[0.1em] sm:tracking-[0.14em] transition-[transform,colors] active:scale-[0.97] touch-manipulation cursor-pointer ${
                   isSelected
                     ? 'border border-[#d4a853] bg-[#d4a853] text-slate-950 font-black shadow-md'
                     : 'border border-stone-200 bg-white/80 text-inkMuted hover:border-stone-300 hover:text-ink'
@@ -112,12 +112,15 @@ function FromFirstLineToFrontDoor() {
               >
                 <span
                   className={`text-[10px] font-bold ${
-                    isSelected ? 'text-white/80' : 'text-stone-400'
+                    isSelected ? 'text-slate-900 font-extrabold' : 'text-stone-400'
                   }`}
                 >
                   {stage.step}
                 </span>
-                <span>{stage.label}</span>
+                <span className="hidden sm:inline">{stage.label}</span>
+                <span className="inline sm:hidden">
+                  {stage.step === '01' ? 'CAD & Plan' : stage.step === '02' ? 'RCC & Framing' : 'Handover'}
+                </span>
               </button>
             )
           })}
@@ -125,7 +128,7 @@ function FromFirstLineToFrontDoor() {
 
         {/* The Interactive Visual Stage Display Frame */}
         <div className="mt-8 overflow-hidden rounded-3xl border border-stone-200 bg-white p-3 shadow-soft sm:p-4">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-stone-100 sm:aspect-[16/9]">
+          <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-stone-100">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStage.id}
