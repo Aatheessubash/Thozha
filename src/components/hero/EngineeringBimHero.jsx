@@ -170,12 +170,7 @@ export default function EngineeringBimHero() {
               }}
             />
 
-            {/* Top Pill Tag with Proper Navbar Clearance */}
-            <div className="absolute top-4 inset-x-0 flex justify-center z-20 pointer-events-none">
-              <div className="px-4 py-1.5 rounded-full backdrop-blur-md bg-white/95 border border-white text-stone-900 text-[11px] font-bold shadow-md tracking-wide">
-                Featured Handover • Valparai Foothills
-              </div>
-            </div>
+
           </div>
 
           {/* Content Layer with BIG BOLD CLEAN FONTS */}
