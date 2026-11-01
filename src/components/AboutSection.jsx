@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2, Compass, ShieldCheck } from 'lucide-react'
-
-const generatedAsset = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+import { resolveAssetUrl } from '@/services/frameSequence'
 
 function AboutSection({ about }) {
   const brandMeaning =
@@ -87,7 +86,7 @@ function AboutSection({ about }) {
             <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white p-3 shadow-soft sm:p-4">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-stone-100 sm:aspect-[4/4]">
                 <img
-                  src={generatedAsset('courtyard-renovation')}
+                  src={resolveAssetUrl('images/thozha/portfolio-anamalai.jpg')}
                   alt="Thozha Associates architectural craftsmanship and materiality"
                   className="h-full w-full object-cover"
                   loading="lazy"

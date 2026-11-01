@@ -190,7 +190,7 @@ const portfolioProjects = [
     timeline: '14 Months',
     scope: 'Complete Turnkey',
     desc: 'Biophilic split-level courtyard residence balancing open outdoor pool terraces with natural stone cladding and teak screens.',
-    image: resolveAssetUrl('images/thozha/portfolio-anamalai-photo.webp'),
+    image: resolveAssetUrl('images/thozha/portfolio-anamalai.jpg'),
   },
   {
     id: 'apex-trade-center',
@@ -204,7 +204,7 @@ const portfolioProjects = [
     timeline: 'RCC PT Slabs',
     scope: 'Structural + MEP',
     desc: 'Engineered commercial hub featuring post-tensioned beam-free slabs for flexible retail floorplans and basement dual-level parking.',
-    image: resolveAssetUrl('images/thozha/portfolio-commercial-photo.webp'),
+    image: resolveAssetUrl('images/thozha/portfolio-commercial.jpg'),
   },
   {
     id: 'vettaikaranpudur-villa',
@@ -218,7 +218,7 @@ const portfolioProjects = [
     timeline: '16 Months',
     scope: 'Architecture & Civil',
     desc: 'Vaastu-aligned agricultural sanctuary with natural rainwater harvesting, exposed brick jali cooling facades, and expansive verandahs.',
-    image: resolveAssetUrl('images/thozha/evolution-stage2-photo.webp'),
+    image: resolveAssetUrl('images/thozha/portfolio-vettaikaranpudur.jpg'),
   },
   {
     id: 'kinathukadavu-hub',
@@ -232,7 +232,7 @@ const portfolioProjects = [
     timeline: 'Industrial PEB',
     scope: 'Turnkey Industrial',
     desc: 'Heavy-duty industrial facility with laser-leveled FM2 flooring, pre-engineered steel portal frames, and high-cube clearance.',
-    image: resolveAssetUrl('images/thozha/evolution-stage1-photo.webp'),
+    image: resolveAssetUrl('images/thozha/portfolio-kinathukadavu.jpg'),
   },
 ]
 

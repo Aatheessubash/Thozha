@@ -206,11 +206,10 @@ function BeforeAfterSlider({ before, after, title }) {
                 key={preset.value}
                 type="button"
                 onClick={() => jumpTo(preset.value)}
-                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-wider transition-all duration-200 cursor-pointer active:scale-[0.97] ${
-                  isSelected
-                    ? 'bg-[#1E1912] text-white shadow-sm'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-[#E8E4DC]/60'
-                }`}
+                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-wider transition-all duration-200 cursor-pointer active:scale-[0.97] ${isSelected
+                  ? 'bg-[#1E1912] text-white shadow-sm'
+                  : 'text-stone-600 hover:text-stone-900 hover:bg-[#E8E4DC]/60'
+                  }`}
               >
                 {preset.label}
               </button>
@@ -270,9 +269,8 @@ function BeforeAfterSlider({ before, after, title }) {
           }}
         >
           <span
-            className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#B88628] bg-white text-xs font-black text-[#B88628] shadow-[0_4px_20px_rgba(184,134,40,0.45)] transition-transform sm:h-12 sm:w-12 ${
-              isDragging ? 'scale-110 ring-4 ring-[#B88628]/25' : 'hover:scale-105'
-            }`}
+            className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#B88628] bg-white text-xs font-black text-[#B88628] shadow-[0_4px_20px_rgba(184,134,40,0.45)] transition-transform sm:h-12 sm:w-12 ${isDragging ? 'scale-110 ring-4 ring-[#B88628]/25' : 'hover:scale-105'
+              }`}
           >
             <ArrowLeftRight size={16} className="text-[#B88628]" />
           </span>

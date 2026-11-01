@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Compass, Eye, Layers, Sparkles } from 'lucide-react'
 import { useState } from 'react'
-
-const generatedAsset = (name) => `${import.meta.env.BASE_URL}images/thozha/${name}.webp`
+import { resolveAssetUrl } from '@/services/frameSequence'
 
 const STAGES = [
   {
@@ -10,7 +9,7 @@ const STAGES = [
     step: '01',
     label: 'Architectural CAD & Plan',
     subtitle: 'From spatial brief to verified structural calculation',
-    image: generatedAsset('planning-studio'),
+    image: resolveAssetUrl('images/thozha/sample-stage1-cad.jpg'),
     blueprintOverlay: true,
     specs: [
       { label: 'Scope', val: 'Floor Plans, 3D Elevation, Structural Analysis' },
@@ -24,7 +23,7 @@ const STAGES = [
     step: '02',
     label: 'Structural RCC & Framing',
     subtitle: 'Precision formwork, reinforced concrete & disciplined masonry',
-    image: generatedAsset('construction-site'),
+    image: resolveAssetUrl('images/thozha/sample-stage2-rcc.jpg'),
     specs: [
       { label: 'Core', val: 'Fe-550D TMT Rebar & M25 Certified Concrete' },
       { label: 'Supervision', val: 'Daily Site In-Charge & Cube Test Reports' },
@@ -37,7 +36,7 @@ const STAGES = [
     step: '03',
     label: 'Turnkey Handover',
     subtitle: 'Warm light, tactile materials, and a home built for everyday life',
-    image: generatedAsset('tropical-residence'),
+    image: resolveAssetUrl('images/thozha/sample-stage3-handover.jpg'),
     specs: [
       { label: 'Finishes', val: 'Lime-Wash Rendering, Teak Joinery & Micro-Cement' },
       { label: 'Efficiency', val: 'Passive Cross-Ventilation & Rainwater Harvesting' },
