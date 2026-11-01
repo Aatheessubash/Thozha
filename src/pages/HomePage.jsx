@@ -12,7 +12,6 @@ import {
   HardHat,
   Home,
   Landmark,
-  Layers,
   MapPin,
   Paintbrush2,
   PencilRuler,
@@ -21,7 +20,6 @@ import {
   Sparkles,
   Star,
   Trees,
-  Wrench,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -1090,71 +1088,6 @@ function HomePage() {
           </div>
         </section>
       </main>
-
-      {/* ==========================================================================
-          SECTION 10: STICKY MOBILE BOTTOM APP BAR (Matching screen 01.png)
-          ========================================================================== */}
-      <nav className="th-mobile-appbar" aria-label="Mobile Quick Nav">
-        <div className="th-mobile-appbar-inner">
-          <a
-            href="#top"
-            onClick={(e) => {
-              e.preventDefault()
-              if (window.lenis) window.lenis.scrollTo(0, { duration: 1.2 })
-              else window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
-            className="th-appbar-link"
-          >
-            <Home size={18} />
-            <span>Home</span>
-          </a>
-          <a
-            href="#portfolio"
-            onClick={(e) => {
-              e.preventDefault()
-              const el = document.querySelector('#portfolio')
-              if (el) {
-                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
-                else el.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}
-            className="th-appbar-link"
-          >
-            <Layers size={18} />
-            <span>Works</span>
-          </a>
-          <a
-            href="#expertise"
-            onClick={(e) => {
-              e.preventDefault()
-              const el = document.querySelector('#expertise')
-              if (el) {
-                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
-                else el.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}
-            className="th-appbar-link"
-          >
-            <Wrench size={18} />
-            <span>Services</span>
-          </a>
-          <a
-            href="#consultation"
-            onClick={(e) => {
-              e.preventDefault()
-              const el = document.querySelector('#consultation')
-              if (el) {
-                if (window.lenis) window.lenis.scrollTo(el, { duration: 1.2 })
-                else el.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}
-            className="th-appbar-link"
-          >
-            <Phone size={18} />
-            <span>Contact</span>
-          </a>
-        </div>
-      </nav>
 
       {/* Architectural Footer */}
       <Footer company={company} />

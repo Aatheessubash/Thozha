@@ -130,7 +130,7 @@ function Footer({ company = {} }) {
       {/* ==========================================================================
           MOBILE FOOTER (block md:hidden): Warm White Editorial
           ========================================================================== */}
-      <div className="block md:hidden bg-[#FAF8F5] text-stone-900 pt-10 pb-28 px-5 border-t border-[#E8E4DC]">
+      <div className="block md:hidden bg-[#FAF8F5] text-stone-900 pt-10 pb-12 px-5 border-t border-[#E8E4DC]">
         <div className="max-w-md mx-auto">
           {/* Brand & Tamil Wordmark with Logo */}
           <div className="mb-4">
