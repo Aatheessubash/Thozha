@@ -9,7 +9,7 @@ const navLinks = [
   { label: 'Portfolio', path: '/projects', hash: '#portfolio' },
   { label: 'Engineering', path: '/services', hash: '#expertise' },
   { label: 'Vaastu & BIM', path: '/process', hash: '#process' },
-  { label: 'Journal', path: '/about', hash: '#consultation' },
+  { label: 'About', path: '/about', hash: '#about' },
 ]
 
 export default function Navbar({ company = {} }) {
@@ -95,9 +95,9 @@ export default function Navbar({ company = {} }) {
                   key={item.label}
                   href={item.hash || item.path}
                   onClick={(e) => handleNavClick(e, item)}
-                  className={`relative text-xs tracking-wide transition-colors no-underline cursor-pointer ${
+                  className={`relative inline-flex items-center py-2 px-1 text-xs tracking-wide transition-colors no-underline cursor-pointer focus-visible:outline-none focus-visible:text-[#B88628] ${
                     active
-                      ? 'text-[#18181B] font-bold after:absolute after:bottom-[-6px] after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-[2px] after:bg-[#B88628] after:rounded-full'
+                      ? 'text-[#18181B] font-bold after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-[2px] after:bg-[#B88628] after:rounded-full'
                       : 'text-stone-600 hover:text-[#18181B] font-medium'
                   }`}
                 >

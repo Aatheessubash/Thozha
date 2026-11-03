@@ -296,7 +296,7 @@ function HomePage() {
   }
 
   return (
-    <div className="thozha-app" data-template="warm">
+    <div className="thozha-app" id="top" data-template="warm">
       {/* Top Sticky Navigation */}
       <Navbar company={company} />
 

@@ -1,0 +1,21 @@
+{
+  "app_name": "Thozha",
+  "bundle_id": "com.thozhaassociates.app",
+  "default_locale": "en-US",
+  "metadata": {
+    "en-US": {
+      "title": "Thozha - Architecture & Civil",
+      "subtitle": "Turnkey Villas & DTCP Plans",
+      "keywords": "construction,contractor,blueprint,vaastu,3d elevation,interior,structural engineering,pollachi,tamil nadu",
+      "promo_text": "Premium turnkey architectural design and civil engineering across Pollachi and Western Tamil Nadu. Request site consultation.",
+      "description": "Thozha Associates brings together architectural planning, structural discipline, and turnkey residential execution across Western Tamil Nadu.\n\nKey Services:\n- 2D Architectural Blueprints & Municipal DTCP Sanctions\n- 3D Exterior Elevations, Walkthroughs & BIM LOD-300\n- STAAD-Pro Earthquake Resistance & M25 Monolithic RCC\n- Bank Valuations by Empaneled Category-1 Valuers\n- Full Turnkey Living Construction with Zero Budget Creep",
+      "support_url": "https://thozhaassociates.com/#consultation",
+      "marketing_url": "https://thozhaassociates.com",
+      "privacy_url": "https://thozhaassociates.com/about"
+    }
+  },
+  "categories": {
+    "primary": "BUSINESS",
+    "secondary": "UTILITIES"
+  }
+}

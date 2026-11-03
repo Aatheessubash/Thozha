@@ -50,24 +50,24 @@ function Footer({ company = {} }) {
             {/* Column 2: Architecture Disciplines */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-900 mb-4">ARCHITECTURE</h3>
-              <ul className="list-none p-0 m-0 space-y-2.5 text-xs text-stone-600">
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">2D Municipal Blueprints</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">3D Exterior Elevations</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">Interior Spatial Design</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">Vaastu Cardinal Layouts</Link></li>
-                <li><Link to="/projects" className="hover:text-[#b88628] transition-colors">Tropical Villa Concepts</Link></li>
+              <ul className="list-none p-0 m-0 space-y-1 text-xs text-stone-600">
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">2D Municipal Blueprints</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">3D Exterior Elevations</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">Interior Spatial Design</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">Vaastu Cardinal Layouts</Link></li>
+                <li><Link to="/projects" className="inline-block py-1 hover:text-[#b88628] transition-colors">Tropical Villa Concepts</Link></li>
               </ul>
             </div>
 
             {/* Column 3: Civil Engineering Disciplines */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-stone-900 mb-4">CIVIL ENGINEERING</h3>
-              <ul className="list-none p-0 m-0 space-y-2.5 text-xs text-stone-600">
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">DTCP &amp; Panchayat Sanctions</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">STAAD Structural Analysis</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">Approved Bank Valuation</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">Turnkey Construction Handover</Link></li>
-                <li><Link to="/services" className="hover:text-[#b88628] transition-colors">M25 Concrete Cube Audits</Link></li>
+              <ul className="list-none p-0 m-0 space-y-1 text-xs text-stone-600">
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">DTCP &amp; Panchayat Sanctions</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">STAAD Structural Analysis</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">Approved Bank Valuation</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">Turnkey Construction Handover</Link></li>
+                <li><Link to="/services" className="inline-block py-1 hover:text-[#b88628] transition-colors">M25 Concrete Cube Audits</Link></li>
               </ul>
             </div>
 
@@ -111,14 +111,14 @@ function Footer({ company = {} }) {
             <p className="m-0">
               © {new Date().getFullYear()} Thozha Associates (தோழா). Civil Engineers &amp; Architects. All rights reserved.
             </p>
-            <div className="flex items-center gap-5">
-              <Link to="/about" className="hover:text-[#b88628] transition-colors">About Us</Link>
-              <Link to="/services" className="hover:text-[#b88628] transition-colors">Services</Link>
-              <Link to="/contact" className="hover:text-[#b88628] transition-colors">Contact</Link>
+            <div className="flex items-center gap-6">
+              <Link to="/about" className="py-2 hover:text-[#b88628] transition-colors">About Us</Link>
+              <Link to="/services" className="py-2 hover:text-[#b88628] transition-colors">Services</Link>
+              <Link to="/contact" className="py-2 hover:text-[#b88628] transition-colors">Contact</Link>
               <button
                 type="button"
                 onClick={scrollToTop}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#E8E4DC] bg-white hover:bg-stone-50 hover:border-[#b88628]/40 text-stone-700 cursor-pointer text-[11px] font-bold shadow-xs transition-all active:scale-[0.97]"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#E8E4DC] bg-white hover:bg-stone-50 hover:border-[#b88628]/40 text-stone-700 cursor-pointer text-[11px] font-bold shadow-xs transition-all active:scale-[0.97] min-h-[38px]"
               >
                 Back to top <ArrowUp size={12} />
               </button>
